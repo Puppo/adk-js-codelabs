@@ -19,13 +19,13 @@ check() {
 
   if [ "$status" = "pass" ]; then
     echo -e "  ${GREEN}✔${NC} ${name}: ${message}"
-    ((passed++))
+    ((passed++)) || true
   elif [ "$status" = "warn" ]; then
     echo -e "  ${YELLOW}⚠${NC} ${name}: ${message}"
-    ((warnings++))
+    ((warnings++)) || true
   else
     echo -e "  ${RED}✘${NC} ${name}: ${message}"
-    ((failed++))
+    ((failed++)) || true
   fi
 }
 
