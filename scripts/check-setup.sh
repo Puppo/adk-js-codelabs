@@ -55,27 +55,6 @@ else
   check "npm" "fail" "Not installed (comes with Node.js)"
 fi
 
-# --- Docker ---
-if command -v docker &> /dev/null; then
-  if docker info &> /dev/null; then
-    DOCKER_VERSION=$(docker --version | sed 's/Docker version //' | cut -d, -f1)
-    check "Docker" "pass" "v${DOCKER_VERSION} (daemon running)"
-  else
-    DOCKER_VERSION=$(docker --version | sed 's/Docker version //' | cut -d, -f1)
-    check "Docker" "fail" "v${DOCKER_VERSION} (daemon NOT running — start Docker Desktop)"
-  fi
-else
-  check "Docker" "fail" "Not installed (https://www.docker.com/products/docker-desktop/)"
-fi
-
-# --- Docker Compose ---
-if docker compose version &> /dev/null; then
-  COMPOSE_VERSION=$(docker compose version --short 2>/dev/null || docker compose version | sed 's/.*v//')
-  check "Docker Compose" "pass" "v${COMPOSE_VERSION}"
-else
-  check "Docker Compose" "fail" "Not installed (included in Docker Desktop)"
-fi
-
 # --- Git ---
 if command -v git &> /dev/null; then
   GIT_VERSION=$(git --version | sed 's/git version //')

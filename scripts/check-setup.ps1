@@ -60,35 +60,6 @@ try {
   Check "npm" "fail" "Not installed (comes with Node.js)"
 }
 
-# --- Docker ---
-try {
-  $dockerVersion = (docker --version 2>$null) -replace 'Docker version ', '' -replace ',.*', ''
-  if ($dockerVersion) {
-    $dockerInfo = docker info 2>$null
-    if ($LASTEXITCODE -eq 0) {
-      Check "Docker" "pass" "v$dockerVersion (daemon running)"
-    } else {
-      Check "Docker" "fail" "v$dockerVersion (daemon NOT running - start Docker Desktop)"
-    }
-  } else {
-    Check "Docker" "fail" "Not installed (https://www.docker.com/products/docker-desktop/)"
-  }
-} catch {
-  Check "Docker" "fail" "Not installed (https://www.docker.com/products/docker-desktop/)"
-}
-
-# --- Docker Compose ---
-try {
-  $composeVersion = docker compose version --short 2>$null
-  if ($composeVersion) {
-    Check "Docker Compose" "pass" "v$composeVersion"
-  } else {
-    Check "Docker Compose" "fail" "Not installed (included in Docker Desktop)"
-  }
-} catch {
-  Check "Docker Compose" "fail" "Not installed (included in Docker Desktop)"
-}
-
 # --- Git ---
 try {
   $gitVersion = (git --version 2>$null) -replace 'git version ', ''
