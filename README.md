@@ -4,20 +4,18 @@
 
 Welcome to the **ADK-JS Codelabs**! In this hands-on workshop, you'll build an intelligent conference assistant agent that helps attendees plan their perfect day at a conference.
 
-You'll progress from creating a simple conversational agent to deploying a full-featured, multi-agent system with database-backed tools and advanced orchestration flows.
+You'll progress from creating a simple conversational agent to building a full-featured, multi-agent system with tools and advanced orchestration flows.
 
 ## Prerequisites
 
 Before the workshop, make sure you have the following installed:
 
-| Tool              | Version | Link                                                             |
-| ----------------- | ------- | ---------------------------------------------------------------- |
-| Node.js           | 22+     | [nodejs.org](https://nodejs.org/)                                |
-| npm               | 10+     | Comes with Node.js                                               |
-| Docker            | Latest  | [docker.com](https://www.docker.com/products/docker-desktop/)    |
-| Docker Compose    | v2+     | Included in Docker Desktop                                       |
-| Git               | Latest  | [git-scm.com](https://git-scm.com/)                              |
-| Google AI API Key | -       | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
+| Tool | Version | Link |
+| --- | --- | --- |
+| Node.js | 22+ | [nodejs.org](https://nodejs.org/) |
+| npm | 10+ | Comes with Node.js |
+| Git | Latest | [git-scm.com](https://git-scm.com/) |
+| Google AI API Key | - | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
 
 ### Verify Your Setup
 
@@ -38,44 +36,46 @@ cd adk-js-codelabs
 .\scripts\check-setup.ps1
 ```
 
-## Workshop Phases
+## Workshop Steps
 
-| Phase                     | Branch (Init)                  | Branch (Solution)               | Description                                           |
-| ------------------------- | ------------------------------ | ------------------------------- | ----------------------------------------------------- |
-| **1. Intro**              | `01-intro-init`                | `01-intro-final`                | Create your first ADK agent with a system instruction |
-| **2. Tools & Sub-Agents** | `02-tools-and-sub-agents-init` | `02-tools-and-sub-agents-final` | Add database-backed tools and compose agents          |
-| **3. Flows**              | `03-flows-init`                | `03-flows-final`                | Build Sequential, Parallel, and Loop workflows        |
-| **4. Deploy**             | `04-deploy-init`               | `04-deploy-final`               | Containerize with Docker and deploy to Cloud Run      |
+| Step | Branch (Init) | Branch (Solution) | Concept |
+| --- | --- | --- | --- |
+| **1. Intro** | `01-intro-init` | `01-intro-final` | `LlmAgent` |
+| **2. Tools** | `02-tools-init` | `02-tools-final` | `FunctionTool` |
+| **3. Sequential Flow** | `03-sequential-init` | `03-sequential-final` | `SequentialAgent` |
+| **4. Loop Flow** | `04-loop-init` | `04-loop-final` | `LoopAgent` |
+| **5. Parallel Flow** | `05-parallel-init` | `05-parallel-final` | `ParallelAgent` |
 
 ## How to Navigate
 
-Each phase has two branches:
+Each step has two branches:
 
 - **`*-init`**: The starter code with TODO comments where you'll write your solution
 - **`*-final`**: The complete solution for reference
 
 ```bash
-# Start Phase 1
+# Start Step 1
 git checkout 01-intro-init
 
 # Check the solution if you get stuck
 git checkout 01-intro-final
 
-# Move to Phase 2
-git checkout 02-tools-and-sub-agents-init
+# Move to Step 2
+git checkout 02-tools-init
 ```
 
-Each branch has its own README with detailed instructions for that phase.
+Follow the [WORKSHOP.md](WORKSHOP.md) guide for detailed step-by-step instructions.
 
 ## What You'll Build
 
 A **Conference Schedule Agent** that can:
 
-- Answer questions about a Conference's sessions, speakers, and tracks
-- Search a database of sessions and speakers using tools
-- Recommend personalized schedules based on user interests
-- Build optimized schedules using sequential, parallel, and loop workflows
-- Run in a Docker container and deploy to the cloud
+- Answer questions about DevFest Pisa 2026 sessions, speakers, and tracks
+- Fetch session and speaker data dynamically using tools
+- Build personalized schedules based on user interests
+- Refine schedules using a two-agent sequential pipeline
+- Self-improve schedules through iterative review loops
+- Generate multiple schedule strategies in parallel and pick the best one
 
 ## AI-Assisted Development (Optional)
 
@@ -97,7 +97,7 @@ Learn more: [Coding with AI - ADK Docs](https://google.github.io/adk-docs/tutori
 
 ## About
 
-This workshop was created for learning ADK-js, targeting newbie and experienced developers alike. No prior AI/ML experience is required — just bring your curiosity and your laptop!
+This workshop was created for learning ADK-JS, targeting newbie and experienced developers alike. No prior AI/ML experience is required — just bring your curiosity and your laptop!
 
 ## License
 
