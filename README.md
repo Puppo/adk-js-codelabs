@@ -17,6 +17,16 @@ Before the workshop, make sure you have the following installed:
 | Git | Latest | [git-scm.com](https://git-scm.com/) |
 | Google AI API Key | - | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
 
+### Configure Your API Key
+
+Copy the example environment file and add your Google AI API key:
+
+```bash
+cp .env.example .env
+```
+
+Then open `.env` and replace `YOUR_API_KEY_HERE` with your actual key from [aistudio.google.com/apikey](https://aistudio.google.com/apikey).
+
 ### Verify Your Setup
 
 Run the setup check script to make sure everything is ready:
