@@ -102,6 +102,6 @@ if ($failed -gt 0) {
   Write-Host ""
   exit 1
 } else {
-  Write-Host "You are ready for the workshop! See you at DevFest Pisa!" -ForegroundColor Green
+  Write-Host "You are ready for the workshop! See you at the workshop!" -ForegroundColor Green
   Write-Host ""
 }

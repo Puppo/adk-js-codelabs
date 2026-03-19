@@ -86,6 +86,6 @@ if [ "$failed" -gt 0 ]; then
   echo ""
   exit 1
 else
-  echo -e "${GREEN}${BOLD}✅ You are ready for the workshop! See you at DevFest Pisa! 🇮🇹${NC}"
+  echo -e "${GREEN}${BOLD}✅ You are ready for the workshop! See you at the workshop!${NC}"
   echo ""
 fi
