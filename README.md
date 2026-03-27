@@ -10,12 +10,12 @@ You'll progress from creating a simple conversational agent to building a full-f
 
 Before the workshop, make sure you have the following installed:
 
-| Tool | Version | Link |
-| --- | --- | --- |
-| Node.js | 22+ | [nodejs.org](https://nodejs.org/) |
-| npm | 10+ | Comes with Node.js |
-| Git | Latest | [git-scm.com](https://git-scm.com/) |
-| Google AI API Key | - | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
+| Tool              | Version | Link                                                             |
+| ----------------- | ------- | ---------------------------------------------------------------- |
+| Node.js           | 24+     | [nodejs.org](https://nodejs.org/)                                |
+| npm               | 10+     | Comes with Node.js                                               |
+| Git               | Latest  | [git-scm.com](https://git-scm.com/)                              |
+| Google AI API Key | -       | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
 
 ### Configure Your API Key
 
@@ -48,13 +48,13 @@ cd adk-js-codelabs
 
 ## Workshop Steps
 
-| Step | Branch (Init) | Branch (Solution) | Concept |
-| --- | --- | --- | --- |
-| **1. Intro** | `01-intro-init` | `01-intro-final` | `LlmAgent` |
-| **2. Tools** | `02-tools-init` | `02-tools-final` | `FunctionTool` |
+| Step                   | Branch (Init)        | Branch (Solution)     | Concept           |
+| ---------------------- | -------------------- | --------------------- | ----------------- |
+| **1. Intro**           | `01-intro-init`      | `01-intro-final`      | `LlmAgent`        |
+| **2. Tools**           | `02-tools-init`      | `02-tools-final`      | `FunctionTool`    |
 | **3. Sequential Flow** | `03-sequential-init` | `03-sequential-final` | `SequentialAgent` |
-| **4. Loop Flow** | `04-loop-init` | `04-loop-final` | `LoopAgent` |
-| **5. Parallel Flow** | `05-parallel-init` | `05-parallel-final` | `ParallelAgent` |
+| **4. Loop Flow**       | `04-loop-init`       | `04-loop-final`       | `LoopAgent`       |
+| **5. Parallel Flow**   | `05-parallel-init`   | `05-parallel-final`   | `ParallelAgent`   |
 
 ## How to Navigate
 

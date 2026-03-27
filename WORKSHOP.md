@@ -16,7 +16,7 @@ Step 5: ParallelAgent      -> Multi-strategy generation + selector
 
 Make sure you've completed the setup from the [README](README.md):
 
-- Node.js 22+, npm 10+, Git
+- Node.js 24+, npm 10+, Git
 - Google AI API Key ([get one here](https://aistudio.google.com/apikey))
 - Run `./scripts/check-setup.sh` to verify
 
@@ -72,9 +72,9 @@ npm run dev
 
 This launches the ADK DevTools web UI. Open your browser and try:
 
-- *"What AI sessions are available?"*
-- *"Tell me about Dr. Elena Rossi"*
-- *"Plan my day — I love Cloud and DevOps, intermediate level"*
+- _"What AI sessions are available?"_
+- _"Tell me about Dr. Elena Rossi"_
+- _"Plan my day — I love Cloud and DevOps, intermediate level"_
 
 ### Check the solution
 
@@ -115,16 +115,26 @@ You'll find three files to work on:
 
 ```typescript
 import { FunctionTool } from "@google/adk";
-import { z } from "zod";
+import { z } from "zod/v3";
 import { sessions, speakers } from "./data/conferenceData.js";
 
 export const getSessions = new FunctionTool({
   name: "get_sessions",
-  description: "Get conference sessions, optionally filtered by track, time slot, or difficulty.",
+  description:
+    "Get conference sessions, optionally filtered by track, time slot, or difficulty.",
   parameters: z.object({
-    track: z.string().optional().describe("Filter by track: AI/ML, Web, Cloud, Mobile, or DevOps"),
-    timeSlot: z.string().optional().describe("Filter by time slot, e.g. 'morning' or 'afternoon'"),
-    difficulty: z.string().optional().describe("Filter by difficulty: Beginner, Intermediate, or Advanced"),
+    track: z
+      .string()
+      .optional()
+      .describe("Filter by track: AI/ML, Web, Cloud, Mobile, or DevOps"),
+    timeSlot: z
+      .string()
+      .optional()
+      .describe("Filter by time slot, e.g. 'morning' or 'afternoon'"),
+    difficulty: z
+      .string()
+      .optional()
+      .describe("Filter by difficulty: Beginner, Intermediate, or Advanced"),
   }),
   execute: async ({ track, timeSlot, difficulty }) => {
     // Filter sessions based on parameters and return formatted results
@@ -153,9 +163,9 @@ npm run dev
 
 Ask the same questions as Step 1. Open the **trace view** in DevTools — you'll see the agent calling tools instead of relying on hardcoded data.
 
-- *"What advanced sessions are there?"*
-- *"Who works at Google?"*
-- *"I'm interested in AI and Cloud, intermediate level"*
+- _"What advanced sessions are there?"_
+- _"Who works at Google?"_
+- _"I'm interested in AI and Cloud, intermediate level"_
 
 ### Check the solution
 
@@ -236,7 +246,7 @@ export const rootAgent = new SequentialAgent({
 npm run dev
 ```
 
-- *"Build me a schedule. I love AI and DevOps, intermediate level."*
+- _"Build me a schedule. I love AI and DevOps, intermediate level."_
 
 Watch the trace: `scheduleBuilder` runs first, then `scheduleOptimizer` refines the result.
 
@@ -318,10 +328,12 @@ import { LoopAgent, SequentialAgent } from "@google/adk";
 
 export const rootAgent = new LoopAgent({
   name: "scheduleLoop",
-  subAgents: [new SequentialAgent({
-    name: "buildAndReview",
-    subAgents: [scheduleBuilder, scheduleReviewer],
-  })],
+  subAgents: [
+    new SequentialAgent({
+      name: "buildAndReview",
+      subAgents: [scheduleBuilder, scheduleReviewer],
+    }),
+  ],
   maxIterations: 3,
 });
 ```
@@ -332,7 +344,7 @@ export const rootAgent = new LoopAgent({
 npm run dev
 ```
 
-- *"Build me a schedule. I'm interested in everything but especially AI."*
+- _"Build me a schedule. I'm interested in everything but especially AI."_
 
 Watch the trace show multiple iterations — the schedule improves each round until the reviewer is satisfied.
 
@@ -423,7 +435,7 @@ export const rootAgent = new SequentialAgent({
 npm run dev
 ```
 
-- *"Build me a schedule. I'm a backend developer interested in Cloud and DevOps but also curious about AI."*
+- _"Build me a schedule. I'm a backend developer interested in Cloud and DevOps but also curious about AI."_
 
 Watch the trace: three strategy agents light up simultaneously, then the selector picks the best.
 
@@ -437,13 +449,13 @@ git checkout 05-parallel-final
 
 ## Recap
 
-| Step | Concept | What you built |
-| --- | --- | --- |
-| 1 | `LlmAgent` | Single agent with hardcoded conference data |
-| 2 | `FunctionTool` | Agent with tools for dynamic data retrieval |
-| 3 | `SequentialAgent` | Builder -> Optimizer pipeline |
-| 4 | `LoopAgent` | Builder <-> Reviewer iterative refinement |
-| 5 | `ParallelAgent` | 3 strategies in parallel -> Selector picks best |
+| Step | Concept           | What you built                                  |
+| ---- | ----------------- | ----------------------------------------------- |
+| 1    | `LlmAgent`        | Single agent with hardcoded conference data     |
+| 2    | `FunctionTool`    | Agent with tools for dynamic data retrieval     |
+| 3    | `SequentialAgent` | Builder -> Optimizer pipeline                   |
+| 4    | `LoopAgent`       | Builder <-> Reviewer iterative refinement       |
+| 5    | `ParallelAgent`   | 3 strategies in parallel -> Selector picks best |
 
 You've gone from a simple chatbot to a sophisticated multi-agent system! Each ADK concept builds on the previous, giving you a toolkit for building real-world AI agent applications.
 
