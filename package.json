@@ -1,0 +1,21 @@
+{
+  "name": "conference-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev:01": "npx @google/adk-devtools web src/01-intro",
+    "dev:02": "npx @google/adk-devtools web src/02-tools",
+    "dev:03": "npx @google/adk-devtools web src/03-sequential",
+    "dev:04": "npx @google/adk-devtools web src/04-loop",
+    "dev:05": "npx @google/adk-devtools web src/05-parallel"
+  },
+  "dependencies": {
+    "@google/adk": "^0.4.0",
+    "dotenv": "^16.4.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@google/adk-devtools": "^0.4.0",
+    "typescript": "^5.5.0"
+  }
+}

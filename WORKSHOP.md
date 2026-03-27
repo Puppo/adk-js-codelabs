@@ -12,6 +12,21 @@ Step 4: LoopAgent          -> Iterative self-improvement with a critic
 Step 5: ParallelAgent      -> Multi-strategy generation + selector
 ```
 
+## Project Structure
+
+Each step lives in its own folder under `src/`. You work through them in order, and each folder is self-contained:
+
+```
+src/
+  01-intro/          -> Step 1
+  02-tools/          -> Step 2
+  03-sequential/     -> Step 3
+  04-loop/           -> Step 4
+  05-parallel/       -> Step 5
+```
+
+The `main` branch contains the starter code with TODOs for you to complete. The `final` branch contains the full solutions for reference.
+
 ## Prerequisites
 
 Make sure you've completed the setup from the [README](README.md):
@@ -20,28 +35,27 @@ Make sure you've completed the setup from the [README](README.md):
 - Google AI API Key ([get one here](https://aistudio.google.com/apikey))
 - Run `./scripts/check-setup.sh` to verify
 
+### Install dependencies
+
+```bash
+npm install
+```
+
 ---
 
 ## Step 1: Your First Agent
 
 **Concept:** `LlmAgent` — the building block of ADK
 
-**Branch:** `01-intro-init` -> `01-intro-final`
+**Folder:** `src/01-intro/`
 
 ### What you'll learn
 
 An `LlmAgent` wraps a large language model with a name, description, and instruction (system prompt). The instruction defines the agent's personality and knowledge. In this step, we embed the entire conference schedule directly in the prompt.
 
-### Get started
-
-```bash
-git checkout 01-intro-init
-npm install
-```
-
 ### Your task
 
-Open `src/agent.ts` and complete the TODOs:
+Open `src/01-intro/agent.ts` and complete the TODOs:
 
 1. Create an `LlmAgent` with the name `conferenceAgent`
 2. Set the model to `gemini-3.0-flash`
@@ -67,7 +81,7 @@ export const rootAgent = new LlmAgent({
 ### Try it
 
 ```bash
-npm run dev
+npm run dev:01
 ```
 
 This launches the ADK DevTools web UI. Open your browser and try:
@@ -78,9 +92,7 @@ This launches the ADK DevTools web UI. Open your browser and try:
 
 ### Check the solution
 
-```bash
-git checkout 01-intro-final
-```
+Switch to the `final` branch and look at `src/01-intro/agent.ts`.
 
 ### Reflection
 
@@ -92,26 +104,19 @@ The agent works, but the instruction is **huge**. All the conference data is har
 
 **Concept:** `FunctionTool` — give your agent superpowers
 
-**Branch:** `02-tools-init` -> `02-tools-final`
+**Folder:** `src/02-tools/`
 
 ### What you'll learn
 
 Tools are functions that the LLM can call to retrieve data or perform actions. Instead of stuffing everything in the prompt, we define tools with typed parameters (using Zod schemas) and let the agent decide when to call them.
 
-### Get started
-
-```bash
-git checkout 02-tools-init
-npm install
-```
-
 ### Your task
 
 You'll find three files to work on:
 
-**1. `src/data/conferenceData.ts`** — Already provided! Contains typed arrays of sessions and speakers.
+**1. `src/02-tools/data/conferenceData.ts`** — Already provided! Contains typed arrays of sessions and speakers.
 
-**2. `src/tools.ts`** — Create three FunctionTools:
+**2. `src/02-tools/tools.ts`** — Create three FunctionTools:
 
 ```typescript
 import { FunctionTool } from "@google/adk";
@@ -142,7 +147,7 @@ export const getSessions = new FunctionTool({
 });
 ```
 
-**3. `src/agent.ts`** — Slim down the instruction and add tools:
+**3. `src/02-tools/agent.ts`** — Slim down the instruction and add tools:
 
 ```typescript
 export const rootAgent = new LlmAgent({
@@ -158,7 +163,7 @@ export const rootAgent = new LlmAgent({
 ### Try it
 
 ```bash
-npm run dev
+npm run dev:02
 ```
 
 Ask the same questions as Step 1. Open the **trace view** in DevTools — you'll see the agent calling tools instead of relying on hardcoded data.
@@ -169,9 +174,7 @@ Ask the same questions as Step 1. Open the **trace view** in DevTools — you'll
 
 ### Check the solution
 
-```bash
-git checkout 02-tools-final
-```
+Switch to the `final` branch and look at `src/02-tools/`.
 
 ### Reflection
 
@@ -183,22 +186,15 @@ Now data is separated from logic, but the agent does everything in one shot. For
 
 **Concept:** `SequentialAgent` — a pipeline of agents
 
-**Branch:** `03-sequential-init` -> `03-sequential-final`
+**Folder:** `src/03-sequential/`
 
 ### What you'll learn
 
 A `SequentialAgent` executes sub-agents in a fixed order. Each agent focuses on one job and stores its output in shared state using `outputKey`. The next agent reads that state via `{{templateVariables}}` in its instruction.
 
-### Get started
-
-```bash
-git checkout 03-sequential-init
-npm install
-```
-
 ### Your task
 
-**1. `src/agents/scheduleBuilder.ts`** — Builds an initial schedule:
+**1. `src/03-sequential/agents/scheduleBuilder.ts`** — Builds an initial schedule:
 
 ```typescript
 import { LlmAgent } from "@google/adk";
@@ -214,7 +210,7 @@ export const scheduleBuilder = new LlmAgent({
 });
 ```
 
-**2. `src/agents/scheduleOptimizer.ts`** — Refines the schedule:
+**2. `src/03-sequential/agents/scheduleOptimizer.ts`** — Refines the schedule:
 
 ```typescript
 export const scheduleOptimizer = new LlmAgent({
@@ -229,7 +225,7 @@ Check for: time conflicts, missing breaks, room-hopping, and suggest alternative
 });
 ```
 
-**3. `src/agent.ts`** — Compose them:
+**3. `src/03-sequential/agent.ts`** — Compose them:
 
 ```typescript
 import { SequentialAgent } from "@google/adk";
@@ -243,7 +239,7 @@ export const rootAgent = new SequentialAgent({
 ### Try it
 
 ```bash
-npm run dev
+npm run dev:03
 ```
 
 - _"Build me a schedule. I love AI and DevOps, intermediate level."_
@@ -252,9 +248,7 @@ Watch the trace: `scheduleBuilder` runs first, then `scheduleOptimizer` refines 
 
 ### Check the solution
 
-```bash
-git checkout 03-sequential-final
-```
+Switch to the `final` branch and look at `src/03-sequential/`.
 
 ### Reflection
 
@@ -266,22 +260,15 @@ The pipeline works in one pass. But what if the optimizer finds issues the build
 
 **Concept:** `LoopAgent` — iterative refinement
 
-**Branch:** `04-loop-init` -> `04-loop-final`
+**Folder:** `src/04-loop/`
 
 ### What you'll learn
 
 A `LoopAgent` repeats its sub-agents until a condition is met (or max iterations is reached). This enables the **generator/critic pattern**: one agent builds, another reviews, and the loop continues until the critic is satisfied and calls `escalate` to exit.
 
-### Get started
-
-```bash
-git checkout 04-loop-init
-npm install
-```
-
 ### Your task
 
-**1. `src/agents/scheduleBuilder.ts`** — Update to be revision-aware:
+**1. `src/04-loop/agents/scheduleBuilder.ts`** — Update to be revision-aware:
 
 ```typescript
 export const scheduleBuilder = new LlmAgent({
@@ -298,7 +285,7 @@ Build or revise the schedule based on user preferences.`,
 });
 ```
 
-**2. `src/agents/scheduleReviewer.ts`** — The critic agent with an exit tool:
+**2. `src/04-loop/agents/scheduleReviewer.ts`** — The critic agent with an exit tool:
 
 ```typescript
 const exitLoop = new FunctionTool({
@@ -321,7 +308,7 @@ If ALL criteria pass, call exit_loop. Otherwise provide feedback.`,
 });
 ```
 
-**3. `src/agent.ts`** — Wire them into a loop:
+**3. `src/04-loop/agent.ts`** — Wire them into a loop:
 
 ```typescript
 import { LoopAgent, SequentialAgent } from "@google/adk";
@@ -341,7 +328,7 @@ export const rootAgent = new LoopAgent({
 ### Try it
 
 ```bash
-npm run dev
+npm run dev:04
 ```
 
 - _"Build me a schedule. I'm interested in everything but especially AI."_
@@ -350,9 +337,7 @@ Watch the trace show multiple iterations — the schedule improves each round un
 
 ### Check the solution
 
-```bash
-git checkout 04-loop-final
-```
+Switch to the `final` branch and look at `src/04-loop/`.
 
 ### Reflection
 
@@ -364,24 +349,17 @@ The loop produces a high-quality single schedule. But what if you want to explor
 
 **Concept:** `ParallelAgent` — concurrent execution
 
-**Branch:** `05-parallel-init` -> `05-parallel-final`
+**Folder:** `src/05-parallel/`
 
 ### What you'll learn
 
 A `ParallelAgent` runs multiple sub-agents simultaneously. Think of it as asking three friends to each plan your day with different priorities, then picking the best plan.
 
-### Get started
-
-```bash
-git checkout 05-parallel-init
-npm install
-```
-
 ### Your task
 
 Create three strategy agents, a selector, and compose them:
 
-**1. `src/agents/topicMatchStrategy.ts`** — Optimize for topic relevance:
+**1. `src/05-parallel/agents/topicMatchStrategy.ts`** — Optimize for topic relevance:
 
 ```typescript
 export const topicMatchStrategy = new LlmAgent({
@@ -393,11 +371,11 @@ Prioritize sessions from their preferred tracks.`,
 });
 ```
 
-**2. `src/agents/speakerQualityStrategy.ts`** — Optimize for top speakers.
+**2. `src/05-parallel/agents/speakerQualityStrategy.ts`** — Optimize for top speakers.
 
-**3. `src/agents/diversityStrategy.ts`** — Optimize for breadth and variety.
+**3. `src/05-parallel/agents/diversityStrategy.ts`** — Optimize for breadth and variety.
 
-**4. `src/agents/bestScheduleSelector.ts`** — Compare and pick the best:
+**4. `src/05-parallel/agents/bestScheduleSelector.ts`** — Compare and pick the best:
 
 ```typescript
 export const bestScheduleSelector = new LlmAgent({
@@ -413,7 +391,7 @@ Select the best one (or create a hybrid). Explain the trade-offs.`,
 });
 ```
 
-**5. `src/agent.ts`** — Compose everything:
+**5. `src/05-parallel/agent.ts`** — Compose everything:
 
 ```typescript
 import { SequentialAgent, ParallelAgent } from "@google/adk";
@@ -432,7 +410,7 @@ export const rootAgent = new SequentialAgent({
 ### Try it
 
 ```bash
-npm run dev
+npm run dev:05
 ```
 
 - _"Build me a schedule. I'm a backend developer interested in Cloud and DevOps but also curious about AI."_
@@ -441,9 +419,7 @@ Watch the trace: three strategy agents light up simultaneously, then the selecto
 
 ### Check the solution
 
-```bash
-git checkout 05-parallel-final
-```
+Switch to the `final` branch and look at `src/05-parallel/`.
 
 ---
 
