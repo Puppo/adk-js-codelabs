@@ -81,7 +81,7 @@ import {
 
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   description: "A helpful assistant for DevFest Pisa 2026",
   instruction: `You are a friendly and enthusiastic conference assistant...
 

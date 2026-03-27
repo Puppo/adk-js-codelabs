@@ -10,7 +10,7 @@ import "dotenv/config";
 //
 // Your agent should have:
 // - name: "conferenceAgent"
-// - model: "gemini-3.0-flash"
+// - model: "gemini-2.5-flash"
 // - description: A helpful assistant for the DevFest Pisa 2026 conference
 // - instruction: A system prompt that includes:
 //   1. The agent's personality (friendly, enthusiastic conference assistant)
