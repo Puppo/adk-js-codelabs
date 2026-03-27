@@ -1,28 +1,6 @@
 import { LlmAgent } from "@google/adk";
 import { getSessions } from "../tools.js";
 
-// TODO: Create and export a scheduleOptimizer agent
-//
-// This agent reads the draft schedule from shared state and improves it.
-//
-// Configuration:
-// - name: "scheduleOptimizer"
-// - model: "gemini-3.0-flash"
-// - description: Reviews and optimizes a draft schedule
-// - tools: [getSessions]  (to look up alternative sessions)
-// - outputKey: "optimizedSchedule"
-//
-// KEY CONCEPT: Use {{draftSchedule}} in the instruction to read from shared state.
-// The scheduleBuilder saved its output there via outputKey: "draftSchedule".
-//
-// The instruction should tell the agent to:
-// 1. Review the draft schedule for issues
-// 2. Check for time conflicts
-// 3. Verify lunch break is free
-// 4. Flag room logistics issues (consecutive sessions in distant rooms)
-// 5. Suggest difficulty progression (easier -> harder)
-// 6. Provide alternative sessions for each slot
-
 export const scheduleOptimizer = new LlmAgent({
   name: "scheduleOptimizer",
   model: "gemini-3.0-flash",
@@ -33,7 +11,17 @@ export const scheduleOptimizer = new LlmAgent({
 Review this draft schedule and improve it:
 {{draftSchedule}}
 
-TODO: Add the rest of the optimization instructions.`,
+Check for and fix these issues:
+1. **Time conflicts**: Ensure no overlapping sessions
+2. **Breaks**: Verify lunch break (12:45-14:00) is free, suggest a coffee break if possible
+3. **Room logistics**: Flag if consecutive sessions are in different rooms (Room A -> Room C is far)
+4. **Difficulty progression**: Suggest starting with easier sessions and progressing to harder ones
+5. **Alternatives**: For each time slot, suggest one alternative session the user might enjoy
+
+Output the optimized schedule with:
+- The final schedule with any improvements
+- A brief explanation of changes made
+- Alternative sessions for each slot`,
   tools: [getSessions],
-  // TODO: Add outputKey to save the optimized result
+  outputKey: "optimizedSchedule",
 });

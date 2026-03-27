@@ -2,12 +2,6 @@ import "dotenv/config";
 import { LlmAgent } from "@google/adk";
 import { getSessions, getSpeakers, getUserPreferences } from "./tools.js";
 
-// In Step 1 we hardcoded all the conference data in the instruction.
-// Now we've extracted the data into tools — the agent uses them on demand.
-//
-// Notice how much shorter the instruction is! The agent knows WHAT to do,
-// but fetches the data through tools instead of having it in the prompt.
-
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
   model: "gemini-3.0-flash",
@@ -30,6 +24,5 @@ Help users:
 - Get recommendations based on their interests
 
 Be enthusiastic about the conference and encourage exploration across tracks!`,
-  // TODO: Pass your three tools here
   tools: [getSessions, getSpeakers, getUserPreferences],
 });

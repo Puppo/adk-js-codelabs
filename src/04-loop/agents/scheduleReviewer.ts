@@ -1,49 +1,18 @@
 import { LlmAgent, FunctionTool } from "@google/adk";
 import { z } from "zod";
 
-// TODO 1: Create an exit_loop FunctionTool
-//
-// This tool lets the reviewer signal that the schedule is approved.
-// When called, it sets context.actions.escalate = true, which breaks the LoopAgent.
-//
-// Configuration:
-// - name: "exit_loop"
-// - description: Call when the schedule meets ALL quality criteria
-// - parameters: z.object({})  (no parameters needed)
-// - execute: Set context.actions.escalate = true and return a status message
-//
-// The execute function receives two arguments:
-//   (input, context) => { context.actions.escalate = true; return { status: "approved" }; }
+// This tool allows the reviewer to signal that the schedule is good enough.
+// When called, it sets escalate = true, which breaks the LoopAgent.
 const exitLoop = new FunctionTool({
   name: "exit_loop",
   description:
     "Call this ONLY when the schedule meets ALL quality criteria. This will approve the schedule and end the review loop.",
   parameters: z.object({}),
-  execute: async () => {
-    // TODO: Accept a second `context` parameter and set context.actions.escalate = true
-    return { status: "approved" };
+  execute: async (_: unknown, context: { actions: { escalate: boolean } }) => {
+    context.actions.escalate = true;
+    return { status: "approved", message: "Schedule meets all quality criteria." };
   },
 });
-
-// TODO 2: Create the scheduleReviewer agent
-//
-// This agent reads the draft schedule from state ({{draftSchedule}}) and evaluates it.
-//
-// Configuration:
-// - name: "scheduleReviewer"
-// - model: "gemini-3.0-flash"
-// - tools: [exitLoop]
-// - outputKey: "reviewerFeedback"
-//
-// The instruction should tell the agent to evaluate:
-// 1. No time conflicts
-// 2. Preference match
-// 3. Topic balance (variety across tracks)
-// 4. Breaks included
-// 5. Difficulty variety
-//
-// If ALL pass → call exit_loop
-// If ANY fail → provide specific feedback
 
 export const scheduleReviewer = new LlmAgent({
   name: "scheduleReviewer",
@@ -55,9 +24,20 @@ export const scheduleReviewer = new LlmAgent({
 Review this schedule:
 {{draftSchedule}}
 
-TODO: Add evaluation criteria and decision logic.
-- If ALL criteria pass: Call the exit_loop tool
-- If ANY criteria fail: Provide specific feedback`,
+Evaluate against these criteria:
+1. **No time conflicts** — Only one session per time slot
+2. **Preference match** — Sessions align with the user's stated interests
+3. **Topic balance** — Not all sessions from a single track (aim for variety)
+4. **Breaks included** — Lunch break (12:45-14:00) is free
+5. **Difficulty variety** — Mix of difficulty levels (not all beginner or all advanced)
+
+DECISION:
+- If ALL criteria pass: Call the exit_loop tool to approve the schedule
+- If ANY criteria fail: Provide specific, actionable feedback explaining what needs to change
+
+When providing feedback, be specific. For example:
+- "The 10:30 and 11:45 slots are both AI/ML — consider swapping 11:45 to a Cloud session"
+- "All sessions are Beginner level — add at least one Intermediate session"`,
   tools: [exitLoop],
-  // TODO: Add outputKey: "reviewerFeedback"
+  outputKey: "reviewerFeedback",
 });

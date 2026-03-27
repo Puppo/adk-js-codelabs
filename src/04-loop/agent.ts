@@ -1,29 +1,25 @@
 import "dotenv/config";
-// TODO: Import LoopAgent and SequentialAgent from "@google/adk"
 import { LoopAgent, SequentialAgent } from "@google/adk";
 import { scheduleBuilder } from "./agents/scheduleBuilder.js";
 import { scheduleReviewer } from "./agents/scheduleReviewer.js";
 
-// TODO: Create a LoopAgent named "scheduleLoop" and export it as rootAgent
+// A LoopAgent repeats its sub-agents until either:
+// 1. maxIterations is reached, OR
+// 2. A sub-agent calls escalate (via the exit_loop tool)
 //
-// The LoopAgent wraps a SequentialAgent that runs:
-//   1. scheduleBuilder — creates/revises the schedule
-//   2. scheduleReviewer — evaluates and either approves (escalate) or gives feedback
-//
-// The loop repeats until either:
-//   - The reviewer calls exit_loop (which sets escalate = true)
-//   - maxIterations is reached (set to 3 as a safety limit)
-//
-// Configuration:
-// - name: "scheduleLoop"
-// - subAgents: [SequentialAgent with builder + reviewer]
-// - maxIterations: 3
+// Each iteration: scheduleBuilder creates/revises -> scheduleReviewer evaluates
+// The reviewer reads {{draftSchedule}} and either approves (escalate) or
+// writes feedback to {{reviewerFeedback}} for the builder to read next iteration.
 
 export const rootAgent = new LoopAgent({
   name: "scheduleLoop",
   description:
     "Iteratively builds and reviews a conference schedule until quality criteria are met.",
-  // TODO: Add subAgents with a SequentialAgent wrapping builder + reviewer
-  subAgents: [],
-  // TODO: Add maxIterations: 3
+  subAgents: [
+    new SequentialAgent({
+      name: "buildAndReview",
+      subAgents: [scheduleBuilder, scheduleReviewer],
+    }),
+  ],
+  maxIterations: 3,
 });

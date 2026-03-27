@@ -1,23 +1,5 @@
 import { LlmAgent } from "@google/adk";
 
-// TODO: Create and export a bestScheduleSelector agent
-//
-// This agent reads ALL THREE strategy schedules from state and picks the best.
-//
-// Configuration:
-// - name: "bestScheduleSelector"
-// - model: "gemini-3.0-flash"
-// - outputKey: "finalSchedule"
-//
-// KEY CONCEPT: Use {{topicSchedule}}, {{speakerSchedule}}, {{diversitySchedule}}
-// in the instruction to read each strategy's output from shared state.
-//
-// The instruction should tell the agent to:
-// 1. Compare all three schedules
-// 2. Evaluate each against the user's preferences
-// 3. Select the best one OR create a hybrid
-// 4. Explain the trade-offs
-
 export const bestScheduleSelector = new LlmAgent({
   name: "bestScheduleSelector",
   model: "gemini-3.0-flash",
@@ -27,15 +9,25 @@ export const bestScheduleSelector = new LlmAgent({
 
 Three different strategies have produced schedule proposals:
 
-**Strategy 1 — Topic Match:**
+**Strategy 1 — Topic Match (maximizes relevance to your interests):**
 {{topicSchedule}}
 
-**Strategy 2 — Speaker Quality:**
+**Strategy 2 — Speaker Quality (prioritizes the best speakers):**
 {{speakerSchedule}}
 
-**Strategy 3 — Diversity:**
+**Strategy 3 — Diversity (maximizes variety across tracks and difficulty):**
 {{diversitySchedule}}
 
-TODO: Add instructions for comparing, selecting, and explaining the best schedule.`,
-  // TODO: Add outputKey: "finalSchedule"
+Your job:
+1. Compare all three schedules
+2. Evaluate each against the user's stated preferences
+3. Select the BEST schedule, or create a HYBRID that takes the best picks from each
+4. Explain the trade-offs clearly
+
+Output format:
+- Present the recommended final schedule
+- For each session choice, note which strategy it came from (if creating a hybrid)
+- Explain WHY this is the best option for this particular user
+- Mention what the user would miss and why the trade-off is worth it`,
+  outputKey: "finalSchedule",
 });

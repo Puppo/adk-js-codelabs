@@ -1,12 +1,13 @@
 import "dotenv/config";
-// TODO: Import SequentialAgent and ParallelAgent from "@google/adk"
 import { SequentialAgent, ParallelAgent } from "@google/adk";
 import { topicMatchStrategy } from "./agents/topicMatchStrategy.js";
 import { speakerQualityStrategy } from "./agents/speakerQualityStrategy.js";
 import { diversityStrategy } from "./agents/diversityStrategy.js";
 import { bestScheduleSelector } from "./agents/bestScheduleSelector.js";
 
-// TODO: Compose the final multi-agent system
+// Three strategy agents run in parallel — each builds a complete schedule
+// with a different optimization goal. Then a selector agent compares all
+// three and picks the best (or creates a hybrid).
 //
 // Architecture:
 //   rootAgent (SequentialAgent)
@@ -15,16 +16,17 @@ import { bestScheduleSelector } from "./agents/bestScheduleSelector.js";
 //     │     ├── speakerQualityStrategy → writes to "speakerSchedule"
 //     │     └── diversityStrategy      → writes to "diversitySchedule"
 //     └── bestScheduleSelector        → reads all three, writes "finalSchedule"
-//
-// Step 1: Create a ParallelAgent named "strategyRunner" with the 3 strategy agents
-// Step 2: Create a SequentialAgent named "scheduleGenerator" that runs
-//         strategyRunner first, then bestScheduleSelector
-// Step 3: Export it as rootAgent
+
+const strategyRunner = new ParallelAgent({
+  name: "strategyRunner",
+  description:
+    "Runs three schedule optimization strategies in parallel.",
+  subAgents: [topicMatchStrategy, speakerQualityStrategy, diversityStrategy],
+});
 
 export const rootAgent = new SequentialAgent({
   name: "scheduleGenerator",
   description:
     "Generates three schedule strategies in parallel, then selects the best one.",
-  // TODO: Create a ParallelAgent and wire it with the selector
-  subAgents: [],
+  subAgents: [strategyRunner, bestScheduleSelector],
 });
