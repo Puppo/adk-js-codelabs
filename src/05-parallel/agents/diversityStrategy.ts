@@ -12,8 +12,8 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 // - outputKey: "diversitySchedule"
 //
 // The instruction should tell the agent to:
-// 1. Pick sessions from as many DIFFERENT tracks as possible
-// 2. Mix difficulty levels (Beginner, Intermediate, Advanced)
+// 1. Pick sessions from as many DIFFERENT rooms and topics as possible
+// 2. Mix session types and topics for variety
 // 3. Avoid scheduling the same speaker twice
 // 4. Expose the user to topics outside their comfort zone
 // 5. Explain why this schedule maximizes diversity
@@ -22,7 +22,7 @@ export const diversityStrategy = new LlmAgent({
   name: "diversityStrategy",
   model: "gemini-3.0-flash",
   description:
-    "Builds a schedule that maximizes variety across tracks, difficulty levels, and speakers.",
+    "Builds a schedule that maximizes variety across rooms, topics, and speakers.",
   instruction: `TODO: Write the instruction for the diversity strategy.
 See the comments above for guidance.`,
   tools: [getSessions, getSpeakers, getUserPreferences],

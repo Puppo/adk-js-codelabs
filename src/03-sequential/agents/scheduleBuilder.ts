@@ -15,16 +15,13 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 // The instruction should tell the agent to:
 // 1. Use get_user_preferences to capture interests
 // 2. Use get_sessions to find matching sessions
-// 3. Build a complete day schedule (9:00-17:30)
+// 3. Build a complete day schedule (10:00-18:40)
 // 4. Follow the time slot structure:
-//    - 9:00-10:00: Keynote
-//    - 10:30-11:30: Pick one session
-//    - 11:45-12:45: Pick one session
-//    - 12:45-14:00: Lunch
-//    - 14:00-15:00/15:30: Pick one session
-//    - 15:15-16:30: Pick one session
-//    - 16:30-17:30: Closing
-// 5. No time conflicts, match interests and skill level
+//    - Morning sessions (10:00-12:40)
+//    - Afternoon sessions (14:00-16:30)
+//    - Evening sessions (17:00-18:40)
+//    - Pick one session per time slot across rooms
+// 5. No time conflicts, match interests
 
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",

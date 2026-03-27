@@ -51,30 +51,48 @@ npm install
 
 ### What you'll learn
 
-An `LlmAgent` wraps a large language model with a name, description, and instruction (system prompt). The instruction defines the agent's personality and knowledge. In this step, we embed the entire conference schedule directly in the prompt.
+An `LlmAgent` wraps a large language model with a name, description, and instruction (system prompt). The instruction defines the agent's personality and knowledge. In this step, we use shared markdown utilities to inject the conference data into the agent's prompt.
+
+The project includes a `src/common/` folder with reusable modules:
+
+- **`conferenceData.ts`** — loads and validates conference, speakers, and schedule data from JSON files using Zod schemas
+- **`toMarkdown.ts`** — converts each data type into well-structured markdown, ideal for LLM consumption
 
 ### Your task
 
 Open `src/01-intro/agent.ts` and complete the TODOs:
 
-1. Create an `LlmAgent` with the name `conferenceAgent`
-2. Set the model to `gemini-3.0-flash`
-3. Write an instruction that includes the full DevFest Pisa 2026 schedule (sessions, speakers, times, rooms, tracks)
-4. Export it as `rootAgent`
+1. Import `{ conference, speakers, schedule }` from `"../common/conferenceData.js"`
+2. Import `{ conferenceToMarkdown, speakersToMarkdown, scheduleToMarkdown }` from `"../common/toMarkdown.js"`
+3. Use these functions inside a template literal to build the agent's `instruction`
+4. Add a section describing how the agent should help attendees
 
 **Key code:**
 
 ```typescript
 import "dotenv/config";
 import { LlmAgent } from "@google/adk";
+import { conference, speakers, schedule } from "../common/conferenceData.js";
+import {
+  conferenceToMarkdown,
+  speakersToMarkdown,
+  scheduleToMarkdown,
+} from "../common/toMarkdown.js";
 
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
   model: "gemini-3.0-flash",
   description: "A helpful assistant for DevFest Pisa 2026",
-  instruction: `You are a friendly conference assistant...
-    // Add the full schedule here
-  `,
+  instruction: `You are a friendly and enthusiastic conference assistant...
+
+// Inject conference data as markdown here
+
+## How you help attendees
+
+- Answer questions about sessions, speakers, rooms, and timing
+- Help attendees plan their day based on their interests
+- Provide speaker bios and talk descriptions
+- Give directions to the venue`,
 });
 ```
 
@@ -96,7 +114,7 @@ Switch to the `final` branch and look at `src/01-intro/agent.ts`.
 
 ### Reflection
 
-The agent works, but the instruction is **huge**. All the conference data is hardcoded in the prompt. What if the schedule changes? What if you want to pull data from a real API? This motivates **Step 2**.
+The agent works and the data stays in sync with the JSON source files automatically. However, all the data is still loaded into the prompt at once. What if you want the agent to look up data on demand? This motivates **Step 2**.
 
 ---
 

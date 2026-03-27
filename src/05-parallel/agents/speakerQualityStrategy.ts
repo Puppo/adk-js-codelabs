@@ -13,8 +13,8 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 //
 // The instruction should tell the agent to:
 // 1. Research all speakers to understand their expertise
-// 2. Prioritize keynote speakers and GDEs
-// 3. Favor Advanced/Intermediate sessions over Beginner
+// 2. Prioritize well-known speakers and GDEs based on their heading/bio
+// 3. Favor sessions by speakers with the most relevant expertise
 // 4. Use topic relevance only as a tiebreaker
 // 5. Explain why this schedule maximizes speaker quality
 

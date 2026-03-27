@@ -50,7 +50,7 @@ export const scheduleReviewer = new LlmAgent({
   model: "gemini-3.0-flash",
   description:
     "Reviews a schedule against quality criteria and either approves it or provides improvement feedback.",
-  instruction: `You are a schedule reviewer for DevFest Pisa 2026.
+  instruction: `You are a schedule reviewer for DevFest Pisa 2026 (April 18, 2026).
 
 Review this schedule:
 {{draftSchedule}}

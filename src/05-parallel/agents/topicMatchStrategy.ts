@@ -13,8 +13,8 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 //
 // The instruction should tell the agent to:
 // 1. Capture user preferences
-// 2. Fill every slot with the most relevant session from preferred tracks
-// 3. Only use other tracks if no matching session exists
+// 2. Fill every slot with the most relevant session based on talk title and speaker expertise
+// 3. Only use less relevant sessions if no matching session exists
 // 4. Explain why this schedule maximizes topic relevance
 
 export const topicMatchStrategy = new LlmAgent({
