@@ -1,0 +1,226 @@
+[
+  {
+    "speaker": "Martino Fornasa",
+    "talk title": "Strategie incrementali per l'adozione di OpenTelemetry",
+    "start_time": "2026-04-18T10:00:00.000",
+    "end_time": "2026-04-18T10:55:00.000",
+    "room": "Sala Fibonacci"
+  },
+  {
+    "speaker": "Daniela Petruzalek",
+    "talk title": "Advanced Techniques for Building Agents with ADK and Vertex AI",
+    "start_time": "2026-04-18T10:00:00.000",
+    "end_time": "2026-04-18T10:30:00.000",
+    "room": "Sala Ricci"
+  },
+  {
+    "speaker": "Pietro Tempesti, Franco Riformato",
+    "talk title": "La Context Engineering come l'arma finale di ogni sviluppatore",
+    "start_time": "2026-04-18T10:00:00.000",
+    "end_time": "2026-04-18T10:55:00.000",
+    "room": "Sala Pacinotti"
+  },
+  {
+    "speaker": "Lorenzo Spiridioni",
+    "talk title": "DevBox: Nix made easy",
+    "start_time": "2026-04-18T10:30:00.000",
+    "end_time": "2026-04-18T10:55:00.000",
+    "room": "Sala Ricci"
+  },
+  {
+    "speaker": "Daniela Petruzalek",
+    "talk title": "Build a photo restoration app using Genkit Go and Nano Banana Pro",
+    "start_time": "2026-04-18T10:30:00.000",
+    "end_time": "2026-04-18T12:40:00.000",
+    "room": "Sala Gentili Build with AI"
+  },
+  {
+    "speaker": "Giovanni Toraldo",
+    "talk title": "Shift left with performance testing",
+    "start_time": "2026-04-18T10:55:00.000",
+    "end_time": "2026-04-18T11:50:00.000",
+    "room": "Sala Ricci"
+  },
+  {
+    "speaker": "Monja Da Riva",
+    "talk title": "Pattern Recognition: identificare il codice invisibile dei non detti",
+    "start_time": "2026-04-18T10:55:00.000",
+    "end_time": "2026-04-18T11:50:00.000",
+    "room": "Sala Fibonacci"
+  },
+  {
+    "speaker": "Katarina Zivkovic",
+    "talk title": "Synthetic Trust: AI, Security, and the Collapse of “Seeing Is Believing”",
+    "start_time": "2026-04-18T10:55:00.000",
+    "end_time": "2026-04-18T11:50:00.000",
+    "room": "Sala Pacinotti"
+  },
+  {
+    "speaker": "Mohamed Mortadha Manai",
+    "talk title": "Building Agentic AI Workflows with xAI on Vertex AI: From Code to Action",
+    "start_time": "2026-04-18T11:50:00.000",
+    "end_time": "2026-04-18T12:40:00.000",
+    "room": "Sala Pacinotti"
+  },
+  {
+    "speaker": "Rowdy Rabouw",
+    "talk title": "Warp Pipes and Prefetching: Navigating the Web at Mario Speed",
+    "start_time": "2026-04-18T11:50:00.000",
+    "end_time": "2026-04-18T12:40:00.000",
+    "room": "Sala Ricci"
+  },
+  {
+    "speaker": "Valeria Salis",
+    "talk title": "From shy contributor to (kinda) confident community leader",
+    "start_time": "2026-04-18T11:50:00.000",
+    "end_time": "2026-04-18T12:40:00.000",
+    "room": "Sala Fibonacci"
+  },
+  {
+    "speaker": "Michela Bertaina",
+    "talk title": "Developer Mezzosangue: Padroneggiare l'Alchimia dell'IA e del Personal Branding",
+    "start_time": "2026-04-18T14:00:00.000",
+    "end_time": "2026-04-18T14:50:00.000",
+    "room": "Sala Pacinotti"
+  },
+  {
+    "speaker": "Luca Del Puppo",
+    "talk title": "Costruiamo agenti con ADK-js",
+    "start_time": "2026-04-18T14:00:00.000",
+    "end_time": "2026-04-18T16:30:00.000",
+    "room": "Sala Gentili Build with AI"
+  },
+  {
+    "speaker": "Chiara Corrado, Federica Merenda, Pinelopi Troullinou, Luciana Bertoncini",
+    "talk title": "Hack the Job Title: Il lavoro reale dietro i titoli tech",
+    "start_time": "2026-04-18T14:00:00.000",
+    "end_time": "2026-04-18T14:25:00.000",
+    "room": "Sala Fibonacci"
+  },
+  {
+    "speaker": "Francesco Sciuti, Emiliano Pisu",
+    "talk title": "60fps o niente: Rendering Pipeline a suon di esempi pratici!",
+    "start_time": "2026-04-18T14:00:00.000",
+    "end_time": "2026-04-18T14:50:00.000",
+    "room": "Sala Ricci"
+  },
+  {
+    "speaker": "Tiffany De Simone, Valentina Giuffre' Coco",
+    "talk title": "Il bug non era nel codice: era nel team!",
+    "start_time": "2026-04-18T14:25:00.000",
+    "end_time": "2026-04-18T14:50:00.000",
+    "room": "Sala Fibonacci"
+  },
+  {
+    "speaker": "Christian Liebel",
+    "talk title": "What’s New in Web? 2026 Edition",
+    "start_time": "2026-04-18T14:50:00.000",
+    "end_time": "2026-04-18T15:40:00.000",
+    "room": "Sala Ricci"
+  },
+  {
+    "speaker": "Luigi De Bianchi",
+    "talk title": "Senior Engineer ≠ More Code: A Git History Tell-All",
+    "start_time": "2026-04-18T14:50:00.000",
+    "end_time": "2026-04-18T15:15:00.000",
+    "room": "Sala Fibonacci"
+  },
+  {
+    "speaker": "Fabian Greavu",
+    "talk title": "Oltre i Chatbot: OpenClaw, Micro-Agenti e l'Ecosistema IA Connesso",
+    "start_time": "2026-04-18T14:50:00.000",
+    "end_time": "2026-04-18T15:15:00.000",
+    "room": "Sala Pacinotti"
+  },
+  {
+    "speaker": "Jacopo Martellini",
+    "talk title": "Il miglior Copilot è umano",
+    "start_time": "2026-04-18T15:15:00.000",
+    "end_time": "2026-04-18T15:40:00.000",
+    "room": "Sala Fibonacci"
+  },
+  {
+    "speaker": "Gregory Pardini",
+    "talk title": "Agenti in produzione: come sbloccare il potenziale in sicurezza",
+    "start_time": "2026-04-18T15:15:00.000",
+    "end_time": "2026-04-18T15:40:00.000",
+    "room": "Sala Pacinotti"
+  },
+  {
+    "speaker": "Giacomo Sergio",
+    "talk title": "IA Generativa e Inclusione: Progettare l'Autonomia Oltre i Bias di Performance",
+    "start_time": "2026-04-18T15:40:00.000",
+    "end_time": "2026-04-18T16:05:00.000",
+    "room": "Sala Pacinotti"
+  },
+  {
+    "speaker": "Matthias Geisler",
+    "talk title": "Design patterns 101 with Kotlin",
+    "start_time": "2026-04-18T15:40:00.000",
+    "end_time": "2026-04-18T16:30:00.000",
+    "room": "Sala Ricci"
+  },
+  {
+    "speaker": "Juna Salviati",
+    "talk title": "L'essenziale è invisibile agli occhi (ma non a Python): un’introduzione alla steganografia",
+    "start_time": "2026-04-18T16:05:00.000",
+    "end_time": "2026-04-18T16:30:00.000",
+    "room": "Sala Fibonacci"
+  },
+  {
+    "speaker": "Diego Giorgini",
+    "talk title": "LLM Steering: progettare 'stati mentali' per modelli linguistici",
+    "start_time": "2026-04-18T16:05:00.000",
+    "end_time": "2026-04-18T16:30:00.000",
+    "room": "Sala Pacinotti"
+  },
+  {
+    "speaker": "Camillo Bucciarelli",
+    "talk title": "Mettiti l’LLM in tasca: AI generativa offline su smartphone con Flutter",
+    "start_time": "2026-04-18T17:00:00.000",
+    "end_time": "2026-04-18T17:50:00.000",
+    "room": "Sala Ricci"
+  },
+  {
+    "speaker": "Federico Paolinelli",
+    "talk title": "Kubernetes Networking Demystified: From Pod IPs to Loadbalancers",
+    "start_time": "2026-04-18T17:00:00.000",
+    "end_time": "2026-04-18T17:50:00.000",
+    "room": "Sala Fibonacci"
+  },
+  {
+    "speaker": "Irene Burresi",
+    "talk title": "LLM Testing 101: qualità e metriche di valutazione per sistemi GenAI",
+    "start_time": "2026-04-18T17:00:00.000",
+    "end_time": "2026-04-18T17:50:00.000",
+    "room": "Sala Pacinotti"
+  },
+  {
+    "speaker": "Luca Di Vita",
+    "talk title": "Tutti a bordo delle Neural ODE!",
+    "start_time": "2026-04-18T17:50:00.000",
+    "end_time": "2026-04-18T18:40:00.000",
+    "room": "Sala Pacinotti"
+  },
+  {
+    "speaker": "Donatella Pasquale, Matilde Petrucci",
+    "talk title": "One Feature, Many Apps: Building Without Repeating Yourself",
+    "start_time": "2026-04-18T17:50:00.000",
+    "end_time": "2026-04-18T18:15:00.000",
+    "room": "Sala Ricci"
+  },
+  {
+    "speaker": "Michel Murabito, Graziano Casto",
+    "talk title": "Da Zero a Cento: Costruire un’Infrastruttura che si Auto-Ottimizza",
+    "start_time": "2026-04-18T17:50:00.000",
+    "end_time": "2026-04-18T18:40:00.000",
+    "room": "Sala Fibonacci"
+  },
+  {
+    "speaker": "Nicola Corti",
+    "talk title": "Gotta Build 'Em All: Android Pokedex 10 Years Later",
+    "start_time": "2026-04-18T18:15:00.000",
+    "end_time": "2026-04-18T18:40:00.000",
+    "room": "Sala Ricci"
+  }
+]

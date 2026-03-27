@@ -1,0 +1,35 @@
+{
+  "conference_name": "DevFest Pisa 2026",
+  "start_time": "2026-04-18T10:00:00.000+02:00",
+  "end_time": "2026-04-18T18:40:00.000+02:00",
+  "theme": "Leaning into the Future",
+  "venue": {
+    "name": "MACC - Meeting Art Craft Center",
+    "address": "P.za V. Emanuele II, 5, 56125 Pisa PI, Italy",
+    "description": "A modern conference center located in the heart of Pisa, close to the Pisa Central Station and the historic center of the city.",
+    "directions": {
+      "by_train": "4 minutes walk from the Pisa Centrale train station. High-speed train (Freccia Rossa) connections available via Florence Santa Maria Novella.",
+      "by_plane": "From Pisa International Airport (approx. 3 km away), take a taxi or the Pisa Mover city train to Pisa Centrale, then a 4-minute walk to the venue.",
+      "by_car": "Accessible via highways A12 and A11. Closest paid parking is Parcheggio Saba V. Emanuele. A free parking option is Park Pratale (30 minutes walk)."
+    }
+  },
+  "organizers": [
+    "GDG Pisa",
+    "WTM Pisa"
+  ],
+  "sponsors": {
+    "main": [
+      "Google"
+    ],
+    "diamond": [
+      "Ema Health SRL",
+      "Garmin Italy Technologies",
+      "Nextworks srl",
+      "TD GROUP ITALIA SRL",
+      "Zerynth S.p.A"
+    ],
+    "silver": [
+      "Wondersys srl"
+    ]
+  }
+}
