@@ -1,10 +1,10 @@
-import "dotenv/config";
 import { LlmAgent } from "@google/adk";
+import "dotenv/config";
 
 // TODO: Import conference data and markdown utilities
 //
-// 1. Import { conference, speakers, schedule } from "../common/conferenceData.js"
-// 2. Import { conferenceToMarkdown, speakersToMarkdown, scheduleToMarkdown } from "../common/toMarkdown.js"
+// 1. import { conference, speakers, schedule } from "../common/conferenceData.js"
+// 2. import { conferenceToMarkdown, speakersToMarkdown, scheduleToMarkdown } from "../common/toMarkdown.js"
 //
 // TODO: Create a rootAgent using LlmAgent and export it
 //
@@ -33,7 +33,7 @@ import { LlmAgent } from "@google/adk";
 
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   description:
     "A helpful assistant for the DevFest Pisa 2026 conference. It answers questions about sessions, speakers, and helps attendees plan their day.",
   instruction: `You are a friendly and enthusiastic conference assistant for DevFest Pisa 2026.
