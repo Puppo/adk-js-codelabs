@@ -38,10 +38,10 @@ echo ""
 if command -v node &> /dev/null; then
   NODE_VERSION=$(node --version | sed 's/v//')
   NODE_MAJOR=$(echo "$NODE_VERSION" | cut -d. -f1)
-  if [ "$NODE_MAJOR" -ge 22 ]; then
+  if [ "$NODE_MAJOR" -ge 24 ]; then
     check "Node.js" "pass" "v${NODE_VERSION}"
   else
-    check "Node.js" "fail" "v${NODE_VERSION} (requires >= 22)"
+    check "Node.js" "fail" "v${NODE_VERSION} (requires >= 24)"
   fi
 else
   check "Node.js" "fail" "Not installed (https://nodejs.org/)"
