@@ -138,25 +138,28 @@ You'll find three files to work on:
 
 ```typescript
 import { FunctionTool } from "@google/adk";
-import { z } from "zod/v3";
-import { sessions, speakers } from "./data/conferenceData.js";
+import { z } from "zod";
+import { schedule, speakers } from "./data/conferenceData.js";
 
 export const getSessions = new FunctionTool({
   name: "get_sessions",
   description:
-    "Get conference sessions, optionally filtered by title, time slot or speaker.",
+    "Get conference sessions, optionally filtered by speaker, room, or time slot.",
   parameters: z.object({
-    title: z
+    speaker: z
       .string()
       .optional()
-      .describe("Filter by session title (partial match)"),
+      .describe("Filter by speaker name (partial match)"),
+    room: z
+      .string()
+      .optional()
+      .describe("Filter by room name (partial match)"),
     timeSlot: z
       .string()
       .optional()
-      .describe("Filter by time slot, e.g. 'morning' or 'afternoon'"),
-    speaker: z.string().optional().describe("Filter by speaker name"),
+      .describe("Filter by time slot, e.g. '10:00' or 'morning' or 'afternoon'"),
   }),
-  execute: async ({ title, timeSlot, speaker }) => {
+  execute: async ({ speaker, room, timeSlot }) => {
     // Filter sessions based on parameters and return formatted results
   },
 });
