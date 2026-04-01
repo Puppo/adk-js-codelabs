@@ -7,7 +7,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 //
 // Configuration:
 // - name: "diversityStrategy"
-// - model: "gemini-3.0-flash"
+// - model: "gemini-2.5-flash"
 // - tools: [getSessions, getSpeakers, getUserPreferences]
 // - outputKey: "diversitySchedule"
 //
@@ -20,7 +20,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const diversityStrategy = new LlmAgent({
   name: "diversityStrategy",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   description:
     "Builds a schedule that maximizes variety across rooms, topics, and speakers.",
   instruction: `TODO: Write the instruction for the diversity strategy.

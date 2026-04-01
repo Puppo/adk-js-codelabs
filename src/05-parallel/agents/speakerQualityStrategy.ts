@@ -7,7 +7,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 //
 // Configuration:
 // - name: "speakerQualityStrategy"
-// - model: "gemini-3.0-flash"
+// - model: "gemini-2.5-flash"
 // - tools: [getSessions, getSpeakers, getUserPreferences]
 // - outputKey: "speakerSchedule"
 //
@@ -20,7 +20,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const speakerQualityStrategy = new LlmAgent({
   name: "speakerQualityStrategy",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   description:
     "Builds a schedule that prioritizes the most renowned speakers and expert-level content.",
   instruction: `TODO: Write the instruction for the speaker quality strategy.
