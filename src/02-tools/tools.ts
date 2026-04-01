@@ -1,6 +1,5 @@
 import { FunctionTool } from "@google/adk";
 import { z } from "zod";
-import { schedule, speakers } from "./data/conferenceData.js";
 
 // ============================================================
 // TODO 1: Create the getSessions tool
@@ -8,9 +7,9 @@ import { schedule, speakers } from "./data/conferenceData.js";
 // This tool lets the agent search for conference sessions.
 //
 // Parameters (all optional):
-//   - speaker: string — filter by speaker name (partial match)
-//   - room: string — filter by room name (partial match)
+//   - title: string — partial match on session title
 //   - timeSlot: string — "morning", "afternoon", or exact time like "10:00"
+//   - speaker: string — filter by speaker name (partial match)
 //
 // The execute function should:
 //   1. Start with all entries from the imported `schedule` array
@@ -24,9 +23,9 @@ import { schedule, speakers } from "./data/conferenceData.js";
 export const getSessions = new FunctionTool({
   name: "get_sessions",
   description:
-    "Get conference sessions, optionally filtered by speaker, room, or time slot.",
+    "Get conference sessions, optionally filtered by title, time slot or speaker.",
   parameters: z.object({
-    // TODO: Add Zod schema for speaker, room, timeSlot (all optional strings)
+    // TODO: Add Zod schema for title, speaker, room, timeSlot (all optional strings)
   }),
   execute: async () => {
     // TODO: Implement the filtering logic described above

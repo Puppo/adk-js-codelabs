@@ -1,4 +1,5 @@
 import "dotenv/config";
+
 import { LlmAgent } from "@google/adk";
 import { getSessions, getSpeakers, getUserPreferences } from "./tools.js";
 
@@ -10,20 +11,17 @@ import { getSessions, getSpeakers, getUserPreferences } from "./tools.js";
 
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   description:
     "A helpful assistant for the DevFest Pisa 2026 conference. It answers questions about sessions, speakers, and helps attendees plan their day.",
   instruction: `You are a friendly and enthusiastic conference assistant for DevFest Pisa 2026.
-The conference takes place on April 18, 2026 at the MACC - Meeting Art Craft Center, Pisa.
-
-The schedule runs from 10:00 to 18:40, with rooms: Sala Fibonacci, Sala Ricci, Sala Pacinotti, and Sala Gentili Build with AI.
 
 Use your tools to look up session and speaker information. Do NOT make up session data — always use the get_sessions and get_speakers tools.
 
 When a user shares their interests, use the get_user_preferences tool to record them, then use get_sessions to find matching sessions.
 
 Help users:
-- Find sessions by speaker, room, or time
+- Find sessions by title, speaker, or time
 - Learn about speakers and their expertise
 - Plan their conference day avoiding time conflicts
 - Get recommendations based on their interests

@@ -144,22 +144,19 @@ import { sessions, speakers } from "./data/conferenceData.js";
 export const getSessions = new FunctionTool({
   name: "get_sessions",
   description:
-    "Get conference sessions, optionally filtered by track, time slot, or difficulty.",
+    "Get conference sessions, optionally filtered by title, time slot or speaker.",
   parameters: z.object({
-    track: z
+    title: z
       .string()
       .optional()
-      .describe("Filter by track: AI/ML, Web, Cloud, Mobile, or DevOps"),
+      .describe("Filter by session title (partial match)"),
     timeSlot: z
       .string()
       .optional()
       .describe("Filter by time slot, e.g. 'morning' or 'afternoon'"),
-    difficulty: z
-      .string()
-      .optional()
-      .describe("Filter by difficulty: Beginner, Intermediate, or Advanced"),
+    speaker: z.string().optional().describe("Filter by speaker name"),
   }),
-  execute: async ({ track, timeSlot, difficulty }) => {
+  execute: async ({ title, timeSlot, speaker }) => {
     // Filter sessions based on parameters and return formatted results
   },
 });
@@ -170,7 +167,7 @@ export const getSessions = new FunctionTool({
 ```typescript
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   description: "A helpful assistant for DevFest Pisa 2026",
   instruction: `You are a friendly conference assistant...
     Use your tools to look up session and speaker information.`,
@@ -220,7 +217,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   description: "Builds a draft conference schedule based on user preferences",
   instruction: `You are a schedule builder for DevFest Pisa 2026...`,
   tools: [getSessions, getSpeakers, getUserPreferences],
@@ -233,7 +230,7 @@ export const scheduleBuilder = new LlmAgent({
 ```typescript
 export const scheduleOptimizer = new LlmAgent({
   name: "scheduleOptimizer",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   description: "Optimizes a draft schedule for conflicts and logistics",
   instruction: `You are a schedule optimizer. Review this draft schedule:
 {{draftSchedule}}
@@ -291,7 +288,7 @@ A `LoopAgent` repeats its sub-agents until a condition is met (or max iterations
 ```typescript
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   instruction: `You are a schedule builder for DevFest Pisa 2026.
 
 If there is reviewer feedback, incorporate it:
