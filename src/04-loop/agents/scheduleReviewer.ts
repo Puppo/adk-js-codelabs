@@ -1,4 +1,4 @@
-import { LlmAgent, FunctionTool } from "@google/adk";
+import { FunctionTool, LlmAgent } from "@google/adk";
 import { z } from "zod";
 
 // TODO 1: Create an exit_loop FunctionTool
@@ -47,7 +47,7 @@ const exitLoop = new FunctionTool({
 
 export const scheduleReviewer = new LlmAgent({
   name: "scheduleReviewer",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   description:
     "Reviews a schedule against quality criteria and either approves it or provides improvement feedback.",
   instruction: `You are a schedule reviewer for DevFest Pisa 2026 (April 18, 2026).

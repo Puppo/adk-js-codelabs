@@ -17,7 +17,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   description:
     "Builds or revises a personalized conference schedule based on user preferences and reviewer feedback.",
   instruction: `You are a schedule builder for DevFest Pisa 2026 (April 18, 2026).
