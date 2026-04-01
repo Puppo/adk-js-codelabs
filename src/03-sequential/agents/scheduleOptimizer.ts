@@ -7,7 +7,7 @@ import { getSessions } from "../tools.js";
 //
 // Configuration:
 // - name: "scheduleOptimizer"
-// - model: "gemini-3.0-flash"
+// - model: "gemini-2.5-flash"
 // - description: Reviews and optimizes a draft schedule
 // - tools: [getSessions]  (to look up alternative sessions)
 // - outputKey: "optimizedSchedule"
@@ -25,7 +25,7 @@ import { getSessions } from "../tools.js";
 
 export const scheduleOptimizer = new LlmAgent({
   name: "scheduleOptimizer",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   description:
     "Reviews and optimizes a draft conference schedule for quality and logistics.",
   instruction: `You are a schedule optimizer for DevFest Pisa 2026.

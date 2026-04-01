@@ -7,7 +7,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 //
 // Configuration:
 // - name: "scheduleBuilder"
-// - model: "gemini-3.0-flash"
+// - model: "gemini-2.5-flash"
 // - description: Builds a personalized conference schedule based on user preferences
 // - tools: [getSessions, getSpeakers, getUserPreferences]
 // - outputKey: "draftSchedule"  <-- This saves the agent's response to shared state
@@ -25,7 +25,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
-  model: "gemini-3.0-flash",
+  model: "gemini-2.5-flash",
   description:
     "Builds a personalized conference schedule based on user preferences.",
   instruction: `TODO: Write the instruction for the schedule builder agent.
