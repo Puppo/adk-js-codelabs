@@ -1,8 +1,9 @@
 import { LlmAgent } from "@google/adk";
+import { MODEL } from "../../common/models.js";
 
 export const bestScheduleSelector = new LlmAgent({
   name: "bestScheduleSelector",
-  model: "gemini-3.0-flash",
+  model: MODEL,
   description:
     "Compares multiple schedule proposals and selects or synthesizes the best one.",
   instruction: `You are a schedule advisor for DevFest Pisa 2026.
@@ -15,7 +16,7 @@ Three different strategies have produced schedule proposals:
 **Strategy 2 — Speaker Quality (prioritizes the best speakers):**
 {{speakerSchedule}}
 
-**Strategy 3 — Diversity (maximizes variety across tracks and difficulty):**
+**Strategy 3 — Diversity (maximizes variety across rooms and topics):**
 {{diversitySchedule}}
 
 Your job:

@@ -1,47 +1,47 @@
 import { FunctionTool } from "@google/adk";
 import { z } from "zod";
-import { sessions, speakers } from "./data/conferenceData.js";
+import { schedule, speakers } from "./data/conferenceData.js";
 
 export const getSessions = new FunctionTool({
   name: "get_sessions",
   description:
-    "Get conference sessions, optionally filtered by track, time slot, or difficulty level.",
+    "Get conference sessions, optionally filtered by speaker, room, or time slot.",
   parameters: z.object({
-    track: z
+    speaker: z
       .string()
       .optional()
-      .describe("Filter by track: AI/ML, Web, Cloud, Mobile, or DevOps"),
+      .describe("Filter by speaker name (partial match)"),
+    room: z
+      .string()
+      .optional()
+      .describe("Filter by room name (partial match)"),
     timeSlot: z
       .string()
       .optional()
       .describe(
-        "Filter by time slot, e.g. '10:30-11:30' or 'morning' or 'afternoon'"
+        "Filter by time slot, e.g. '10:00' or 'morning' or 'afternoon'"
       ),
-    difficulty: z
-      .string()
-      .optional()
-      .describe("Filter by difficulty: Beginner, Intermediate, or Advanced"),
   }),
   execute: async ({
-    track,
+    speaker,
+    room,
     timeSlot,
-    difficulty,
   }: {
-    track?: string;
+    speaker?: string;
+    room?: string;
     timeSlot?: string;
-    difficulty?: string;
   }) => {
-    let result = sessions;
+    let result = schedule;
 
-    if (track) {
-      result = result.filter(
-        (s) => s.track.toLowerCase() === track.toLowerCase()
+    if (speaker) {
+      result = result.filter((s) =>
+        s.speaker.toLowerCase().includes(speaker.toLowerCase())
       );
     }
 
-    if (difficulty) {
-      result = result.filter(
-        (s) => s.difficulty.toLowerCase() === difficulty.toLowerCase()
+    if (room) {
+      result = result.filter((s) =>
+        s.room.toLowerCase().includes(room.toLowerCase())
       );
     }
 
@@ -49,16 +49,16 @@ export const getSessions = new FunctionTool({
       const slot = timeSlot.toLowerCase();
       if (slot === "morning") {
         result = result.filter((s) => {
-          const hour = parseInt(s.time.split(":")[0]);
+          const hour = parseInt(s.start_time.split("T")[1].split(":")[0]);
           return hour < 13;
         });
       } else if (slot === "afternoon") {
         result = result.filter((s) => {
-          const hour = parseInt(s.time.split(":")[0]);
+          const hour = parseInt(s.start_time.split("T")[1].split(":")[0]);
           return hour >= 13;
         });
       } else {
-        result = result.filter((s) => s.time === timeSlot);
+        result = result.filter((s) => s.start_time.includes(timeSlot));
       }
     }
 
@@ -69,7 +69,7 @@ export const getSessions = new FunctionTool({
     return result
       .map(
         (s) =>
-          `${s.time} | ${s.title} by ${s.speaker} | ${s.room} | ${s.track} | ${s.difficulty}\n  ${s.description}`
+          `${s.start_time} - ${s.end_time} | ${s["talk title"]} by ${s.speaker} | ${s.room}`
       )
       .join("\n\n");
   },
@@ -78,18 +78,24 @@ export const getSessions = new FunctionTool({
 export const getSpeakers = new FunctionTool({
   name: "get_speakers",
   description:
-    "Get information about conference speakers, optionally filtered by name or company.",
+    "Get information about conference speakers, optionally filtered by name or heading.",
   parameters: z.object({
     name: z
       .string()
       .optional()
       .describe("Filter by speaker name (partial match)"),
-    company: z
+    heading: z
       .string()
       .optional()
-      .describe("Filter by company name (partial match)"),
+      .describe("Filter by heading/role (partial match)"),
   }),
-  execute: async ({ name, company }: { name?: string; company?: string }) => {
+  execute: async ({
+    name,
+    heading,
+  }: {
+    name?: string;
+    heading?: string;
+  }) => {
     let result = speakers;
 
     if (name) {
@@ -98,9 +104,9 @@ export const getSpeakers = new FunctionTool({
       );
     }
 
-    if (company) {
+    if (heading) {
       result = result.filter((s) =>
-        s.company.toLowerCase().includes(company.toLowerCase())
+        s.heading.toLowerCase().includes(heading.toLowerCase())
       );
     }
 
@@ -109,7 +115,7 @@ export const getSpeakers = new FunctionTool({
     }
 
     return result
-      .map((s) => `${s.name} — ${s.role} at ${s.company}\n  ${s.bio}`)
+      .map((s) => `${s.name} — ${s.heading}\n  ${s.bio}`)
       .join("\n\n");
   },
 });
@@ -122,12 +128,8 @@ export const getUserPreferences = new FunctionTool({
     interests: z
       .array(z.string())
       .describe(
-        "List of tracks or topics the user is interested in, e.g. ['AI/ML', 'Cloud']"
+        "List of topics the user is interested in"
       ),
-    skillLevel: z
-      .string()
-      .optional()
-      .describe("User's skill level: Beginner, Intermediate, or Advanced"),
     mustSeeSpeakers: z
       .array(z.string())
       .optional()
@@ -135,19 +137,17 @@ export const getUserPreferences = new FunctionTool({
   }),
   execute: async ({
     interests,
-    skillLevel,
     mustSeeSpeakers,
   }: {
     interests: string[];
-    skillLevel?: string;
     mustSeeSpeakers?: string[];
   }) => {
+    const rooms = [...new Set(schedule.map((s) => s.room))];
     return JSON.stringify(
       {
         interests,
-        skillLevel: skillLevel ?? "any",
         mustSeeSpeakers: mustSeeSpeakers ?? [],
-        availableTracks: ["AI/ML", "Web", "Cloud", "Mobile", "DevOps"],
+        availableRooms: rooms,
       },
       null,
       2
