@@ -112,12 +112,6 @@ You can supercharge your development experience with ADK dev skills:
 npx skills add google/adk-docs/skills -y -g
 ```
 
-### ADK Docs MCP Server (for Claude Code)
-
-```bash
-claude mcp add adk-docs -- npx -y -p @anthropic-ai/claude-code @anthropic-ai/claude-mcp-fetch https://google.github.io/adk-docs/llms.txt
-```
-
 Learn more: [Coding with AI - ADK Docs](https://google.github.io/adk-docs/tutorials/coding-with-ai/)
 
 ## About
