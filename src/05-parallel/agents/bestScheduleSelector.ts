@@ -1,4 +1,5 @@
 import { LlmAgent } from "@google/adk";
+import { MODEL } from "../../common/models.js";
 
 // TODO: Create and export a bestScheduleSelector agent
 //
@@ -6,7 +7,7 @@ import { LlmAgent } from "@google/adk";
 //
 // Configuration:
 // - name: "bestScheduleSelector"
-// - model: "gemini-2.5-flash"
+// - model: MODEL (imported from "../../common/models.js")
 // - outputKey: "finalSchedule"
 //
 // KEY CONCEPT: Use {{topicSchedule}}, {{speakerSchedule}}, {{diversitySchedule}}
@@ -20,7 +21,7 @@ import { LlmAgent } from "@google/adk";
 
 export const bestScheduleSelector = new LlmAgent({
   name: "bestScheduleSelector",
-  model: "gemini-2.5-flash",
+  model: MODEL,
   description:
     "Compares multiple schedule proposals and selects or synthesizes the best one.",
   instruction: `You are a schedule advisor for DevFest Pisa 2026.

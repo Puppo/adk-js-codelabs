@@ -1,4 +1,5 @@
 import { LlmAgent } from "@google/adk";
+import { MODEL } from "../../common/models.js";
 import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 // TODO: Create and export a speakerQualityStrategy agent
@@ -7,7 +8,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 //
 // Configuration:
 // - name: "speakerQualityStrategy"
-// - model: "gemini-2.5-flash"
+// - model: MODEL (imported from "../../common/models.js")
 // - tools: [getSessions, getSpeakers, getUserPreferences]
 // - outputKey: "speakerSchedule"
 //
@@ -20,7 +21,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const speakerQualityStrategy = new LlmAgent({
   name: "speakerQualityStrategy",
-  model: "gemini-2.5-flash",
+  model: MODEL,
   description:
     "Builds a schedule that prioritizes the most renowned speakers and expert-level content.",
   instruction: `TODO: Write the instruction for the speaker quality strategy.

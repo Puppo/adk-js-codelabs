@@ -1,4 +1,5 @@
 import { LlmAgent } from "@google/adk";
+import { MODEL } from "../../common/models.js";
 import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 // TODO: Create and export a topicMatchStrategy agent
@@ -7,7 +8,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 //
 // Configuration:
 // - name: "topicMatchStrategy"
-// - model: "gemini-2.5-flash"
+// - model: MODEL (imported from "../../common/models.js")
 // - tools: [getSessions, getSpeakers, getUserPreferences]
 // - outputKey: "topicSchedule"  <-- The selector reads this from state
 //
@@ -19,7 +20,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const topicMatchStrategy = new LlmAgent({
   name: "topicMatchStrategy",
-  model: "gemini-2.5-flash",
+  model: MODEL,
   description:
     "Builds a schedule that maximizes topic relevance to user interests.",
   instruction: `TODO: Write the instruction for the topic match strategy.

@@ -1,4 +1,5 @@
 import { LlmAgent } from "@google/adk";
+import { MODEL } from "../../common/models.js";
 import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 // TODO: Update the scheduleBuilder to be revision-aware
@@ -17,7 +18,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
-  model: "gemini-2.5-flash",
+  model: MODEL,
   description:
     "Builds or revises a personalized conference schedule based on user preferences and reviewer feedback.",
   instruction: `You are a schedule builder for DevFest Pisa 2026 (April 18, 2026).
