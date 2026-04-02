@@ -9,7 +9,7 @@ const exitLoop = new FunctionTool({
   description:
     "Call this ONLY when the schedule meets ALL quality criteria. This will approve the schedule and end the review loop.",
   parameters: z.object({}),
-  execute: async (_: unknown, context) => {
+  execute: async (_, context) => {
     context!.actions.escalate = true;
     return { status: "approved", message: "Schedule meets all quality criteria." };
   },

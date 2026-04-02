@@ -26,10 +26,6 @@ export const getSessions = new FunctionTool({
     speaker,
     room,
     timeSlot,
-  }: {
-    speaker?: string;
-    room?: string;
-    timeSlot?: string;
   }) => {
     let result = schedule;
 
@@ -92,9 +88,6 @@ export const getSpeakers = new FunctionTool({
   execute: async ({
     name,
     heading,
-  }: {
-    name?: string;
-    heading?: string;
   }) => {
     let result = speakers;
 
@@ -138,9 +131,6 @@ export const getUserPreferences = new FunctionTool({
   execute: async ({
     interests,
     mustSeeSpeakers,
-  }: {
-    interests: string[];
-    mustSeeSpeakers?: string[];
   }) => {
     const rooms = [...new Set(schedule.map((s) => s.room))];
     return JSON.stringify(
