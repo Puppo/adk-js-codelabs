@@ -295,7 +295,7 @@ export const scheduleBuilder = new LlmAgent({
   instruction: `You are a schedule builder for DevFest Pisa 2026.
 
 If there is reviewer feedback, incorporate it:
-{{reviewerFeedback}}
+{{reviewerFeedback:}}
 
 Build or revise the schedule based on user preferences.`,
   tools: [getSessions, getSpeakers, getUserPreferences],
