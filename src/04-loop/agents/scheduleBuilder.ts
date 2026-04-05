@@ -12,7 +12,7 @@ export const scheduleBuilder = new LlmAgent({
 Your job is to create or revise a personalized day schedule for the attendee.
 
 PREVIOUS REVIEWER FEEDBACK (if any):
-{{reviewerFeedback}}
+{{reviewerFeedback:}}
 
 If there is reviewer feedback above, incorporate it to improve the schedule.
 If there is no feedback yet, build a fresh schedule from the user's preferences.

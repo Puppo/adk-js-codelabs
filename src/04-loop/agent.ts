@@ -9,7 +9,7 @@ import { scheduleReviewer } from "./agents/scheduleReviewer.js";
 //
 // Each iteration: scheduleBuilder creates/revises -> scheduleReviewer evaluates
 // The reviewer reads {{draftSchedule}} and either approves (escalate) or
-// writes feedback to {{reviewerFeedback}} for the builder to read next iteration.
+// writes feedback to {{reviewerFeedback:}} for the builder to read next iteration.
 
 export const rootAgent = new LoopAgent({
   name: "scheduleLoop",
