@@ -10,9 +10,9 @@
     "dev:05": "npx @google/adk-devtools web src/05-parallel"
   },
   "dependencies": {
-    "@google/adk": "^0.4.0",
-    "dotenv": "^16.4.0",
-    "zod": "^3.23.0"
+    "@google/adk": "^0.6.1",
+    "dotenv": "^17.4.2",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@google/adk-devtools": "^0.6.1",
