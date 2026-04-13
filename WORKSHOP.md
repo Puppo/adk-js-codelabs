@@ -70,7 +70,7 @@ import { LlmAgent } from "@google/adk";
 
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
-  model: "gemini-3.0-flash",
+  model: "gemini-3-flash-preview",
   description: "A helpful assistant for DevFest Pisa 2026",
   instruction: `You are a friendly conference assistant...
     // Add the full schedule here
@@ -152,7 +152,7 @@ export const getSessions = new FunctionTool({
 ```typescript
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
-  model: "gemini-3.0-flash",
+  model: "gemini-3-flash-preview",
   description: "A helpful assistant for DevFest Pisa 2026",
   instruction: `You are a friendly conference assistant...
     Use your tools to look up session and speaker information.`,
@@ -202,7 +202,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
-  model: "gemini-3.0-flash",
+  model: "gemini-3-flash-preview",
   description: "Builds a draft conference schedule based on user preferences",
   instruction: `You are a schedule builder for DevFest Pisa 2026...`,
   tools: [getSessions, getSpeakers, getUserPreferences],
@@ -215,7 +215,7 @@ export const scheduleBuilder = new LlmAgent({
 ```typescript
 export const scheduleOptimizer = new LlmAgent({
   name: "scheduleOptimizer",
-  model: "gemini-3.0-flash",
+  model: "gemini-3-flash-preview",
   description: "Optimizes a draft schedule for conflicts and logistics",
   instruction: `You are a schedule optimizer. Review this draft schedule:
 {{draftSchedule}}
@@ -273,7 +273,7 @@ A `LoopAgent` repeats its sub-agents until a condition is met (or max iterations
 ```typescript
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
-  model: "gemini-3.0-flash",
+  model: "gemini-3-flash-preview",
   instruction: `You are a schedule builder for DevFest Pisa 2026.
 
 If there is reviewer feedback, incorporate it:
