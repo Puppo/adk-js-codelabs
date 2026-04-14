@@ -51,30 +51,48 @@ npm install
 
 ### What you'll learn
 
-An `LlmAgent` wraps a large language model with a name, description, and instruction (system prompt). The instruction defines the agent's personality and knowledge. In this step, we embed the entire conference schedule directly in the prompt.
+An `LlmAgent` wraps a large language model with a name, description, and instruction (system prompt). The instruction defines the agent's personality and knowledge. In this step, we use shared markdown utilities to inject the conference data into the agent's prompt.
+
+The project includes a `src/common/` folder with reusable modules:
+
+- **`conferenceData.ts`** — loads and validates conference, speakers, and schedule data from JSON files using Zod schemas
+- **`toMarkdown.ts`** — converts each data type into well-structured markdown, ideal for LLM consumption
 
 ### Your task
 
 Open `src/01-intro/agent.ts` and complete the TODOs:
 
-1. Create an `LlmAgent` with the name `conferenceAgent`
-2. Set the model to `gemini-3.0-flash`
-3. Write an instruction that includes the full DevFest Pisa 2026 schedule (sessions, speakers, times, rooms, tracks)
-4. Export it as `rootAgent`
+1. Import `{ conference, speakers, schedule }` from `"../common/conferenceData.js"`
+2. Import `{ conferenceToMarkdown, speakersToMarkdown, scheduleToMarkdown }` from `"../common/toMarkdown.js"`
+3. Use these functions inside a template literal to build the agent's `instruction`
+4. Add a section describing how the agent should help attendees
 
 **Key code:**
 
 ```typescript
 import { LlmAgent } from "@google/adk";
+import { conference, speakers, schedule } from "../common/conferenceData.js";
+import {
+  conferenceToMarkdown,
+  speakersToMarkdown,
+  scheduleToMarkdown,
+} from "../common/toMarkdown.js";
 import { getModel } from "../common/models.js";
 
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
   model: getModel(),
   description: "A helpful assistant for DevFest Pisa 2026",
-  instruction: `You are a friendly conference assistant...
-    // Add the full schedule here
-  `,
+  instruction: `You are a friendly and enthusiastic conference assistant...
+
+// Inject conference data as markdown here
+
+## How you help attendees
+
+- Answer questions about sessions, speakers, rooms, and timing
+- Help attendees plan their day based on their interests
+- Provide speaker bios and talk descriptions
+- Give directions to the venue`,
 });
 ```
 
@@ -96,7 +114,7 @@ Switch to the `final` branch and look at `src/01-intro/agent.ts`.
 
 ### Reflection
 
-The agent works, but the instruction is **huge**. All the conference data is hardcoded in the prompt. What if the schedule changes? What if you want to pull data from a real API? This motivates **Step 2**.
+The agent works and the data stays in sync with the JSON source files automatically. However, all the data is still loaded into the prompt at once. What if you want the agent to look up data on demand? This motivates **Step 2**.
 
 ---
 
@@ -120,28 +138,27 @@ You'll find three files to work on:
 
 ```typescript
 import { FunctionTool } from "@google/adk";
-import { z } from "zod/v3";
-import { sessions, speakers } from "./data/conferenceData.js";
+import { z } from "zod";
+import { schedule, speakers } from "./data/conferenceData.js";
 
 export const getSessions = new FunctionTool({
   name: "get_sessions",
   description:
-    "Get conference sessions, optionally filtered by track, time slot, or difficulty.",
+    "Get conference sessions, optionally filtered by speaker, room, or time slot.",
   parameters: z.object({
-    track: z
+    speaker: z
       .string()
       .optional()
-      .describe("Filter by track: AI/ML, Web, Cloud, Mobile, or DevOps"),
+      .describe("Filter by speaker name (partial match)"),
+    room: z.string().optional().describe("Filter by room name (partial match)"),
     timeSlot: z
       .string()
       .optional()
-      .describe("Filter by time slot, e.g. 'morning' or 'afternoon'"),
-    difficulty: z
-      .string()
-      .optional()
-      .describe("Filter by difficulty: Beginner, Intermediate, or Advanced"),
+      .describe(
+        "Filter by time slot, e.g. '10:00' or 'morning' or 'afternoon'",
+      ),
   }),
-  execute: async ({ track, timeSlot, difficulty }) => {
+  execute: async ({ speaker, room, timeSlot }) => {
     // Filter sessions based on parameters and return formatted results
   },
 });
@@ -199,8 +216,6 @@ A `SequentialAgent` executes sub-agents in a fixed order. Each agent focuses on 
 ```typescript
 import { LlmAgent } from "@google/adk";
 import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
-
-import { getModel } from "../common/models.js";
 
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
@@ -302,6 +317,7 @@ const exitLoop = new FunctionTool({
 
 export const scheduleReviewer = new LlmAgent({
   name: "scheduleReviewer",
+  model: getModel(),
   instruction: `Review this schedule: {{draftSchedule}}
 Evaluate: time conflicts, preference match, topic balance, breaks, difficulty variety.
 If ALL criteria pass, call exit_loop. Otherwise provide feedback.`,
@@ -364,8 +380,11 @@ Create three strategy agents, a selector, and compose them:
 **1. `src/05-parallel/agents/topicMatchStrategy.ts`** — Optimize for topic relevance:
 
 ```typescript
+import { getModel } from "../common/models.js";
+
 export const topicMatchStrategy = new LlmAgent({
   name: "topicMatchStrategy",
+  model: getModel(),
   instruction: `Build a schedule that maximizes relevance to the user's stated interests.
 Prioritize sessions from their preferred tracks.`,
   tools: [getSessions, getSpeakers, getUserPreferences],
@@ -382,6 +401,7 @@ Prioritize sessions from their preferred tracks.`,
 ```typescript
 export const bestScheduleSelector = new LlmAgent({
   name: "bestScheduleSelector",
+  model: getModel(),
   instruction: `Compare these three schedule proposals:
 
 Topic-optimized: {{topicSchedule}}
@@ -397,14 +417,17 @@ Select the best one (or create a hybrid). Explain the trade-offs.`,
 
 ```typescript
 import { SequentialAgent, ParallelAgent } from "@google/adk";
+import { getModel } from "../common/models.js";
 
 const strategyRunner = new ParallelAgent({
   name: "strategyRunner",
+  model: getModel(),
   subAgents: [topicMatchStrategy, speakerQualityStrategy, diversityStrategy],
 });
 
 export const rootAgent = new SequentialAgent({
   name: "scheduleGenerator",
+  model: getModel(),
   subAgents: [strategyRunner, bestScheduleSelector],
 });
 ```
