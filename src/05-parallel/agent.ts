@@ -1,9 +1,8 @@
-import "dotenv/config";
-import { SequentialAgent, ParallelAgent } from "@google/adk";
-import { topicMatchStrategy } from "./agents/topicMatchStrategy.js";
-import { speakerQualityStrategy } from "./agents/speakerQualityStrategy.js";
-import { diversityStrategy } from "./agents/diversityStrategy.js";
+import { ParallelAgent, SequentialAgent } from "@google/adk";
 import { bestScheduleSelector } from "./agents/bestScheduleSelector.js";
+import { diversityStrategy } from "./agents/diversityStrategy.js";
+import { speakerQualityStrategy } from "./agents/speakerQualityStrategy.js";
+import { topicMatchStrategy } from "./agents/topicMatchStrategy.js";
 
 // Three strategy agents run in parallel — each builds a complete schedule
 // with a different optimization goal. Then a selector agent compares all
@@ -19,8 +18,7 @@ import { bestScheduleSelector } from "./agents/bestScheduleSelector.js";
 
 const strategyRunner = new ParallelAgent({
   name: "strategyRunner",
-  description:
-    "Runs three schedule optimization strategies in parallel.",
+  description: "Runs three schedule optimization strategies in parallel.",
   subAgents: [topicMatchStrategy, speakerQualityStrategy, diversityStrategy],
 });
 

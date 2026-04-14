@@ -1,9 +1,9 @@
 import { LlmAgent } from "@google/adk";
-import { MODEL } from "../../common/models.js";
+import { getModel } from "../../common/models.js";
 
 export const bestScheduleSelector = new LlmAgent({
   name: "bestScheduleSelector",
-  model: MODEL,
+  model: getModel(),
   description:
     "Compares multiple schedule proposals and selects or synthesizes the best one.",
   instruction: `You are a schedule advisor for DevFest Pisa 2026.

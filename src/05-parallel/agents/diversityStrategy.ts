@@ -1,10 +1,10 @@
 import { LlmAgent } from "@google/adk";
-import { MODEL } from "../../common/models.js";
+import { getModel } from "../../common/models.js";
 import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const diversityStrategy = new LlmAgent({
   name: "diversityStrategy",
-  model: MODEL,
+  model: getModel(),
   description:
     "Builds a schedule that maximizes variety across rooms, topics, and speakers.",
   instruction: `You are a schedule strategist for DevFest Pisa 2026.

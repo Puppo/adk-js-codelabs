@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { SequentialAgent } from "@google/adk";
 import { scheduleBuilder } from "./agents/scheduleBuilder.js";
 import { scheduleOptimizer } from "./agents/scheduleOptimizer.js";

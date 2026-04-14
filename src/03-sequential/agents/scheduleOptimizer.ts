@@ -1,10 +1,10 @@
 import { LlmAgent } from "@google/adk";
-import { MODEL } from "../../common/models.js";
+import { getModel } from "../../common/models.js";
 import { getSessions } from "../tools.js";
 
 export const scheduleOptimizer = new LlmAgent({
   name: "scheduleOptimizer",
-  model: MODEL,
+  model: getModel(),
   description:
     "Reviews and optimizes a draft conference schedule for quality and logistics.",
   instruction: `You are a schedule optimizer for DevFest Pisa 2026.

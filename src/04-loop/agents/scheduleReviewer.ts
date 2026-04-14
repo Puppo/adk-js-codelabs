@@ -1,6 +1,6 @@
 import { LlmAgent, FunctionTool } from "@google/adk";
 import { z } from "zod";
-import { MODEL } from "../../common/models.js";
+import { getModel } from "../../common/models.js";
 
 // This tool allows the reviewer to signal that the schedule is good enough.
 // When called, it sets escalate = true, which breaks the LoopAgent.
@@ -17,7 +17,7 @@ const exitLoop = new FunctionTool({
 
 export const scheduleReviewer = new LlmAgent({
   name: "scheduleReviewer",
-  model: MODEL,
+  model: getModel(),
   description:
     "Reviews a schedule against quality criteria and either approves it or provides improvement feedback.",
   instruction: `You are a schedule reviewer for DevFest Pisa 2026.
