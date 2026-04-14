@@ -70,7 +70,6 @@ Open `src/01-intro/agent.ts` and complete the TODOs:
 **Key code:**
 
 ```typescript
-import "dotenv/config";
 import { LlmAgent } from "@google/adk";
 import { conference, speakers, schedule } from "../common/conferenceData.js";
 import {
@@ -78,10 +77,11 @@ import {
   speakersToMarkdown,
   scheduleToMarkdown,
 } from "../common/toMarkdown.js";
+import { getModel } from "../common/models.js";
 
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
-  model: "gemini-3-flash-preview",
+  model: getModel(),
   description: "A helpful assistant for DevFest Pisa 2026",
   instruction: `You are a friendly and enthusiastic conference assistant...
 
@@ -150,14 +150,13 @@ export const getSessions = new FunctionTool({
       .string()
       .optional()
       .describe("Filter by speaker name (partial match)"),
-    room: z
-      .string()
-      .optional()
-      .describe("Filter by room name (partial match)"),
+    room: z.string().optional().describe("Filter by room name (partial match)"),
     timeSlot: z
       .string()
       .optional()
-      .describe("Filter by time slot, e.g. '10:00' or 'morning' or 'afternoon'"),
+      .describe(
+        "Filter by time slot, e.g. '10:00' or 'morning' or 'afternoon'",
+      ),
   }),
   execute: async ({ speaker, room, timeSlot }) => {
     // Filter sessions based on parameters and return formatted results
@@ -170,7 +169,7 @@ export const getSessions = new FunctionTool({
 ```typescript
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
-  model: "gemini-3-flash-preview",
+  model: getModel(),
   description: "A helpful assistant for DevFest Pisa 2026",
   instruction: `You are a friendly conference assistant...
     Use your tools to look up session and speaker information.`,
@@ -220,7 +219,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
-  model: "gemini-3-flash-preview",
+  model: getModel(),
   description: "Builds a draft conference schedule based on user preferences",
   instruction: `You are a schedule builder for DevFest Pisa 2026...`,
   tools: [getSessions, getSpeakers, getUserPreferences],
@@ -233,7 +232,7 @@ export const scheduleBuilder = new LlmAgent({
 ```typescript
 export const scheduleOptimizer = new LlmAgent({
   name: "scheduleOptimizer",
-  model: "gemini-3-flash-preview",
+  model: getModel(),
   description: "Optimizes a draft schedule for conflicts and logistics",
   instruction: `You are a schedule optimizer. Review this draft schedule:
 {{draftSchedule}}
@@ -291,7 +290,7 @@ A `LoopAgent` repeats its sub-agents until a condition is met (or max iterations
 ```typescript
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
-  model: "gemini-3-flash-preview",
+  model: getModel(),
   instruction: `You are a schedule builder for DevFest Pisa 2026.
 
 If there is reviewer feedback, incorporate it:
@@ -318,6 +317,7 @@ const exitLoop = new FunctionTool({
 
 export const scheduleReviewer = new LlmAgent({
   name: "scheduleReviewer",
+  model: getModel(),
   instruction: `Review this schedule: {{draftSchedule}}
 Evaluate: time conflicts, preference match, topic balance, breaks, difficulty variety.
 If ALL criteria pass, call exit_loop. Otherwise provide feedback.`,
@@ -380,8 +380,11 @@ Create three strategy agents, a selector, and compose them:
 **1. `src/05-parallel/agents/topicMatchStrategy.ts`** — Optimize for topic relevance:
 
 ```typescript
+import { getModel } from "../common/models.js";
+
 export const topicMatchStrategy = new LlmAgent({
   name: "topicMatchStrategy",
+  model: getModel(),
   instruction: `Build a schedule that maximizes relevance to the user's stated interests.
 Prioritize sessions from their preferred tracks.`,
   tools: [getSessions, getSpeakers, getUserPreferences],
@@ -398,6 +401,7 @@ Prioritize sessions from their preferred tracks.`,
 ```typescript
 export const bestScheduleSelector = new LlmAgent({
   name: "bestScheduleSelector",
+  model: getModel(),
   instruction: `Compare these three schedule proposals:
 
 Topic-optimized: {{topicSchedule}}
@@ -413,14 +417,17 @@ Select the best one (or create a hybrid). Explain the trade-offs.`,
 
 ```typescript
 import { SequentialAgent, ParallelAgent } from "@google/adk";
+import { getModel } from "../common/models.js";
 
 const strategyRunner = new ParallelAgent({
   name: "strategyRunner",
+  model: getModel(),
   subAgents: [topicMatchStrategy, speakerQualityStrategy, diversityStrategy],
 });
 
 export const rootAgent = new SequentialAgent({
   name: "scheduleGenerator",
+  model: getModel(),
   subAgents: [strategyRunner, bestScheduleSelector],
 });
 ```

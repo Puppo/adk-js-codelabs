@@ -1,6 +1,5 @@
 import { LlmAgent } from "@google/adk";
-import "dotenv/config";
-import { MODEL } from "../common/models.js";
+import { getModel } from "../common/models.js";
 
 // TODO: Import conference data and markdown utilities
 //
@@ -11,7 +10,7 @@ import { MODEL } from "../common/models.js";
 //
 // Your agent should have:
 // - name: "conferenceAgent"
-// - model: MODEL (imported from "../common/models.js")
+// - model: getModel() (imported from "../common/models.js")
 // - description: A helpful assistant for the DevFest Pisa 2026 conference
 // - instruction: A system prompt that includes:
 //   1. The agent's personality (friendly, enthusiastic conference assistant)
@@ -34,7 +33,7 @@ import { MODEL } from "../common/models.js";
 
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
-  model: MODEL,
+  model: getModel(),
   description:
     "A helpful assistant for the DevFest Pisa 2026 conference. It answers questions about sessions, speakers, and helps attendees plan their day.",
   instruction: `You are a friendly and enthusiastic conference assistant for DevFest Pisa 2026.

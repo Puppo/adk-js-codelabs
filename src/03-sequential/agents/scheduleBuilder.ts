@@ -1,5 +1,5 @@
 import { LlmAgent } from "@google/adk";
-import { MODEL } from "../../common/models.js";
+import { getModel } from "../../common/models.js";
 import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 // TODO: Create and export a scheduleBuilder agent
@@ -26,7 +26,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
-  model: MODEL,
+  model: getModel(),
   description:
     "Builds a personalized conference schedule based on user preferences.",
   instruction: `TODO: Write the instruction for the schedule builder agent.

@@ -1,6 +1,6 @@
 import { FunctionTool, LlmAgent } from "@google/adk";
 import { z } from "zod";
-import { MODEL } from "../../common/models.js";
+import { getModel } from "../../common/models.js";
 
 // TODO 1: Create an exit_loop FunctionTool
 //
@@ -48,7 +48,7 @@ const exitLoop = new FunctionTool({
 
 export const scheduleReviewer = new LlmAgent({
   name: "scheduleReviewer",
-  model: MODEL,
+  model: getModel(),
   description:
     "Reviews a schedule against quality criteria and either approves it or provides improvement feedback.",
   instruction: `You are a schedule reviewer for DevFest Pisa 2026 (April 18, 2026).

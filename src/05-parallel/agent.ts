@@ -1,4 +1,3 @@
-import "dotenv/config";
 // TODO: Import SequentialAgent and ParallelAgent from "@google/adk"
 import { SequentialAgent, ParallelAgent } from "@google/adk";
 import { topicMatchStrategy } from "./agents/topicMatchStrategy.js";

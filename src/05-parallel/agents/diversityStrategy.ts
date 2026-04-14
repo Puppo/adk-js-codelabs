@@ -1,5 +1,5 @@
 import { LlmAgent } from "@google/adk";
-import { MODEL } from "../../common/models.js";
+import { getModel } from "../../common/models.js";
 import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 // TODO: Create and export a diversityStrategy agent
@@ -8,7 +8,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 //
 // Configuration:
 // - name: "diversityStrategy"
-// - model: MODEL (imported from "../../common/models.js")
+// - model: getModel() (imported from "../../common/models.js")
 // - tools: [getSessions, getSpeakers, getUserPreferences]
 // - outputKey: "diversitySchedule"
 //
@@ -21,7 +21,7 @@ import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const diversityStrategy = new LlmAgent({
   name: "diversityStrategy",
-  model: MODEL,
+  model: getModel(),
   description:
     "Builds a schedule that maximizes variety across rooms, topics, and speakers.",
   instruction: `TODO: Write the instruction for the diversity strategy.

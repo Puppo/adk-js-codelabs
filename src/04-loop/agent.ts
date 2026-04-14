@@ -1,4 +1,3 @@
-import "dotenv/config";
 // TODO: Import LoopAgent and SequentialAgent from "@google/adk"
 import { LoopAgent, SequentialAgent } from "@google/adk";
 import { scheduleBuilder } from "./agents/scheduleBuilder.js";
