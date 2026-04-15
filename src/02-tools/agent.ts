@@ -27,5 +27,5 @@ Help users:
 
 Be enthusiastic about the conference and encourage exploration across rooms and topics!`,
   // TODO: Pass your three tools here
-  tools: [getSessions, getSpeakers, getUserPreferences],
+  tools: [],
 });
