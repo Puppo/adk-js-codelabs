@@ -150,16 +150,137 @@ export const getSessions = new FunctionTool({
       .string()
       .optional()
       .describe("Filter by speaker name (partial match)"),
-    room: z.string().optional().describe("Filter by room name (partial match)"),
+    room: z
+      .string()
+      .optional()
+      .describe("Filter by room name (partial match)"),
     timeSlot: z
       .string()
       .optional()
       .describe(
-        "Filter by time slot, e.g. '10:00' or 'morning' or 'afternoon'",
+        "Filter by time slot, e.g. '10:00' or 'morning' or 'afternoon'"
       ),
   }),
-  execute: async ({ speaker, room, timeSlot }) => {
-    // Filter sessions based on parameters and return formatted results
+  execute: async ({
+    speaker,
+    room,
+    timeSlot,
+  }) => {
+    let result = schedule;
+
+    if (speaker) {
+      result = result.filter((s) =>
+        s.speaker.toLowerCase().includes(speaker.toLowerCase())
+      );
+    }
+
+    if (room) {
+      result = result.filter((s) =>
+        s.room.toLowerCase().includes(room.toLowerCase())
+      );
+    }
+
+    if (timeSlot) {
+      const slot = timeSlot.toLowerCase();
+      if (slot === "morning") {
+        result = result.filter((s) => {
+          const hour = parseInt(s.start_time.split("T")[1].split(":")[0]);
+          return hour < 13;
+        });
+      } else if (slot === "afternoon") {
+        result = result.filter((s) => {
+          const hour = parseInt(s.start_time.split("T")[1].split(":")[0]);
+          return hour >= 13;
+        });
+      } else {
+        result = result.filter((s) => s.start_time.includes(timeSlot));
+      }
+    }
+
+    if (result.length === 0) {
+      return "No sessions found matching the given filters.";
+    }
+
+    return result
+      .map(
+        (s) =>
+          `${s.start_time} - ${s.end_time} | ${s["talk title"]} by ${s.speaker} | ${s.room}`
+      )
+      .join("\n\n");
+  },
+});
+
+export const getSpeakers = new FunctionTool({
+  name: "get_speakers",
+  description:
+    "Get information about conference speakers, optionally filtered by name or heading.",
+  parameters: z.object({
+    name: z
+      .string()
+      .optional()
+      .describe("Filter by speaker name (partial match)"),
+    heading: z
+      .string()
+      .optional()
+      .describe("Filter by heading/role (partial match)"),
+  }),
+  execute: async ({
+    name,
+    heading,
+  }) => {
+    let result = speakers;
+
+    if (name) {
+      result = result.filter((s) =>
+        s.name.toLowerCase().includes(name.toLowerCase())
+      );
+    }
+
+    if (heading) {
+      result = result.filter((s) =>
+        s.heading.toLowerCase().includes(heading.toLowerCase())
+      );
+    }
+
+    if (result.length === 0) {
+      return "No speakers found matching the given filters.";
+    }
+
+    return result
+      .map((s) => `${s.name} — ${s.heading}\n  ${s.bio}`)
+      .join("\n\n");
+  },
+});
+
+export const getUserPreferences = new FunctionTool({
+  name: "get_user_preferences",
+  description:
+    "Record and return structured user preferences for schedule building. Call this when the user shares their interests.",
+  parameters: z.object({
+    interests: z
+      .array(z.string())
+      .describe(
+        "List of topics the user is interested in"
+      ),
+    mustSeeSpeakers: z
+      .array(z.string())
+      .optional()
+      .describe("Speakers the user specifically wants to see"),
+  }),
+  execute: async ({
+    interests,
+    mustSeeSpeakers,
+  }) => {
+    const rooms = [...new Set(schedule.map((s) => s.room))];
+    return JSON.stringify(
+      {
+        interests,
+        mustSeeSpeakers: mustSeeSpeakers ?? [],
+        availableRooms: rooms,
+      },
+      null,
+      2
+    );
   },
 });
 ```
@@ -170,9 +291,21 @@ export const getSessions = new FunctionTool({
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
   model: getModel(),
-  description: "A helpful assistant for DevFest Pisa 2026",
-  instruction: `You are a friendly conference assistant...
-    Use your tools to look up session and speaker information.`,
+  description:
+    "A helpful assistant for the DevFest Pisa 2026 conference. It answers questions about sessions, speakers, and helps attendees plan their day.",
+  instruction: `You are a friendly and enthusiastic conference assistant for DevFest Pisa 2026.
+
+Use your tools to look up session and speaker information. Do NOT make up session data — always use the get_sessions and get_speakers tools.
+
+When a user shares their interests, use the get_user_preferences tool to record them, then use get_sessions to find matching sessions.
+
+Help users:
+- Find sessions by title, speaker, or time
+- Learn about speakers and their expertise
+- Plan their conference day avoiding time conflicts
+- Get recommendations based on their interests
+
+Be enthusiastic about the conference and encourage exploration across rooms and topics!`,
   tools: [getSessions, getSpeakers, getUserPreferences],
 });
 ```
@@ -215,13 +348,33 @@ A `SequentialAgent` executes sub-agents in a fixed order. Each agent focuses on 
 
 ```typescript
 import { LlmAgent } from "@google/adk";
+import { getModel } from "../../common/models.js";
 import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
   model: getModel(),
-  description: "Builds a draft conference schedule based on user preferences",
-  instruction: `You are a schedule builder for DevFest Pisa 2026...`,
+  description:
+    "Builds a personalized conference schedule based on user preferences.",
+  instruction: `You are a schedule builder for DevFest Pisa 2026.
+
+Your job is to create a personalized day schedule for the attendee.
+
+Steps:
+1. Use get_user_preferences to capture what the user is interested in
+2. Use get_sessions to find sessions matching their interests
+3. Use get_speakers to provide context about the speakers
+4. Build a complete day schedule
+
+Schedule format:
+- Pick one session per time slot across rooms
+- Include morning and afternoon sessions
+- Leave the lunch break free
+
+Rules:
+- No time conflicts (only one session per time slot)
+- Match the user's stated interests
+- Include talk title, speaker, room, start and end time for each slot`,
   tools: [getSessions, getSpeakers, getUserPreferences],
   outputKey: "draftSchedule",
 });
@@ -230,14 +383,32 @@ export const scheduleBuilder = new LlmAgent({
 **2. `src/03-sequential/agents/scheduleOptimizer.ts`** — Refines the schedule:
 
 ```typescript
+import { LlmAgent } from "@google/adk";
+import { getModel } from "../../common/models.js";
+import { getSessions } from "../tools.js";
+
 export const scheduleOptimizer = new LlmAgent({
   name: "scheduleOptimizer",
   model: getModel(),
-  description: "Optimizes a draft schedule for conflicts and logistics",
-  instruction: `You are a schedule optimizer. Review this draft schedule:
+  description:
+    "Reviews and optimizes a draft conference schedule for quality and logistics.",
+  instruction: `You are a schedule optimizer for DevFest Pisa 2026.
+
+Review this draft schedule and improve it:
 {{draftSchedule}}
 
-Check for: time conflicts, missing breaks, room-hopping, and suggest alternatives.`,
+Check for and fix these issues:
+1. **Time conflicts**: Ensure no overlapping sessions
+2. **Breaks**: Verify the lunch break is free, suggest a coffee break if possible
+3. **Room logistics**: Flag if consecutive sessions are in distant rooms
+4. **Difficulty progression**: Suggest starting with easier sessions and progressing to harder ones
+5. **Alternatives**: For each time slot, suggest one alternative session the user might enjoy
+
+Output the optimized schedule with:
+- The final schedule with any improvements
+- A brief explanation of changes made
+- Alternative sessions for each slot`,
+  tools: [getSessions],
   outputKey: "optimizedSchedule",
 });
 ```
@@ -246,9 +417,13 @@ Check for: time conflicts, missing breaks, room-hopping, and suggest alternative
 
 ```typescript
 import { SequentialAgent } from "@google/adk";
+import { scheduleBuilder } from "./agents/scheduleBuilder.js";
+import { scheduleOptimizer } from "./agents/scheduleOptimizer.js";
 
 export const rootAgent = new SequentialAgent({
   name: "schedulePipeline",
+  description:
+    "Builds a personalized conference schedule, then optimizes it for quality and logistics.",
   subAgents: [scheduleBuilder, scheduleOptimizer],
 });
 ```
@@ -288,15 +463,40 @@ A `LoopAgent` repeats its sub-agents until a condition is met (or max iterations
 **1. `src/04-loop/agents/scheduleBuilder.ts`** — Update to be revision-aware:
 
 ```typescript
+import { LlmAgent } from "@google/adk";
+import { getModel } from "../../common/models.js";
+import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
+
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
   model: getModel(),
+  description:
+    "Builds or revises a personalized conference schedule based on user preferences and reviewer feedback.",
   instruction: `You are a schedule builder for DevFest Pisa 2026.
 
-If there is reviewer feedback, incorporate it:
+Your job is to create or revise a personalized day schedule for the attendee.
+
+PREVIOUS REVIEWER FEEDBACK (if any):
 {{reviewerFeedback:}}
 
-Build or revise the schedule based on user preferences.`,
+If there is reviewer feedback above, incorporate it to improve the schedule.
+If there is no feedback yet, build a fresh schedule from the user's preferences.
+
+Steps:
+1. Use get_user_preferences to capture what the user is interested in
+2. Use get_sessions to find sessions matching their interests
+3. Use get_speakers to provide context about the speakers
+4. Build a complete day schedule
+
+Schedule format:
+- Pick one session per time slot across rooms
+- Include morning and afternoon sessions
+- Leave the lunch break free
+
+Rules:
+- No time conflicts (only one session per time slot)
+- Match the user's stated interests
+- Include talk title, speaker, room, start and end time for each slot`,
   tools: [getSessions, getSpeakers, getUserPreferences],
   outputKey: "draftSchedule",
 });
@@ -305,22 +505,45 @@ Build or revise the schedule based on user preferences.`,
 **2. `src/04-loop/agents/scheduleReviewer.ts`** — The critic agent with an exit tool:
 
 ```typescript
+import { LlmAgent, FunctionTool } from "@google/adk";
+import { z } from "zod";
+import { getModel } from "../../common/models.js";
+
 const exitLoop = new FunctionTool({
   name: "exit_loop",
-  description: "Call this when the schedule meets all quality criteria.",
+  description:
+    "Call this ONLY when the schedule meets ALL quality criteria. This will approve the schedule and end the review loop.",
   parameters: z.object({}),
   execute: async (_, context) => {
-    context.actions.escalate = true;
-    return { status: "approved" };
+    context!.actions.escalate = true;
+    return { status: "approved", message: "Schedule meets all quality criteria." };
   },
 });
 
 export const scheduleReviewer = new LlmAgent({
   name: "scheduleReviewer",
   model: getModel(),
-  instruction: `Review this schedule: {{draftSchedule}}
-Evaluate: time conflicts, preference match, topic balance, breaks, difficulty variety.
-If ALL criteria pass, call exit_loop. Otherwise provide feedback.`,
+  description:
+    "Reviews a schedule against quality criteria and either approves it or provides improvement feedback.",
+  instruction: `You are a schedule reviewer for DevFest Pisa 2026.
+
+Review this schedule:
+{{draftSchedule}}
+
+Evaluate against these criteria:
+1. **No time conflicts** — Only one session per time slot
+2. **Preference match** — Sessions align with the user's stated interests
+3. **Topic balance** — Not all sessions from a single topic area (aim for variety)
+4. **Breaks included** — Lunch break is free
+5. **Variety** — Mix of different topics and speakers
+
+DECISION:
+- If ALL criteria pass: Call the exit_loop tool to approve the schedule
+- If ANY criteria fail: Provide specific, actionable feedback explaining what needs to change
+
+When providing feedback, be specific. For example:
+- "The morning slots are both in the same room — consider varying rooms"
+- "All sessions are from the same speaker — add variety"`,
   tools: [exitLoop],
   outputKey: "reviewerFeedback",
 });
@@ -330,9 +553,13 @@ If ALL criteria pass, call exit_loop. Otherwise provide feedback.`,
 
 ```typescript
 import { LoopAgent, SequentialAgent } from "@google/adk";
+import { scheduleBuilder } from "./agents/scheduleBuilder.js";
+import { scheduleReviewer } from "./agents/scheduleReviewer.js";
 
 export const rootAgent = new LoopAgent({
   name: "scheduleLoop",
+  description:
+    "Iteratively builds and reviews a conference schedule until quality criteria are met.",
   subAgents: [
     new SequentialAgent({
       name: "buildAndReview",
@@ -380,13 +607,30 @@ Create three strategy agents, a selector, and compose them:
 **1. `src/05-parallel/agents/topicMatchStrategy.ts`** — Optimize for topic relevance:
 
 ```typescript
-import { getModel } from "../common/models.js";
+import { LlmAgent } from "@google/adk";
+import { getModel } from "../../common/models.js";
+import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
 
 export const topicMatchStrategy = new LlmAgent({
   name: "topicMatchStrategy",
   model: getModel(),
-  instruction: `Build a schedule that maximizes relevance to the user's stated interests.
-Prioritize sessions from their preferred tracks.`,
+  description:
+    "Builds a schedule that maximizes topic relevance to user interests.",
+  instruction: `You are a schedule strategist for DevFest Pisa 2026.
+Your optimization goal: MAXIMIZE TOPIC RELEVANCE.
+
+1. Use get_user_preferences to understand the user's interests
+2. Use get_sessions to find ALL sessions matching the user's preferred topics
+3. Build a full day schedule that prioritizes sessions matching their interests
+
+Strategy:
+- Fill every slot with the most relevant session based on talk title and speaker expertise
+- If multiple sessions match in a time slot, pick the one closest to their interests
+- Only use less relevant sessions if no matching session is available
+- Match the user's skill level when possible
+
+For each session include: title, speaker, room, start and end time.
+End with a brief explanation of why this schedule maximizes topic relevance.`,
   tools: [getSessions, getSpeakers, getUserPreferences],
   outputKey: "topicSchedule",
 });
@@ -394,21 +638,104 @@ Prioritize sessions from their preferred tracks.`,
 
 **2. `src/05-parallel/agents/speakerQualityStrategy.ts`** — Optimize for top speakers.
 
+```typescript
+import { LlmAgent } from "@google/adk";
+import { getModel } from "../../common/models.js";
+import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
+
+export const speakerQualityStrategy = new LlmAgent({
+  name: "speakerQualityStrategy",
+  model: getModel(),
+  description:
+    "Builds a schedule that prioritizes the most renowned speakers and expert-level content.",
+  instruction: `You are a schedule strategist for DevFest Pisa 2026.
+Your optimization goal: MAXIMIZE SPEAKER QUALITY.
+
+1. Use get_user_preferences to understand the user's interests (as secondary criteria)
+2. Use get_speakers to learn about ALL speakers
+3. Use get_sessions to find sessions by the top speakers
+4. Build a full day schedule that prioritizes the best speakers
+
+Strategy:
+- Prioritize keynote speakers and recognized experts based on their heading/bio
+- Favor sessions by speakers with the most relevant expertise
+- Use topic relevance only as a tiebreaker between equally qualified speakers
+
+For each session include: title, speaker, room, start and end time.
+End with a brief explanation of why this schedule maximizes speaker quality.`,
+  tools: [getSessions, getSpeakers, getUserPreferences],
+  outputKey: "speakerSchedule",
+});
+```
+
 **3. `src/05-parallel/agents/diversityStrategy.ts`** — Optimize for breadth and variety.
+
+```typescript
+import { LlmAgent } from "@google/adk";
+import { getModel } from "../../common/models.js";
+import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
+
+export const diversityStrategy = new LlmAgent({
+  name: "diversityStrategy",
+  model: getModel(),
+  description:
+    "Builds a schedule that maximizes variety across rooms, topics, and speakers.",
+  instruction: `You are a schedule strategist for DevFest Pisa 2026.
+Your optimization goal: MAXIMIZE DIVERSITY AND BREADTH.
+
+1. Use get_user_preferences to understand the user's interests (as light guidance)
+2. Use get_sessions to explore ALL available sessions
+3. Build a full day schedule that maximizes variety
+
+Strategy:
+- Pick sessions from as many DIFFERENT rooms and topics as possible
+- Mix session types and topics for variety
+- Avoid scheduling the same speaker twice
+- Expose the user to topics outside their comfort zone
+- Balance between the user's interests and new discoveries
+
+For each session include: title, speaker, room, start and end time.
+End with a brief explanation of why this schedule maximizes diversity.`,
+  tools: [getSessions, getSpeakers, getUserPreferences],
+  outputKey: "diversitySchedule",
+});
+```
 
 **4. `src/05-parallel/agents/bestScheduleSelector.ts`** — Compare and pick the best:
 
 ```typescript
+import { LlmAgent } from "@google/adk";
+import { getModel } from "../../common/models.js";
+
 export const bestScheduleSelector = new LlmAgent({
   name: "bestScheduleSelector",
   model: getModel(),
-  instruction: `Compare these three schedule proposals:
+  description:
+    "Compares multiple schedule proposals and selects or synthesizes the best one.",
+  instruction: `You are a schedule advisor for DevFest Pisa 2026.
 
-Topic-optimized: {{topicSchedule}}
-Speaker-optimized: {{speakerSchedule}}
-Diversity-optimized: {{diversitySchedule}}
+Three different strategies have produced schedule proposals:
 
-Select the best one (or create a hybrid). Explain the trade-offs.`,
+**Strategy 1 — Topic Match (maximizes relevance to your interests):**
+{{topicSchedule}}
+
+**Strategy 2 — Speaker Quality (prioritizes the best speakers):**
+{{speakerSchedule}}
+
+**Strategy 3 — Diversity (maximizes variety across rooms and topics):**
+{{diversitySchedule}}
+
+Your job:
+1. Compare all three schedules
+2. Evaluate each against the user's stated preferences
+3. Select the BEST schedule, or create a HYBRID that takes the best picks from each
+4. Explain the trade-offs clearly
+
+Output format:
+- Present the recommended final schedule
+- For each session choice, note which strategy it came from (if creating a hybrid)
+- Explain WHY this is the best option for this particular user
+- Mention what the user would miss and why the trade-off is worth it`,
   outputKey: "finalSchedule",
 });
 ```
@@ -416,18 +743,22 @@ Select the best one (or create a hybrid). Explain the trade-offs.`,
 **5. `src/05-parallel/agent.ts`** — Compose everything:
 
 ```typescript
-import { SequentialAgent, ParallelAgent } from "@google/adk";
-import { getModel } from "../common/models.js";
+import { ParallelAgent, SequentialAgent } from "@google/adk";
+import { bestScheduleSelector } from "./agents/bestScheduleSelector.js";
+import { diversityStrategy } from "./agents/diversityStrategy.js";
+import { speakerQualityStrategy } from "./agents/speakerQualityStrategy.js";
+import { topicMatchStrategy } from "./agents/topicMatchStrategy.js";
 
 const strategyRunner = new ParallelAgent({
   name: "strategyRunner",
-  model: getModel(),
+  description: "Runs three schedule optimization strategies in parallel.",
   subAgents: [topicMatchStrategy, speakerQualityStrategy, diversityStrategy],
 });
 
 export const rootAgent = new SequentialAgent({
   name: "scheduleGenerator",
-  model: getModel(),
+  description:
+    "Generates three schedule strategies in parallel, then selects the best one.",
   subAgents: [strategyRunner, bestScheduleSelector],
 });
 ```
