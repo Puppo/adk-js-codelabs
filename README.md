@@ -25,7 +25,8 @@ Copy the example environment file and add your Google AI API key: 📝
 cp .env.example .env
 ```
 
-Then open `.env` and replace `YOUR_API_KEY_HERE` with your actual key from [aistudio.google.com/apikey](https://aistudio.google.com/apikey).
+Then open `.env` and replace `YOUR_API_KEY_HERE` with your actual key from [codelab-apikey-manager](https://github.com/giacomoRanieri/codelab-apikey-manager/).
+Use the `codelab-apikey-manager` from the Google Cloud Console to get your API key. 🔑
 
 ### ✅ Verify Your Setup
 
