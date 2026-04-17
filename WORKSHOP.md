@@ -674,33 +674,33 @@ export const rootAgent = new LoopAgent({
 });
 ```
 
-### Try it
+### 🚀 Try it
 
 ```bash
 npm run dev:04
 ```
 
-- _"Build me a schedule. I'm interested in everything but especially AI."_
+- _"Build me a schedule. I'm interested in everything but especially AI."_ 🤖
 
-Watch the trace show multiple iterations — the schedule improves each round until the reviewer is satisfied.
+Watch the trace show multiple iterations — the schedule improves each round until the reviewer is satisfied. 📈
 
-### Check the solution
+### 🔍 Check the solution
 
 Switch to the `final` branch and look at `src/04-loop/`.
 
-### Reflection
+### 💭 Reflection
 
-The loop produces a high-quality single schedule. But what if you want to explore **different strategies**? Running them one by one would be slow. **Step 5** runs them in parallel.
+The loop produces a high-quality single schedule. But what if you want to explore **different strategies**? Running them one by one would be slow. 🐢 **Step 5** runs them in parallel! ⚡ ➡️
 
 ---
 
-## Step 5: Parallel Flow
+## ⚡ Step 5: Parallel Flow
 
 **Concept:** `ParallelAgent` — concurrent execution
 
 **Folder:** `src/05-parallel/`
 
-### What you'll build
+### 🏗️ What you'll build
 
 ```mermaid
 graph TB
@@ -733,13 +733,13 @@ graph TB
     style FinalState fill:#fff8e1,stroke:#2e7d32,stroke-width:3px,color:#1b1b1b
 ```
 
-> Three strategy agents run **simultaneously**, each optimizing for a different goal (topic relevance, speaker quality, diversity). Their outputs are stored in shared state. Then a **selector agent** reads all three and picks the best — or creates a hybrid combining the strongest picks from each.
+> Three strategy agents run **simultaneously**, each optimizing for a different goal (topic relevance, speaker quality, diversity). Their outputs are stored in shared state. Then a **selector agent** reads all three and picks the best — or creates a hybrid combining the strongest picks from each. 🏆
 
-### What you'll learn
+### 🎓 What you'll learn
 
-A `ParallelAgent` runs multiple sub-agents simultaneously. Think of it as asking three friends to each plan your day with different priorities, then picking the best plan.
+A `ParallelAgent` runs multiple sub-agents simultaneously. Think of it as asking three friends to each plan your day with different priorities, then picking the best plan. 🤝
 
-### Your task
+### ✏️ Your task
 
 Create three strategy agents, a selector, and compose them:
 
@@ -902,37 +902,37 @@ export const rootAgent = new SequentialAgent({
 });
 ```
 
-### Try it
+### 🚀 Try it
 
 ```bash
 npm run dev:05
 ```
 
-- _"Build me a schedule. I'm a backend developer interested in Cloud and DevOps but also curious about AI."_
+- _"Build me a schedule. I'm a backend developer interested in Cloud and DevOps but also curious about AI."_ 💻
 
-Watch the trace: three strategy agents light up simultaneously, then the selector picks the best.
+Watch the trace: three strategy agents light up simultaneously, then the selector picks the best. 🎆
 
-### Check the solution
+### 🔍 Check the solution
 
 Switch to the `final` branch and look at `src/05-parallel/`.
 
 ---
 
-## Recap
+## 🎉 Recap
 
-| Step | Concept           | What you built                                  |
-| ---- | ----------------- | ----------------------------------------------- |
-| 1    | `LlmAgent`        | Single agent with hardcoded conference data     |
-| 2    | `FunctionTool`    | Agent with tools for dynamic data retrieval     |
-| 3    | `SequentialAgent` | Builder -> Optimizer pipeline                   |
-| 4    | `LoopAgent`       | Builder <-> Reviewer iterative refinement       |
-| 5    | `ParallelAgent`   | 3 strategies in parallel -> Selector picks best |
+| Step | Concept           | What you built                                      |
+| ---- | ----------------- | --------------------------------------------------- |
+| 1 🧩 | `LlmAgent`        | Single agent with hardcoded conference data         |
+| 2 🔧 | `FunctionTool`    | Agent with tools for dynamic data retrieval         |
+| 3 ⛓️ | `SequentialAgent` | Builder -> Optimizer pipeline                       |
+| 4 🔄 | `LoopAgent`       | Builder <-> Reviewer iterative refinement           |
+| 5 ⚡ | `ParallelAgent`   | 3 strategies in parallel -> Selector picks best     |
 
-You've gone from a simple chatbot to a sophisticated multi-agent system! Each ADK concept builds on the previous, giving you a toolkit for building real-world AI agent applications.
+You've gone from a simple chatbot to a sophisticated multi-agent system! 🚀 Each ADK concept builds on the previous, giving you a toolkit for building real-world AI agent applications. 🎊
 
-## Next Steps
+## 🔮 Next Steps
 
-- Explore the [ADK documentation](https://google.github.io/adk-docs/)
-- Try adding your own tools (e.g., fetch real conference data from an API)
-- Experiment with different agent compositions
-- Deploy your agent using Docker and Cloud Run
+- 📖 Explore the [ADK documentation](https://google.github.io/adk-docs/)
+- 🛠️ Try adding your own tools (e.g., fetch real conference data from an API)
+- 🧪 Experiment with different agent compositions
+- 🐳 Deploy your agent using Docker and Cloud Run
