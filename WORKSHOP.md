@@ -1,8 +1,8 @@
-# Workshop Guide: Build a Conference Schedule Agent
+# 🛠️ Workshop Guide: Build a Conference Schedule Agent
 
-Welcome to the ADK-JS workshop! You'll build a Conference Schedule Agent for **DevFest Pisa 2026** — step by step, from a simple chatbot to a multi-agent system with parallel execution.
+Welcome to the ADK-JS workshop! 🎉 You'll build a Conference Schedule Agent for **DevFest Pisa 2026** — step by step, from a simple chatbot to a multi-agent system with parallel execution. 🚀
 
-## Overview
+## 🗺️ Overview
 
 ```
 Step 1: LlmAgent          -> Simple agent with hardcoded schedule
@@ -12,7 +12,7 @@ Step 4: LoopAgent          -> Iterative self-improvement with a critic
 Step 5: ParallelAgent      -> Multi-strategy generation + selector
 ```
 
-## Project Structure
+## 📁 Project Structure
 
 Each step lives in its own folder under `src/`. You work through them in order, and each folder is self-contained:
 
@@ -25,17 +25,17 @@ src/
   05-parallel/       -> Step 5
 ```
 
-The `main` branch contains the starter code with TODOs for you to complete. The `final` branch contains the full solutions for reference.
+The `main` branch contains the starter code with TODOs for you to complete. The `final` branch contains the full solutions for reference. 💡
 
-## Prerequisites
+## ✅ Prerequisites
 
 Make sure you've completed the setup from the [README](README.md):
 
-- Node.js 24+, npm 10+, Git
-- Google AI API Key ([get one here](https://aistudio.google.com/apikey))
-- Run `./scripts/check-setup.sh` to verify
+- 📦 Node.js 24+, npm 10+, Git
+- 🔑 Google AI API Key ([get one here](https://aistudio.google.com/apikey))
+- 🧪 Run `./scripts/check-setup.sh` to verify
 
-### Install dependencies
+### 📥 Install dependencies
 
 ```bash
 npm install
@@ -43,13 +43,13 @@ npm install
 
 ---
 
-## Step 1: Your First Agent
+## 🧩 Step 1: Your First Agent
 
 **Concept:** `LlmAgent` — the building block of ADK
 
 **Folder:** `src/01-intro/`
 
-### What you'll build
+### 🏗️ What you'll build
 
 ```mermaid
 graph LR
@@ -65,9 +65,9 @@ graph LR
     style Data fill:#fff8e1,stroke:#e65100,stroke-width:2px,color:#1b1b1b
 ```
 
-> A single `LlmAgent` with all conference data embedded directly in the system prompt. No tools, no composition — just one agent answering questions.
+> A single `LlmAgent` with all conference data embedded directly in the system prompt. No tools, no composition — just one agent answering questions. 💬
 
-### What you'll learn
+### 🎓 What you'll learn
 
 An `LlmAgent` wraps a large language model with a name, description, and instruction (system prompt). The instruction defines the agent's personality and knowledge. In this step, we use shared markdown utilities to inject the conference data into the agent's prompt.
 
@@ -76,7 +76,7 @@ The project includes a `src/common/` folder with reusable modules:
 - **`conferenceData.ts`** — loads and validates conference, speakers, and schedule data from JSON files using Zod schemas
 - **`toMarkdown.ts`** — converts each data type into well-structured markdown, ideal for LLM consumption
 
-### Your task
+### ✏️ Your task
 
 Open `src/01-intro/agent.ts` and complete the TODOs:
 
@@ -85,7 +85,7 @@ Open `src/01-intro/agent.ts` and complete the TODOs:
 3. Use these functions inside a template literal to build the agent's `instruction`
 4. Add a section describing how the agent should help attendees
 
-**Key code:**
+**Key code:** 👇
 
 ```typescript
 import { LlmAgent } from "@google/adk";
@@ -114,7 +114,7 @@ export const rootAgent = new LlmAgent({
 });
 ```
 
-### Try it
+### 🚀 Try it
 
 ```bash
 npm run dev:01
@@ -122,27 +122,27 @@ npm run dev:01
 
 This launches the ADK DevTools web UI. Open your browser and try:
 
-- _"What AI sessions are available?"_
-- _"Tell me about Dr. Elena Rossi"_
-- _"Plan my day — I love Cloud and DevOps, intermediate level"_
+- _"What AI sessions are available?"_ 🤖
+- _"Tell me about Dr. Elena Rossi"_ 🎤
+- _"Plan my day — I love Cloud and DevOps, intermediate level"_ 📅
 
-### Check the solution
+### 🔍 Check the solution
 
 Switch to the `final` branch and look at `src/01-intro/agent.ts`.
 
-### Reflection
+### 💭 Reflection
 
-The agent works and the data stays in sync with the JSON source files automatically. However, all the data is still loaded into the prompt at once. What if you want the agent to look up data on demand? This motivates **Step 2**.
+The agent works and the data stays in sync with the JSON source files automatically. However, all the data is still loaded into the prompt at once. What if you want the agent to look up data on demand? This motivates **Step 2**. ➡️
 
 ---
 
-## Step 2: Adding Tools
+## 🔧 Step 2: Adding Tools
 
-**Concept:** `FunctionTool` — give your agent superpowers
+**Concept:** `FunctionTool` — give your agent superpowers 💪
 
 **Folder:** `src/02-tools/`
 
-### What you'll build
+### 🏗️ What you'll build
 
 ```mermaid
 graph LR
@@ -169,13 +169,13 @@ graph LR
     style Data fill:#fff8e1,stroke:#6a1b9a,stroke-width:2px,color:#1b1b1b
 ```
 
-> The same agent, but now it fetches data on demand through **FunctionTools** instead of having everything in the prompt. The LLM decides which tools to call based on the user's question.
+> The same agent, but now it fetches data on demand through **FunctionTools** instead of having everything in the prompt. The LLM decides which tools to call based on the user's question. 🧠
 
-### What you'll learn
+### 🎓 What you'll learn
 
 Tools are functions that the LLM can call to retrieve data or perform actions. Instead of stuffing everything in the prompt, we define tools with typed parameters (using Zod schemas) and let the agent decide when to call them.
 
-### Your task
+### ✏️ Your task
 
 You'll find three files to work on:
 
@@ -357,35 +357,35 @@ Be enthusiastic about the conference and encourage exploration across rooms and 
 });
 ```
 
-### Try it
+### 🚀 Try it
 
 ```bash
 npm run dev:02
 ```
 
-Ask the same questions as Step 1. Open the **trace view** in DevTools — you'll see the agent calling tools instead of relying on hardcoded data.
+Ask the same questions as Step 1. Open the **trace view** in DevTools — you'll see the agent calling tools instead of relying on hardcoded data. 🔎
 
-- _"What advanced sessions are there?"_
-- _"Who works at Google?"_
-- _"I'm interested in AI and Cloud, intermediate level"_
+- _"What advanced sessions are there?"_ 🎯
+- _"Who works at Google?"_ 🏢
+- _"I'm interested in AI and Cloud, intermediate level"_ ☁️
 
-### Check the solution
+### 🔍 Check the solution
 
 Switch to the `final` branch and look at `src/02-tools/`.
 
-### Reflection
+### 💭 Reflection
 
-Now data is separated from logic, but the agent does everything in one shot. For complex tasks like schedule building, it would be better to have **specialized agents** working together. That's **Step 3**.
+Now data is separated from logic, but the agent does everything in one shot. For complex tasks like schedule building, it would be better to have **specialized agents** working together. That's **Step 3**. ➡️
 
 ---
 
-## Step 3: Sequential Flow
+## ⛓️ Step 3: Sequential Flow
 
 **Concept:** `SequentialAgent` — a pipeline of agents
 
 **Folder:** `src/03-sequential/`
 
-### What you'll build
+### 🏗️ What you'll build
 
 ```mermaid
 graph TB
@@ -407,13 +407,13 @@ graph TB
     style State2 fill:#fff8e1,stroke:#e65100,stroke-width:2px,color:#1b1b1b
 ```
 
-> Two specialized agents in a pipeline. The **scheduleBuilder** creates a draft and saves it to shared state via `outputKey`. The **scheduleOptimizer** reads it via `{{draftSchedule}}` and produces an improved version.
+> Two specialized agents in a pipeline. The **scheduleBuilder** creates a draft and saves it to shared state via `outputKey`. The **scheduleOptimizer** reads it via `{{draftSchedule}}` and produces an improved version. ✨
 
-### What you'll learn
+### 🎓 What you'll learn
 
 A `SequentialAgent` executes sub-agents in a fixed order. Each agent focuses on one job and stores its output in shared state using `outputKey`. The next agent reads that state via `{{templateVariables}}` in its instruction.
 
-### Your task
+### ✏️ Your task
 
 **1. `src/03-sequential/agents/scheduleBuilder.ts`** — Builds an initial schedule:
 
@@ -499,33 +499,33 @@ export const rootAgent = new SequentialAgent({
 });
 ```
 
-### Try it
+### 🚀 Try it
 
 ```bash
 npm run dev:03
 ```
 
-- _"Build me a schedule. I love AI and DevOps, intermediate level."_
+- _"Build me a schedule. I love AI and DevOps, intermediate level."_ 🗓️
 
-Watch the trace: `scheduleBuilder` runs first, then `scheduleOptimizer` refines the result.
+Watch the trace: `scheduleBuilder` runs first, then `scheduleOptimizer` refines the result. 👀
 
-### Check the solution
+### 🔍 Check the solution
 
 Switch to the `final` branch and look at `src/03-sequential/`.
 
-### Reflection
+### 💭 Reflection
 
-The pipeline works in one pass. But what if the optimizer finds issues the builder should fix? Currently there's no feedback loop. **Step 4** introduces iteration.
+The pipeline works in one pass. But what if the optimizer finds issues the builder should fix? Currently there's no feedback loop. 🔄 **Step 4** introduces iteration. ➡️
 
 ---
 
-## Step 4: Loop Flow
+## 🔄 Step 4: Loop Flow
 
 **Concept:** `LoopAgent` — iterative refinement
 
 **Folder:** `src/04-loop/`
 
-### What you'll build
+### 🏗️ What you'll build
 
 ```mermaid
 graph LR
@@ -556,13 +556,13 @@ graph LR
     style Approved fill:#ffffff,stroke:#2e7d32,stroke-width:3px,color:#1b1b1b
 ```
 
-> The **generator/critic pattern**: the builder creates a schedule, the reviewer evaluates it against quality criteria. If it passes, `exit_loop` is called (sets `escalate = true`). If not, feedback flows back and the builder revises. Repeats up to 3 times.
+> The **generator/critic pattern**: the builder creates a schedule, the reviewer evaluates it against quality criteria. If it passes, `exit_loop` is called (sets `escalate = true`). If not, feedback flows back and the builder revises. Repeats up to 3 times. 🎯
 
-### What you'll learn
+### 🎓 What you'll learn
 
-A `LoopAgent` repeats its sub-agents until a condition is met (or max iterations is reached). This enables the **generator/critic pattern**: one agent builds, another reviews, and the loop continues until the critic is satisfied and calls `escalate` to exit.
+A `LoopAgent` repeats its sub-agents until a condition is met (or max iterations is reached). This enables the **generator/critic pattern**: one agent builds, another reviews, and the loop continues until the critic is satisfied and calls `escalate` to exit. 🏆
 
-### Your task
+### ✏️ Your task
 
 **1. `src/04-loop/agents/scheduleBuilder.ts`** — Update to be revision-aware:
 
