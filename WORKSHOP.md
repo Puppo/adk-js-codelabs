@@ -49,6 +49,24 @@ npm install
 
 **Folder:** `src/01-intro/`
 
+### What you'll build
+
+```mermaid
+graph LR
+    User(["👤 User"])
+    Agent["🤖 conferenceAgent"]
+    Data[("📦 Conference Data")]
+
+    User -- "question" --> Agent
+    Agent -- "answer" --> User
+    Data -. "hardcoded in prompt" .-> Agent
+
+    style Agent fill:#ffffff,stroke:#2e7d32,stroke-width:2px,color:#1b1b1b
+    style Data fill:#fff8e1,stroke:#e65100,stroke-width:2px,color:#1b1b1b
+```
+
+> A single `LlmAgent` with all conference data embedded directly in the system prompt. No tools, no composition — just one agent answering questions.
+
 ### What you'll learn
 
 An `LlmAgent` wraps a large language model with a name, description, and instruction (system prompt). The instruction defines the agent's personality and knowledge. In this step, we use shared markdown utilities to inject the conference data into the agent's prompt.
@@ -123,6 +141,35 @@ The agent works and the data stays in sync with the JSON source files automatica
 **Concept:** `FunctionTool` — give your agent superpowers
 
 **Folder:** `src/02-tools/`
+
+### What you'll build
+
+```mermaid
+graph LR
+    User(["👤 User"])
+    Agent["🤖 conferenceAgent"]
+    T1["🔧 get_sessions"]
+    T2["🔧 get_speakers"]
+    T3["🔧 get_user_preferences"]
+    Data[("📦 JSON Data")]
+
+    User -- "question" --> Agent
+    Agent -- "answer" --> User
+    Agent -- "calls" --> T1
+    Agent -- "calls" --> T2
+    Agent -- "calls" --> T3
+    T1 -. "reads" .-> Data
+    T2 -. "reads" .-> Data
+    T3 -. "reads" .-> Data
+
+    style Agent fill:#ffffff,stroke:#2e7d32,stroke-width:2px,color:#1b1b1b
+    style T1 fill:#ffffff,stroke:#e65100,stroke-width:2px,color:#1b1b1b
+    style T2 fill:#ffffff,stroke:#e65100,stroke-width:2px,color:#1b1b1b
+    style T3 fill:#ffffff,stroke:#e65100,stroke-width:2px,color:#1b1b1b
+    style Data fill:#fff8e1,stroke:#6a1b9a,stroke-width:2px,color:#1b1b1b
+```
+
+> The same agent, but now it fetches data on demand through **FunctionTools** instead of having everything in the prompt. The LLM decides which tools to call based on the user's question.
 
 ### What you'll learn
 
@@ -338,6 +385,30 @@ Now data is separated from logic, but the agent does everything in one shot. For
 
 **Folder:** `src/03-sequential/`
 
+### What you'll build
+
+```mermaid
+graph TB
+    User(["👤 User"])
+
+    User -- "interests" --> Pipeline
+
+    subgraph Pipeline["schedulePipeline · SequentialAgent"]
+        direction LR
+        Builder["🔨 scheduleBuilder"] --> State1[("draftSchedule")] --> Optimizer["✨ scheduleOptimizer"] --> State2[("optimizedSchedule")]
+    end
+
+    Pipeline -- "optimized schedule" --> Result(["👤 User"])
+
+    style Pipeline fill:#ffffff,stroke:#2e7d32,stroke-width:2px,color:#1b1b1b
+    style Builder fill:#ffffff,stroke:#1565c0,stroke-width:2px,color:#1b1b1b
+    style Optimizer fill:#ffffff,stroke:#b71c1c,stroke-width:2px,color:#1b1b1b
+    style State1 fill:#fff8e1,stroke:#e65100,stroke-width:2px,color:#1b1b1b
+    style State2 fill:#fff8e1,stroke:#e65100,stroke-width:2px,color:#1b1b1b
+```
+
+> Two specialized agents in a pipeline. The **scheduleBuilder** creates a draft and saves it to shared state via `outputKey`. The **scheduleOptimizer** reads it via `{{draftSchedule}}` and produces an improved version.
+
 ### What you'll learn
 
 A `SequentialAgent` executes sub-agents in a fixed order. Each agent focuses on one job and stores its output in shared state using `outputKey`. The next agent reads that state via `{{templateVariables}}` in its instruction.
@@ -453,6 +524,39 @@ The pipeline works in one pass. But what if the optimizer finds issues the build
 **Concept:** `LoopAgent` — iterative refinement
 
 **Folder:** `src/04-loop/`
+
+### What you'll build
+
+```mermaid
+graph LR
+    User(["👤 User"])
+
+    subgraph Loop["scheduleLoop · LoopAgent · max 3 iterations"]
+        Builder["🔨 scheduleBuilder"]
+        DraftState[("draftSchedule")]
+        Reviewer["🔍 scheduleReviewer"]
+        Approved["✅ Approved"]
+
+        Builder --> DraftState --> Reviewer
+        Reviewer -- "exit_loop" --> Approved
+    end
+
+    FeedbackState[("reviewerFeedback")]
+    Reviewer -- "needs revision" --> FeedbackState
+    FeedbackState -. "next iteration" .-> Builder
+
+    User -- "interests" --> Builder
+    Approved -- "final schedule" --> User
+
+    style Loop fill:#ffffff,stroke:#f57f17,stroke-width:3px,color:#1b1b1b
+    style Builder fill:#ffffff,stroke:#1565c0,stroke-width:2px,color:#1b1b1b
+    style Reviewer fill:#ffffff,stroke:#b71c1c,stroke-width:2px,color:#1b1b1b
+    style DraftState fill:#fff8e1,stroke:#e65100,stroke-width:2px,color:#1b1b1b
+    style FeedbackState fill:#fff8e1,stroke:#6a1b9a,stroke-width:2px,color:#1b1b1b
+    style Approved fill:#ffffff,stroke:#2e7d32,stroke-width:3px,color:#1b1b1b
+```
+
+> The **generator/critic pattern**: the builder creates a schedule, the reviewer evaluates it against quality criteria. If it passes, `exit_loop` is called (sets `escalate = true`). If not, feedback flows back and the builder revises. Repeats up to 3 times.
 
 ### What you'll learn
 
@@ -595,6 +699,41 @@ The loop produces a high-quality single schedule. But what if you want to explor
 **Concept:** `ParallelAgent` — concurrent execution
 
 **Folder:** `src/05-parallel/`
+
+### What you'll build
+
+```mermaid
+graph TB
+    User(["👤 User"])
+
+    subgraph Parallel["strategyRunner · ParallelAgent"]
+        direction LR
+        S1["📊 topicMatchStrategy"]
+        S2["⭐ speakerQualityStrategy"]
+        S3["🌈 diversityStrategy"]
+    end
+
+    Selector["🏆 bestScheduleSelector"]
+    FinalState[("finalSchedule")]
+
+    User -- "interests" --> S1
+    User -- "interests" --> S2
+    User -- "interests" --> S3
+    S1 -- "topicSchedule" --> Selector
+    S2 -- "speakerSchedule" --> Selector
+    S3 -- "diversitySchedule" --> Selector
+    Selector --> FinalState
+    FinalState -- "best schedule" --> User
+
+    style Parallel fill:#ffffff,stroke:#1565c0,stroke-width:2px,color:#1b1b1b
+    style S1 fill:#ffffff,stroke:#e65100,stroke-width:2px,color:#1b1b1b
+    style S2 fill:#ffffff,stroke:#b71c1c,stroke-width:2px,color:#1b1b1b
+    style S3 fill:#ffffff,stroke:#6a1b9a,stroke-width:2px,color:#1b1b1b
+    style Selector fill:#ffffff,stroke:#f57f17,stroke-width:2px,color:#1b1b1b
+    style FinalState fill:#fff8e1,stroke:#2e7d32,stroke-width:3px,color:#1b1b1b
+```
+
+> Three strategy agents run **simultaneously**, each optimizing for a different goal (topic relevance, speaker quality, diversity). Their outputs are stored in shared state. Then a **selector agent** reads all three and picks the best — or creates a hybrid combining the strongest picks from each.
 
 ### What you'll learn
 
