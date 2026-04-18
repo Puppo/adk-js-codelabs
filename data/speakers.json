@@ -12,7 +12,7 @@
   {
     "name": "Emiliano Pisu",
     "heading": "Senior Design Engineer, Sensei & Co-Host @ DevDojoIT",
-    "bio": "Throughout my career, driven by my coding addiction, I’ve always stayed up to date with software development and related trends, focusing on UI, UX, Accessibility, Responsiveness, Compatibility, Scalability, and Maintainability.\n\nI am deeply committed to knowledge sharing and mentorship: through my experience as Sensei @ Dev Dojo IT, I actively support those who want to grow in the frontend world and in designing accessible and scalable interfaces."
+    "bio": "Throughout my career, driven by my coding addiction, I’ve always stayed up to date with software development and related trends, focusing on UI, UX, Accessibility, Responsiveness, Compatibility, Scalability, and Maintainability. I am deeply committed to knowledge sharing and mentorship: through my experience as Sensei @ Dev Dojo IT, I actively support those who want to grow in the frontend world and in designing accessible and scalable interfaces."
   },
   {
     "name": "Federica Merenda",
@@ -42,7 +42,7 @@
   {
     "name": "Martino Fornasa",
     "heading": "Independent Consultant & Strategic Advisor | DevOps | Cloud Native | FinOps | Trainer",
-    "bio": "I am an independent consultant, helping companies to design and implement an effective cloud-native strategy.\n\nI helped several companies transform from traditional infrastructure to public or private cloud implementation, using container and serverless approaches.\n\nI focus on cloud-native implementations, scalability, continuous delivery practices, resiliency, performance, and observability."
+    "bio": "I am an independent consultant, helping companies to design and implement an effective cloud-native strategy. I helped several companies transform from traditional infrastructure to public or private cloud implementation, using container and serverless approaches. I focus on cloud-native implementations, scalability, continuous delivery practices, resiliency, performance, and observability."
   },
   {
     "name": "Fabian Greavu",
@@ -62,12 +62,12 @@
   {
     "name": "Graziano Casto",
     "heading": "Developer Relations Engineer @ Akamas | Tech Lead @ CNCF TAG DevEx | Kubernetes v1.35 Comms Lead",
-    "bio": "Graziano is a DevRel Engineer at Akamas, where he spends his days convincing computers to stop being lazy and start being efficient. A former distributed systems developer and product manager, he’s now on a mission to optimize the entire cloud-native universe, one Pod at a time. As a Tech Lead for the CNCF TAG DevEx and a member of the Kubernetes Release Team since v1.34, he balances deep infrastructure roots with a passion for developer happiness. Obsessed with AI, Platform Engineering, and saving the planet through better code, Graziano is basically trying to make the cloud faster, greener, and significantly less annoying for everyone."
+    "bio": "Graziano is a DevRel Engineer at Akamas, where he spends his days convincing computers to stop being lazy and start being efficient. A former distributed systems developer and product manager, he’s now on a mission to optimize the entire cloud-native universe, one Pod at a time. As a Tech Lead for the CNCF TAG DevEx and a member of the Kubernetes Release Team since v1.34, he balances deep infrastructure roots with a passion for developer happiness. Obsessed with AI, Platform Engineering, and saving the planet through better code, Graziano is basically trying to make the cloud faster, greener, and significantly less annoying for everyone. More on: https://castograziano.com/"
   },
   {
     "name": "Michela Bertaina",
     "heading": "Head of Community & Growth @ Codemotion| Partnership Team Lead @ TEDx Cuneo | WTM Ambassador | GDG Bari Lead | Tourism Councilor @ Cissone",
-    "bio": "Community lover & Ambassador of Enthusiasm. Since 2017, I’ve evolved from organizing tech communities (GDG, GrUSP) to Community Program Manager Europe at Codemotion. I also lead GDG Bari, serve as a WTM Ambassador, head TEDxCuneo partnerships, and am a local Tourism Councilor. A public speaker fueled by diversity and growth, I’m dedicated to sharing knowledge and building vibrant tech spaces with pure energy."
+    "bio": "Community lover & Ambassador of Enthusiasm. Since 2017, I’ve evolved from organizing tech communities (GDG, GrUSP) to Community Program Manager Europe at Codemotion. I also lead GDG Bari, serve as a WTM Ambassador, head TEDxCuneo partnerships, and am a local Tourism Councilor. A public speaker fueled by diversity and growth, I’m dedicated to sharing knowledge and building vibrant tech spaces with pure energy. 🚀 More info: https://bit.ly/pantarei-mb"
   },
   {
     "name": "Giacomo Sergio",
@@ -112,7 +112,7 @@
   {
     "name": "Luca Di Vita",
     "heading": "Machine Learning Engineer @ Cy4Gate | Member @ GDG Pescara | Co-Founder @ Python Pescara",
-    "bio": "I hold a degree in Computer Engineering and work as a Machine Learning Engineer in the security and defense sector. Passionate about research in ML and Evolutionary Computation, I enjoy sharing knowledge through Dev Talks and engaging with the tech community. Driven by curiosity, I aim to inspire others and foster innovation."
+    "bio": "I hold a degree in Computer Engineering and work as a Machine Learning Engineer in the security and defense sector. Passionate about research in ML and Evolutionary Computation, I enjoy sharing knowledge through Dev Talks and engaging with the tech community. Driven by curiosity, I aim to inspire others and foster innovation. More on my blog: https://www.lucadivita.it/"
   },
   {
     "name": "Cristian Burrini",
@@ -185,8 +185,13 @@
     "bio": "Veronica Domestico è Software Engineer e Technical Leader, con esperienza nello sviluppo di applicazioni mobile e web in contesti complessi e ad alto impatto. Si occupa di analisi dei requisiti, progettazione architetturale e guida dei team di sviluppo, trasformando bisogni funzionali in soluzioni tecniche scalabili ed efficaci. È Ambassador di SheTech, dove promuove l’inclusione e la crescita delle donne nel mondo della tecnologia."
   },
   {
+    "name": "Fabio Biondi",
+    "heading": "Google Expert in Angular | LearnByDo.ing",
+    "bio": "Fabio Biondi è uno sviluppatore freelance con più di 15 anni di esperienza nella creazione di applicazioni web enterprise. Speaker in numerosi eventi front-end, ha inoltre fondato diverse community italiane che si occupano di Javascript, Angular e React (~30000 membri). Attualmente si occupa principalmente di formazione e consulenza su JS, TS, Angular, React, Redux, NGRX, Next e RxJS, Google Gemini e AI Gen"
+  },
+  {
     "name": "Mohamed Mortadha Manai",
-    "heading": "Senior AI Engineer |AI Expert| AI Engineer @Netflix | PHD candidate in xAI | International AI Speaker",
+    "heading": "Senior AI Engineer |AI Expert| AI Engineer @Netflix |  PHD candidate in xAI | International AI Speaker",
     "bio": "Senior AI Engineer @Netflix | PHD candidate in xAI |AI Expert Consultant @Tegus & @Wivenn |Technical Reviewer@Packt |2024 AI Apprentice@Google | International AI Speaker(Linkedin Top Voice)"
   },
   {
