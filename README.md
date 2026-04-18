@@ -15,7 +15,7 @@ Before the workshop, make sure you have the following installed: 🛠️
 | Node.js           | 24+     | [nodejs.org](https://nodejs.org/)                                                   |
 | npm               | 10+     | Comes with Node.js                                                                  |
 | Git               | Latest  | [git-scm.com](https://git-scm.com/)                                                 |
-| Google AI API Key | -       | [codelab-apikey-manager](https://github.com/giacomoRanieri/codelab-apikey-manager/) |
+| Google AI API Key | -       | [codelab-apikey-manager](https://github.com/giacomoRanieri/codelab-apikey-manager/#%EF%B8%8F-usage-on-google-cloud-shell) |
 
 ### 🔑 Configure Your API Key
 
@@ -25,7 +25,7 @@ Copy the example environment file and add your Google AI API key: 📝
 cp .env.example .env
 ```
 
-Then open `.env` and replace `YOUR_API_KEY_HERE` with your actual key from [codelab-apikey-manager](https://github.com/giacomoRanieri/codelab-apikey-manager/).
+Then open `.env` and replace `YOUR_API_KEY_HERE` with your actual key from [codelab-apikey-manager](https://github.com/giacomoRanieri/codelab-apikey-manager/#%EF%B8%8F-usage-on-google-cloud-shell).
 Use the `codelab-apikey-manager` from the Google Cloud Console to get your API key. 🔑
 
 ### ✅ Verify Your Setup
