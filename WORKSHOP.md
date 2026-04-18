@@ -89,28 +89,35 @@ Open `src/01-intro/agent.ts` and complete the TODOs:
 
 ```typescript
 import { LlmAgent } from "@google/adk";
-import { conference, speakers, schedule } from "../common/conferenceData.js";
+import { conference, schedule, speakers } from "../common/conferenceData.js";
+import { getModel } from "../common/models.js";
 import {
   conferenceToMarkdown,
-  speakersToMarkdown,
   scheduleToMarkdown,
+  speakersToMarkdown,
 } from "../common/toMarkdown.js";
-import { getModel } from "../common/models.js";
 
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
   model: getModel(),
-  description: "A helpful assistant for DevFest Pisa 2026",
-  instruction: `You are a friendly and enthusiastic conference assistant...
+  description:
+    "A helpful assistant for the DevFest Pisa 2026 conference. It answers questions about sessions, speakers, and helps attendees plan their day.",
+  instruction: `You are a friendly and enthusiastic conference assistant for DevFest Pisa 2026.
 
-// Inject conference data as markdown here
+${conferenceToMarkdown(conference)}
+
+${scheduleToMarkdown(schedule)}
+
+${speakersToMarkdown(speakers)}
 
 ## How you help attendees
 
 - Answer questions about sessions, speakers, rooms, and timing
 - Help attendees plan their day based on their interests
 - Provide speaker bios and talk descriptions
-- Give directions to the venue`,
+- Give directions to the venue
+
+Be enthusiastic about the conference and encourage exploration across rooms and topics!`,
 });
 ```
 
@@ -335,6 +342,10 @@ export const getUserPreferences = new FunctionTool({
 **3. `src/02-tools/agent.ts`** — Slim down the instruction and add tools:
 
 ```typescript
+import { LlmAgent } from "@google/adk";
+import { getModel } from "../common/models.js";
+import { getSessions, getSpeakers, getUserPreferences } from "./tools.js";
+
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
   model: getModel(),
