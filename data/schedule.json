@@ -21,6 +21,13 @@
     "room": "Sala Fibonacci"
   },
   {
+    "speaker": "Donatella Pasquale, Matilde Petrucci",
+    "talk title": "One Feature, Many Apps: Building Without Repeating Yourself",
+    "start_time": "2026-04-18T10:20:00.000",
+    "end_time": "2026-04-18T10:45:00.000",
+    "room": "Sala Ricci"
+  },
+  {
     "speaker": "Pietro Tempesti, Franco Riformato",
     "talk title": "La Context Engineering come l'arma finale di ogni sviluppatore",
     "start_time": "2026-04-18T10:20:00.000",
@@ -70,15 +77,8 @@
     "room": "Sala Pacinotti"
   },
   {
-    "speaker": "Valeria Salis",
-    "talk title": "From shy contributor to (kinda) confident community leader",
-    "start_time": "2026-04-18T12:00:00.000",
-    "end_time": "2026-04-18T12:50:00.000",
-    "room": "Sala Fibonacci"
-  },
-  {
-    "speaker": "Francesco Sciuti, Emiliano Pisu",
-    "talk title": "60fps o niente: Rendering Pipeline a suon di esempi pratici!",
+    "speaker": "Cristian Burrini",
+    "talk title": "Claude Code Internals",
     "start_time": "2026-04-18T12:00:00.000",
     "end_time": "2026-04-18T12:50:00.000",
     "room": "Sala Ricci"
@@ -105,8 +105,8 @@
     "room": "Sala Fibonacci"
   },
   {
-    "speaker": "Francesco Sciuti",
-    "talk title": "Inferenza locale o remota: un viaggio andata e ritorno!",
+    "speaker": "Fabio Biondi",
+    "talk title": "Agentic Apps con Google Gemini SDK e TypeScript",
     "start_time": "2026-04-18T14:20:00.000",
     "end_time": "2026-04-18T16:00:00.000",
     "room": "Sala Gentili Build with AI"
@@ -120,7 +120,7 @@
   },
   {
     "speaker": "Giorgio Basile, Fabrizio Baldazzi",
-    "talk title": "Superset, dashboard, embedding e dolori",
+    "talk title": "Superset, dashboard, embedding  e dolori",
     "start_time": "2026-04-18T15:10:00.000",
     "end_time": "2026-04-18T16:00:00.000",
     "room": "Sala Ricci"
@@ -168,8 +168,8 @@
     "room": "Sala Ricci"
   },
   {
-    "speaker": "Cristian Burrini",
-    "talk title": "Claude Code Internals",
+    "speaker": "Francesco Sciuti, Emiliano Pisu",
+    "talk title": "60fps o niente: Rendering Pipeline a suon di esempi pratici!",
     "start_time": "2026-04-18T16:00:00.000",
     "end_time": "2026-04-18T16:50:00.000",
     "room": "Sala Gentili Build with AI"
@@ -224,8 +224,8 @@
     "room": "Sala Pacinotti"
   },
   {
-    "speaker": "Donatella Pasquale, Matilde Petrucci",
-    "talk title": "One Feature, Many Apps: Building Without Repeating Yourself",
+    "speaker": "Nicola Corti",
+    "talk title": "Gotta Build 'Em All: Android Pokedex 10 Years Later",
     "start_time": "2026-04-18T18:10:00.000",
     "end_time": "2026-04-18T18:35:00.000",
     "room": "Sala Ricci"
@@ -236,12 +236,5 @@
     "start_time": "2026-04-18T18:10:00.000",
     "end_time": "2026-04-18T19:00:00.000",
     "room": "Sala Fibonacci"
-  },
-  {
-    "speaker": "Nicola Corti",
-    "talk title": "Gotta Build 'Em All: Android Pokedex 10 Years Later",
-    "start_time": "2026-04-18T18:35:00.000",
-    "end_time": "2026-04-18T19:00:00.000",
-    "room": "Sala Ricci"
   }
 ]
