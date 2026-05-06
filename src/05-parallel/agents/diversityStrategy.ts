@@ -1,18 +1,24 @@
 import { LlmAgent } from "@google/adk";
 import { getModel } from "../../common/models.js";
-import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
+import {
+  getSessions,
+  getSpeakers,
+  getUserPreferences,
+  listConferences,
+} from "../tools.js";
 
 export const diversityStrategy = new LlmAgent({
   name: "diversityStrategy",
   model: getModel(),
   description:
     "Builds a schedule that maximizes variety across rooms, topics, and speakers.",
-  instruction: `You are a schedule strategist for DevFest Pisa 2026.
+  instruction: `You are a schedule strategist for DevFest-style conferences.
 Your optimization goal: MAXIMIZE DIVERSITY AND BREADTH.
 
-1. Use get_user_preferences to understand the user's interests (as light guidance)
-2. Use get_sessions to explore ALL available sessions
-3. Build a full day schedule that maximizes variety
+1. If the user hasn't chosen a conference, call list_conferences and ask them to pick one. Use the chosen conferenceId in every subsequent tool call.
+2. Use get_user_preferences to understand the user's interests (as light guidance)
+3. Use get_sessions to explore ALL available sessions
+4. Build a full day schedule that maximizes variety
 
 Strategy:
 - Pick sessions from as many DIFFERENT rooms and topics as possible
@@ -23,6 +29,6 @@ Strategy:
 
 For each session include: title, speaker, room, start and end time.
 End with a brief explanation of why this schedule maximizes diversity.`,
-  tools: [getSessions, getSpeakers, getUserPreferences],
+  tools: [listConferences, getSessions, getSpeakers, getUserPreferences],
   outputKey: "diversitySchedule",
 });

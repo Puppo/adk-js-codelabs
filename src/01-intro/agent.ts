@@ -1,5 +1,5 @@
 import { LlmAgent } from "@google/adk";
-import { conference, schedule, speakers } from "../common/conferenceData.js";
+import { getConferenceData } from "../common/conferenceData.js";
 import { getModel } from "../common/models.js";
 import {
   conferenceToMarkdown,
@@ -7,12 +7,16 @@ import {
   speakersToMarkdown,
 } from "../common/toMarkdown.js";
 
+const DEFAULT_CONFERENCE_ID = "pisa-2026";
+const { conference, speakers, schedule } = getConferenceData(
+  DEFAULT_CONFERENCE_ID,
+);
+
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
   model: getModel(),
-  description:
-    "A helpful assistant for the DevFest Pisa 2026 conference. It answers questions about sessions, speakers, and helps attendees plan their day.",
-  instruction: `You are a friendly and enthusiastic conference assistant for DevFest Pisa 2026.
+  description: `A helpful assistant for the ${conference.conference_name} conference. It answers questions about sessions, speakers, and helps attendees plan their day.`,
+  instruction: `You are a friendly and enthusiastic conference assistant for ${conference.conference_name}.
 
 ${conferenceToMarkdown(conference)}
 

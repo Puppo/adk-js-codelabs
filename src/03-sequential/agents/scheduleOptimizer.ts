@@ -7,7 +7,7 @@ export const scheduleOptimizer = new LlmAgent({
   model: getModel(),
   description:
     "Reviews and optimizes a draft conference schedule for quality and logistics.",
-  instruction: `You are a schedule optimizer for DevFest Pisa 2026.
+  instruction: `You are a schedule optimizer for DevFest-style conferences.
 
 Review this draft schedule and improve it:
 {{draftSchedule}}
@@ -18,6 +18,8 @@ Check for and fix these issues:
 3. **Room logistics**: Flag if consecutive sessions are in distant rooms
 4. **Difficulty progression**: Suggest starting with easier sessions and progressing to harder ones
 5. **Alternatives**: For each time slot, suggest one alternative session the user might enjoy
+
+When calling get_sessions, reuse the same conferenceId that appears in the draft schedule above.
 
 Output the optimized schedule with:
 - The final schedule with any improvements
