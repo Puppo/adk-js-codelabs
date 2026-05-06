@@ -10,11 +10,11 @@ You'll progress from creating a simple conversational agent to building a full-f
 
 Before the workshop, make sure you have the following installed: 🛠️
 
-| Tool              | Version | Link                                                                                |
-| ----------------- | ------- | ----------------------------------------------------------------------------------- |
-| Node.js           | 24+     | [nodejs.org](https://nodejs.org/)                                                   |
-| npm               | 10+     | Comes with Node.js                                                                  |
-| Git               | Latest  | [git-scm.com](https://git-scm.com/)                                                 |
+| Tool              | Version | Link                                                                                                                      |
+| ----------------- | ------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Node.js           | 24+     | [nodejs.org](https://nodejs.org/)                                                                                         |
+| npm               | 10+     | Comes with Node.js                                                                                                        |
+| Git               | Latest  | [git-scm.com](https://git-scm.com/)                                                                                       |
 | Google AI API Key | -       | [codelab-apikey-manager](https://github.com/giacomoRanieri/codelab-apikey-manager/#%EF%B8%8F-usage-on-google-cloud-shell) |
 
 ### 🔑 Configure Your API Key

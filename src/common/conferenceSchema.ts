@@ -20,6 +20,7 @@ const sponsorsSchema = z.object({
 });
 
 export const conferenceSchema = z.object({
+  id: z.string(),
   conference_name: z.string(),
   start_time: z.string(),
   end_time: z.string(),
@@ -30,3 +31,7 @@ export const conferenceSchema = z.object({
 });
 
 export type Conference = z.infer<typeof conferenceSchema>;
+
+export const conferencesSchema = z.array(conferenceSchema);
+
+export type Conferences = z.infer<typeof conferencesSchema>;

@@ -1,12 +1,51 @@
 import { FunctionTool } from "@google/adk";
 import { z } from "zod";
-import { schedule, speakers } from "./data/conferenceData.js";
+import { conferenceToMarkdown } from "../common/toMarkdown.js";
+import { conferences, getConferenceData } from "./data/conferenceData.js";
+
+const conferenceIdParam = z
+  .string()
+  .describe(
+    "The conference id, e.g. 'pisa-2026'. Call list_conferences to discover available ids.",
+  );
+
+export const listConferences = new FunctionTool({
+  name: "list_conferences",
+  description:
+    "List all available conferences with their id, name, start date and theme. Call this first when the user hasn't specified which conference they want.",
+  parameters: z.object({}),
+  execute: async () => {
+    if (conferences.length === 0) {
+      return "No conferences are configured.";
+    }
+    return conferences
+      .map(
+        (c) =>
+          `${c.id} | ${c.conference_name} | ${c.start_time} | Theme: ${c.theme}`,
+      )
+      .join("\n");
+  },
+});
+
+export const getConference = new FunctionTool({
+  name: "get_conference",
+  description:
+    "Get full details for a conference: venue, directions, organizers and sponsors.",
+  parameters: z.object({
+    conferenceId: conferenceIdParam,
+  }),
+  execute: async ({ conferenceId }) => {
+    const { conference } = getConferenceData(conferenceId);
+    return conferenceToMarkdown(conference);
+  },
+});
 
 export const getSessions = new FunctionTool({
   name: "get_sessions",
   description:
     "Get conference sessions, optionally filtered by speaker, room, or time slot.",
   parameters: z.object({
+    conferenceId: conferenceIdParam,
     speaker: z
       .string()
       .optional()
@@ -23,14 +62,12 @@ export const getSessions = new FunctionTool({
       ),
   }),
   execute: async ({
+    conferenceId,
     speaker,
     room,
     timeSlot,
-  }: {
-    speaker?: string;
-    room?: string;
-    timeSlot?: string;
   }) => {
+    const { schedule } = getConferenceData(conferenceId);
     let result = schedule;
 
     if (speaker) {
@@ -80,6 +117,7 @@ export const getSpeakers = new FunctionTool({
   description:
     "Get information about conference speakers, optionally filtered by name or heading.",
   parameters: z.object({
+    conferenceId: conferenceIdParam,
     name: z
       .string()
       .optional()
@@ -90,12 +128,11 @@ export const getSpeakers = new FunctionTool({
       .describe("Filter by heading/role (partial match)"),
   }),
   execute: async ({
+    conferenceId,
     name,
     heading,
-  }: {
-    name?: string;
-    heading?: string;
   }) => {
+    const { speakers } = getConferenceData(conferenceId);
     let result = speakers;
 
     if (name) {
@@ -125,6 +162,7 @@ export const getUserPreferences = new FunctionTool({
   description:
     "Record and return structured user preferences for schedule building. Call this when the user shares their interests.",
   parameters: z.object({
+    conferenceId: conferenceIdParam,
     interests: z
       .array(z.string())
       .describe(
@@ -136,15 +174,15 @@ export const getUserPreferences = new FunctionTool({
       .describe("Speakers the user specifically wants to see"),
   }),
   execute: async ({
+    conferenceId,
     interests,
     mustSeeSpeakers,
-  }: {
-    interests: string[];
-    mustSeeSpeakers?: string[];
   }) => {
+    const { schedule } = getConferenceData(conferenceId);
     const rooms = [...new Set(schedule.map((s) => s.room))];
     return JSON.stringify(
       {
+        conferenceId,
         interests,
         mustSeeSpeakers: mustSeeSpeakers ?? [],
         availableRooms: rooms,

@@ -23,18 +23,23 @@ import { getSessions } from "../tools.js";
 // 4. Flag room logistics issues (consecutive sessions in distant rooms)
 // 5. Suggest difficulty progression (easier -> harder)
 // 6. Provide alternative sessions for each slot
+//
+// Multi-conference note: when the optimizer calls get_sessions it must reuse
+// the same conferenceId that appears in {{draftSchedule}} (the builder will
+// have written it there). No need to call list_conferences here.
 
 export const scheduleOptimizer = new LlmAgent({
   name: "scheduleOptimizer",
   model: getModel(),
   description:
     "Reviews and optimizes a draft conference schedule for quality and logistics.",
-  instruction: `You are a schedule optimizer for DevFest Pisa 2026.
+  instruction: `You are a schedule optimizer for DevFest-style conferences.
 
 Review this draft schedule and improve it:
 {{draftSchedule}}
 
-TODO: Add the rest of the optimization instructions.`,
+TODO: Add the rest of the optimization instructions.
+Tip: when you call get_sessions, reuse the conferenceId that appears in the draft above.`,
   tools: [getSessions],
-  // TODO: Add outputKey to save the optimized result
+  // TODO: Add outputKey: "optimizedSchedule" to save the optimized result
 });

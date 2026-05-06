@@ -24,7 +24,7 @@ export const bestScheduleSelector = new LlmAgent({
   model: getModel(),
   description:
     "Compares multiple schedule proposals and selects or synthesizes the best one.",
-  instruction: `You are a schedule advisor for DevFest Pisa 2026.
+  instruction: `You are a schedule advisor for DevFest-style conferences.
 
 Three different strategies have produced schedule proposals:
 

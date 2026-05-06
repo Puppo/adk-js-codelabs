@@ -1,28 +1,48 @@
-// TODO: Import LoopAgent and SequentialAgent from "@google/adk"
 import { LoopAgent, SequentialAgent } from "@google/adk";
 import { scheduleBuilder } from "./agents/scheduleBuilder.js";
+import { schedulePresenter } from "./agents/schedulePresenter.js";
 import { scheduleReviewer } from "./agents/scheduleReviewer.js";
 
-// TODO: Create a LoopAgent named "scheduleLoop" and export it as rootAgent
+// In step 4 we wrap a build/review cycle in a LoopAgent, then hand the
+// approved schedule off to a presenter that renders it as the final
+// user-facing message.
 //
-// The LoopAgent wraps a SequentialAgent that runs:
-//   1. scheduleBuilder — creates/revises the schedule
-//   2. scheduleReviewer — evaluates and either approves (escalate) or gives feedback
+// Architecture you'll build below:
 //
-// The loop repeats until either:
-//   - The reviewer calls exit_loop (which sets escalate = true)
-//   - maxIterations is reached (set to 3 as a safety limit)
+//   rootAgent (SequentialAgent "scheduleFlow")
+//     ├── scheduleLoop (LoopAgent, maxIterations: 3)
+//     │     └── SequentialAgent "buildAndReview"
+//     │           ├── scheduleBuilder   (writes draftSchedule to state)
+//     │           └── scheduleReviewer  (calls exit_loop OR writes feedback)
+//     └── schedulePresenter             (renders the approved {{draftSchedule}})
 //
-// Configuration:
-// - name: "scheduleLoop"
-// - subAgents: [SequentialAgent with builder + reviewer]
-// - maxIterations: 3
+// Why a presenter? Without it, the last message the user sees is the
+// reviewer's "approved" note rather than the schedule itself.
 
-export const rootAgent = new LoopAgent({
+// TODO: Build the inner LoopAgent
+//
+// const scheduleLoop = new LoopAgent({
+//   name: "scheduleLoop",
+//   description: "...",
+//   subAgents: [new SequentialAgent({ name: "buildAndReview", subAgents: [scheduleBuilder, scheduleReviewer] })],
+//   maxIterations: 3,
+// });
+const scheduleLoop = new LoopAgent({
   name: "scheduleLoop",
   description:
     "Iteratively builds and reviews a conference schedule until quality criteria are met.",
-  // TODO: Add subAgents with a SequentialAgent wrapping builder + reviewer
+  // TODO: Add subAgents — one SequentialAgent named "buildAndReview"
+  // wrapping [scheduleBuilder, scheduleReviewer].
   subAgents: [],
   // TODO: Add maxIterations: 3
+});
+
+// TODO: Wrap the loop and presenter in a SequentialAgent named "scheduleFlow".
+// subAgents should be [scheduleLoop, schedulePresenter].
+export const rootAgent = new SequentialAgent({
+  name: "scheduleFlow",
+  description:
+    "Iteratively builds and reviews a conference schedule, then presents the approved version to the user.",
+  // TODO: subAgents: [scheduleLoop, schedulePresenter]
+  subAgents: [],
 });

@@ -1,6 +1,8 @@
 # 🛠️ Workshop Guide: Build a Conference Schedule Agent
 
-Welcome to the ADK-JS workshop! 🎉 You'll build a Conference Schedule Agent for **DevFest Pisa 2026** — step by step, from a simple chatbot to a multi-agent system with parallel execution. 🚀
+Welcome to the ADK-JS workshop! 🎉 You'll build a Conference Schedule Agent for any **DevFest-style conference** — step by step, from a simple chatbot to a multi-agent system with parallel execution. 🚀
+
+The codebase supports **multiple conferences out of the box**: data is keyed by conference id (e.g. `pisa-2026`), and the agents discover which conference the user cares about at runtime.
 
 ## 🗺️ Overview
 
@@ -43,6 +45,34 @@ npm install
 
 ---
 
+## 📦 Data Layout
+
+Conference data is **keyed by conference id**. The root `data/conference.json` is a **list** of conferences; each conference has its own folder with per-conference speakers and schedule:
+
+```
+data/
+  conference.json                  # [{ id, conference_name, venue, sponsors, ... }, ...]
+  pisa-2026/
+    speakers.json                  # Speaker[]
+    schedule.json                  # ScheduleEntry[]
+  <your-conference-id>/
+    speakers.json
+    schedule.json
+```
+
+The shared loader in [`src/common/conferenceData.ts`](src/common/conferenceData.ts) eagerly reads every folder at module load, validates with Zod, and exposes:
+
+- `conferences` — array of all conference metadata (id, name, date, theme, venue, …)
+- `getConferenceData(conferenceId)` — returns the full bundle `{ conference, speakers, schedule }` for a given id
+
+**To add a new conference:**
+
+1. Create `data/<your-id>/speakers.json` and `data/<your-id>/schedule.json`.
+2. Append a new entry (with matching `id`) to `data/conference.json`.
+3. Restart the dev server — the agent will immediately discover it via `list_conferences`.
+
+---
+
 ## 🧩 Step 1: Your First Agent
 
 **Concept:** `LlmAgent` — the building block of ADK
@@ -69,27 +99,29 @@ graph LR
 
 ### 🎓 What you'll learn
 
-An `LlmAgent` wraps a large language model with a name, description, and instruction (system prompt). The instruction defines the agent's personality and knowledge. In this step, we use shared markdown utilities to inject the conference data into the agent's prompt.
+An `LlmAgent` wraps a large language model with a name, description, and instruction (system prompt). The instruction defines the agent's personality and knowledge. In this step, we use shared markdown utilities to inject a single conference's data into the agent's prompt.
 
 The project includes a `src/common/` folder with reusable modules:
 
-- **`conferenceData.ts`** — loads and validates conference, speakers, and schedule data from JSON files using Zod schemas
+- **`conferenceData.ts`** — eagerly loads and validates every conference under `data/` using Zod, and exposes `conferences` and `getConferenceData(id)`
 - **`toMarkdown.ts`** — converts each data type into well-structured markdown, ideal for LLM consumption
+
+Since Step 1 has no tools, we simply pick a **default conference id** and render its bundle into the prompt.
 
 ### ✏️ Your task
 
 Open `src/01-intro/agent.ts` and complete the TODOs:
 
-1. Import `{ conference, speakers, schedule }` from `"../common/conferenceData.js"`
+1. Import `getConferenceData` from `"../common/conferenceData.js"`
 2. Import `{ conferenceToMarkdown, speakersToMarkdown, scheduleToMarkdown }` from `"../common/toMarkdown.js"`
-3. Use these functions inside a template literal to build the agent's `instruction`
-4. Add a section describing how the agent should help attendees
+3. Pick a default conference id (e.g. `"pisa-2026"`) and destructure `{ conference, speakers, schedule }` from `getConferenceData(...)`
+4. Use the conference name in the description/instruction (no hardcoded string), and render the three markdown helpers into the instruction
 
 **Key code:** 👇
 
 ```typescript
 import { LlmAgent } from "@google/adk";
-import { conference, schedule, speakers } from "../common/conferenceData.js";
+import { getConferenceData } from "../common/conferenceData.js";
 import { getModel } from "../common/models.js";
 import {
   conferenceToMarkdown,
@@ -97,12 +129,16 @@ import {
   speakersToMarkdown,
 } from "../common/toMarkdown.js";
 
+const DEFAULT_CONFERENCE_ID = "pisa-2026";
+const { conference, speakers, schedule } = getConferenceData(
+  DEFAULT_CONFERENCE_ID,
+);
+
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
   model: getModel(),
-  description:
-    "A helpful assistant for the DevFest Pisa 2026 conference. It answers questions about sessions, speakers, and helps attendees plan their day.",
-  instruction: `You are a friendly and enthusiastic conference assistant for DevFest Pisa 2026.
+  description: `A helpful assistant for the ${conference.conference_name} conference. It answers questions about sessions, speakers, and helps attendees plan their day.`,
+  instruction: `You are a friendly and enthusiastic conference assistant for ${conference.conference_name}.
 
 ${conferenceToMarkdown(conference)}
 
@@ -130,8 +166,8 @@ npm run dev:01
 This launches the ADK DevTools web UI. Open your browser and try:
 
 - _"What AI sessions are available?"_ 🤖
-- _"Tell me about Dr. Elena Rossi"_ 🎤
-- _"Plan my day — I love Cloud and DevOps, intermediate level"_ 📅
+- _"Tell me about Nicola Corti"_ 🎤
+- _"Plan my day — I love Cloud and DevOps"_ 📅
 
 ### 🔍 Check the solution
 
@@ -139,7 +175,7 @@ Switch to the `final` branch and look at `src/01-intro/agent.ts`.
 
 ### 💭 Reflection
 
-The agent works and the data stays in sync with the JSON source files automatically. However, all the data is still loaded into the prompt at once. What if you want the agent to look up data on demand? This motivates **Step 2**. ➡️
+The agent works and the data stays in sync with the JSON source files automatically. But notice: **the whole conference** is baked into the prompt, and the prompt is tied to one specific conference. What if you want the agent to handle multiple conferences, or to look up data on demand? This motivates **Step 2**. ➡️
 
 ---
 
@@ -155,51 +191,100 @@ The agent works and the data stays in sync with the JSON source files automatica
 graph LR
     User(["👤 User"])
     Agent["🤖 conferenceAgent"]
-    T1["🔧 get_sessions"]
-    T2["🔧 get_speakers"]
-    T3["🔧 get_user_preferences"]
-    Data[("📦 JSON Data")]
+    T0["🔧 list_conferences"]
+    T1["🔧 get_conference"]
+    T2["🔧 get_sessions"]
+    T3["🔧 get_speakers"]
+    T4["🔧 get_user_preferences"]
+    Data[("📦 Map&lt;id, Bundle&gt;")]
 
     User -- "question" --> Agent
     Agent -- "answer" --> User
+    Agent -- "calls" --> T0
     Agent -- "calls" --> T1
     Agent -- "calls" --> T2
     Agent -- "calls" --> T3
+    Agent -- "calls" --> T4
+    T0 -. "reads" .-> Data
     T1 -. "reads" .-> Data
     T2 -. "reads" .-> Data
     T3 -. "reads" .-> Data
+    T4 -. "reads" .-> Data
 
     style Agent fill:#ffffff,stroke:#2e7d32,stroke-width:2px,color:#1b1b1b
-    style T1 fill:#ffffff,stroke:#e65100,stroke-width:2px,color:#1b1b1b
+    style T0 fill:#ffffff,stroke:#1565c0,stroke-width:2px,color:#1b1b1b
+    style T1 fill:#ffffff,stroke:#1565c0,stroke-width:2px,color:#1b1b1b
     style T2 fill:#ffffff,stroke:#e65100,stroke-width:2px,color:#1b1b1b
     style T3 fill:#ffffff,stroke:#e65100,stroke-width:2px,color:#1b1b1b
+    style T4 fill:#ffffff,stroke:#e65100,stroke-width:2px,color:#1b1b1b
     style Data fill:#fff8e1,stroke:#6a1b9a,stroke-width:2px,color:#1b1b1b
 ```
 
-> The same agent, but now it fetches data on demand through **FunctionTools** instead of having everything in the prompt. The LLM decides which tools to call based on the user's question. 🧠
+> The same agent, but now it fetches data on demand through **FunctionTools** instead of having everything in the prompt. Two of the tools (`list_conferences`, `get_conference`) let the agent discover which conference to work with; the other three operate on a specific `conferenceId`. The LLM decides which tools to call based on the user's question. 🧠
 
 ### 🎓 What you'll learn
 
 Tools are functions that the LLM can call to retrieve data or perform actions. Instead of stuffing everything in the prompt, we define tools with typed parameters (using Zod schemas) and let the agent decide when to call them.
 
+Because the codebase supports **multiple conferences**, every data tool takes a `conferenceId` parameter. Two additional tools (`list_conferences`, `get_conference`) let the agent discover which conference the user wants.
+
 ### ✏️ Your task
 
 You'll find three files to work on:
 
-**1. `src/02-tools/data/conferenceData.ts`** — Already provided! Contains typed arrays of sessions and speakers.
+**1. `src/02-tools/data/conferenceData.ts`** — Already provided! Re-exports `conferences` and `getConferenceData` from the shared loader.
 
-**2. `src/02-tools/tools.ts`** — Create three FunctionTools:
+**2. `src/02-tools/tools.ts`** — Create five FunctionTools:
 
 ```typescript
 import { FunctionTool } from "@google/adk";
 import { z } from "zod";
-import { schedule, speakers } from "./data/conferenceData.js";
+import { conferenceToMarkdown } from "../common/toMarkdown.js";
+import { conferences, getConferenceData } from "./data/conferenceData.js";
+
+const conferenceIdParam = z
+  .string()
+  .describe(
+    "The conference id, e.g. 'pisa-2026'. Call list_conferences to discover available ids.",
+  );
+
+export const listConferences = new FunctionTool({
+  name: "list_conferences",
+  description:
+    "List all available conferences with their id, name, start date and theme. Call this first when the user hasn't specified which conference they want.",
+  parameters: z.object({}),
+  execute: async () => {
+    if (conferences.length === 0) {
+      return "No conferences are configured.";
+    }
+    return conferences
+      .map(
+        (c) =>
+          `${c.id} | ${c.conference_name} | ${c.start_time} | Theme: ${c.theme}`,
+      )
+      .join("\n");
+  },
+});
+
+export const getConference = new FunctionTool({
+  name: "get_conference",
+  description:
+    "Get full details for a conference: venue, directions, organizers and sponsors.",
+  parameters: z.object({
+    conferenceId: conferenceIdParam,
+  }),
+  execute: async ({ conferenceId }) => {
+    const { conference } = getConferenceData(conferenceId);
+    return conferenceToMarkdown(conference);
+  },
+});
 
 export const getSessions = new FunctionTool({
   name: "get_sessions",
   description:
     "Get conference sessions, optionally filtered by speaker, room, or time slot.",
   parameters: z.object({
+    conferenceId: conferenceIdParam,
     speaker: z
       .string()
       .optional()
@@ -216,10 +301,12 @@ export const getSessions = new FunctionTool({
       ),
   }),
   execute: async ({
+    conferenceId,
     speaker,
     room,
     timeSlot,
   }) => {
+    const { schedule } = getConferenceData(conferenceId);
     let result = schedule;
 
     if (speaker) {
@@ -269,6 +356,7 @@ export const getSpeakers = new FunctionTool({
   description:
     "Get information about conference speakers, optionally filtered by name or heading.",
   parameters: z.object({
+    conferenceId: conferenceIdParam,
     name: z
       .string()
       .optional()
@@ -279,9 +367,11 @@ export const getSpeakers = new FunctionTool({
       .describe("Filter by heading/role (partial match)"),
   }),
   execute: async ({
+    conferenceId,
     name,
     heading,
   }) => {
+    const { speakers } = getConferenceData(conferenceId);
     let result = speakers;
 
     if (name) {
@@ -311,6 +401,7 @@ export const getUserPreferences = new FunctionTool({
   description:
     "Record and return structured user preferences for schedule building. Call this when the user shares their interests.",
   parameters: z.object({
+    conferenceId: conferenceIdParam,
     interests: z
       .array(z.string())
       .describe(
@@ -322,12 +413,15 @@ export const getUserPreferences = new FunctionTool({
       .describe("Speakers the user specifically wants to see"),
   }),
   execute: async ({
+    conferenceId,
     interests,
     mustSeeSpeakers,
   }) => {
+    const { schedule } = getConferenceData(conferenceId);
     const rooms = [...new Set(schedule.map((s) => s.room))];
     return JSON.stringify(
       {
+        conferenceId,
         interests,
         mustSeeSpeakers: mustSeeSpeakers ?? [],
         availableRooms: rooms,
@@ -339,23 +433,34 @@ export const getUserPreferences = new FunctionTool({
 });
 ```
 
-**3. `src/02-tools/agent.ts`** — Slim down the instruction and add tools:
+**3. `src/02-tools/agent.ts`** — Slim down the instruction and register all five tools:
 
 ```typescript
 import { LlmAgent } from "@google/adk";
 import { getModel } from "../common/models.js";
-import { getSessions, getSpeakers, getUserPreferences } from "./tools.js";
+import {
+  getConference,
+  getSessions,
+  getSpeakers,
+  getUserPreferences,
+  listConferences,
+} from "./tools.js";
 
 export const rootAgent = new LlmAgent({
   name: "conferenceAgent",
   model: getModel(),
   description:
-    "A helpful assistant for the DevFest Pisa 2026 conference. It answers questions about sessions, speakers, and helps attendees plan their day.",
-  instruction: `You are a friendly and enthusiastic conference assistant for DevFest Pisa 2026.
+    "A helpful assistant for DevFest-style conferences. It answers questions about sessions, speakers, and helps attendees plan their day.",
+  instruction: `You are a friendly and enthusiastic conference assistant for DevFest-style conferences.
 
-Use your tools to look up session and speaker information. Do NOT make up session data — always use the get_sessions and get_speakers tools.
+Use your tools to look up session and speaker information. Do NOT make up data — always use the tools.
 
-When a user shares their interests, use the get_user_preferences tool to record them, then use get_sessions to find matching sessions.
+Conference discovery:
+- If the user hasn't told you which conference they mean, call list_conferences first and ask them to pick one.
+- Once a conference is chosen, pass its conferenceId to every other tool (get_conference, get_sessions, get_speakers, get_user_preferences).
+- Call get_conference when the user asks about the venue, directions, organizers or sponsors.
+
+When a user shares their interests, use get_user_preferences to record them, then use get_sessions to find matching sessions.
 
 Help users:
 - Find sessions by title, speaker, or time
@@ -364,7 +469,7 @@ Help users:
 - Get recommendations based on their interests
 
 Be enthusiastic about the conference and encourage exploration across rooms and topics!`,
-  tools: [getSessions, getSpeakers, getUserPreferences],
+  tools: [listConferences, getConference, getSessions, getSpeakers, getUserPreferences],
 });
 ```
 
@@ -374,11 +479,12 @@ Be enthusiastic about the conference and encourage exploration across rooms and 
 npm run dev:02
 ```
 
-Ask the same questions as Step 1. Open the **trace view** in DevTools — you'll see the agent calling tools instead of relying on hardcoded data. 🔎
+Open the **trace view** in DevTools — you'll see the agent calling tools (starting with `list_conferences` when needed) instead of relying on hardcoded data. 🔎
 
-- _"What advanced sessions are there?"_ 🎯
-- _"Who works at Google?"_ 🏢
-- _"I'm interested in AI and Cloud, intermediate level"_ ☁️
+- _"What conferences do you know about?"_ 🗂️
+- _"For DevFest Pisa 2026, what AI sessions are available?"_ 🎯
+- _"Who speaks at Pisa 2026 and works at Google?"_ 🏢
+- _"I'm going to Pisa 2026 and I'm interested in AI and Cloud"_ ☁️
 
 ### 🔍 Check the solution
 
@@ -431,22 +537,28 @@ A `SequentialAgent` executes sub-agents in a fixed order. Each agent focuses on 
 ```typescript
 import { LlmAgent } from "@google/adk";
 import { getModel } from "../../common/models.js";
-import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
+import {
+  getSessions,
+  getSpeakers,
+  getUserPreferences,
+  listConferences,
+} from "../tools.js";
 
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
   model: getModel(),
   description:
     "Builds a personalized conference schedule based on user preferences.",
-  instruction: `You are a schedule builder for DevFest Pisa 2026.
+  instruction: `You are a schedule builder for DevFest-style conferences.
 
 Your job is to create a personalized day schedule for the attendee.
 
 Steps:
-1. Use get_user_preferences to capture what the user is interested in
-2. Use get_sessions to find sessions matching their interests
-3. Use get_speakers to provide context about the speakers
-4. Build a complete day schedule
+1. If the user hasn't chosen a conference, call list_conferences and ask them to pick one. Use the chosen conferenceId in every subsequent tool call.
+2. Use get_user_preferences to capture what the user is interested in
+3. Use get_sessions to find sessions matching their interests
+4. Use get_speakers to provide context about the speakers
+5. Build a complete day schedule
 
 Schedule format:
 - Pick one session per time slot across rooms
@@ -457,7 +569,7 @@ Rules:
 - No time conflicts (only one session per time slot)
 - Match the user's stated interests
 - Include talk title, speaker, room, start and end time for each slot`,
-  tools: [getSessions, getSpeakers, getUserPreferences],
+  tools: [listConferences, getSessions, getSpeakers, getUserPreferences],
   outputKey: "draftSchedule",
 });
 ```
@@ -474,7 +586,7 @@ export const scheduleOptimizer = new LlmAgent({
   model: getModel(),
   description:
     "Reviews and optimizes a draft conference schedule for quality and logistics.",
-  instruction: `You are a schedule optimizer for DevFest Pisa 2026.
+  instruction: `You are a schedule optimizer for DevFest-style conferences.
 
 Review this draft schedule and improve it:
 {{draftSchedule}}
@@ -485,6 +597,8 @@ Check for and fix these issues:
 3. **Room logistics**: Flag if consecutive sessions are in distant rooms
 4. **Difficulty progression**: Suggest starting with easier sessions and progressing to harder ones
 5. **Alternatives**: For each time slot, suggest one alternative session the user might enjoy
+
+When calling get_sessions, reuse the same conferenceId that appears in the draft schedule above.
 
 Output the optimized schedule with:
 - The final schedule with any improvements
@@ -516,9 +630,10 @@ export const rootAgent = new SequentialAgent({
 npm run dev:03
 ```
 
-- _"Build me a schedule. I love AI and DevOps, intermediate level."_ 🗓️
+- _"Which conferences are available?"_ 🗂️
+- _"Build me a schedule for Pisa 2026. I love AI and DevOps."_ 🗓️
 
-Watch the trace: `scheduleBuilder` runs first, then `scheduleOptimizer` refines the result. 👀
+Watch the trace: `scheduleBuilder` runs first (calling `list_conferences` if the user hasn't named one), then `scheduleOptimizer` refines the result. 👀
 
 ### 🔍 Check the solution
 
@@ -542,14 +657,20 @@ The pipeline works in one pass. But what if the optimizer finds issues the build
 graph LR
     User(["👤 User"])
 
-    subgraph Loop["scheduleLoop · LoopAgent · max 3 iterations"]
-        Builder["🔨 scheduleBuilder"]
-        DraftState[("draftSchedule")]
-        Reviewer["🔍 scheduleReviewer"]
-        Approved["✅ Approved"]
+    subgraph Flow["scheduleFlow · SequentialAgent"]
+        direction LR
+        subgraph Loop["scheduleLoop · LoopAgent · max 3 iterations"]
+            Builder["🔨 scheduleBuilder"]
+            DraftState[("draftSchedule")]
+            Reviewer["🔍 scheduleReviewer"]
+            Approved["✅ Approved"]
 
-        Builder --> DraftState --> Reviewer
-        Reviewer -- "exit_loop" --> Approved
+            Builder --> DraftState --> Reviewer
+            Reviewer -- "exit_loop" --> Approved
+        end
+
+        Presenter["📣 schedulePresenter"]
+        Approved --> Presenter
     end
 
     FeedbackState[("reviewerFeedback")]
@@ -557,17 +678,21 @@ graph LR
     FeedbackState -. "next iteration" .-> Builder
 
     User -- "interests" --> Builder
-    Approved -- "final schedule" --> User
+    Presenter -- "final schedule" --> User
 
+    style Flow fill:#ffffff,stroke:#2e7d32,stroke-width:2px,color:#1b1b1b
     style Loop fill:#ffffff,stroke:#f57f17,stroke-width:3px,color:#1b1b1b
     style Builder fill:#ffffff,stroke:#1565c0,stroke-width:2px,color:#1b1b1b
     style Reviewer fill:#ffffff,stroke:#b71c1c,stroke-width:2px,color:#1b1b1b
+    style Presenter fill:#ffffff,stroke:#2e7d32,stroke-width:2px,color:#1b1b1b
     style DraftState fill:#fff8e1,stroke:#e65100,stroke-width:2px,color:#1b1b1b
     style FeedbackState fill:#fff8e1,stroke:#6a1b9a,stroke-width:2px,color:#1b1b1b
     style Approved fill:#ffffff,stroke:#2e7d32,stroke-width:3px,color:#1b1b1b
 ```
 
 > The **generator/critic pattern**: the builder creates a schedule, the reviewer evaluates it against quality criteria. If it passes, `exit_loop` is called (sets `escalate = true`). If not, feedback flows back and the builder revises. Repeats up to 3 times. 🎯
+>
+> Once the loop exits, a **schedulePresenter** renders the approved `{{draftSchedule}}` as the final message — so the attendee actually sees the schedule, not just the reviewer's "approved" note. 📣
 
 ### 🎓 What you'll learn
 
@@ -580,14 +705,19 @@ A `LoopAgent` repeats its sub-agents until a condition is met (or max iterations
 ```typescript
 import { LlmAgent } from "@google/adk";
 import { getModel } from "../../common/models.js";
-import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
+import {
+  getSessions,
+  getSpeakers,
+  getUserPreferences,
+  listConferences,
+} from "../tools.js";
 
 export const scheduleBuilder = new LlmAgent({
   name: "scheduleBuilder",
   model: getModel(),
   description:
     "Builds or revises a personalized conference schedule based on user preferences and reviewer feedback.",
-  instruction: `You are a schedule builder for DevFest Pisa 2026.
+  instruction: `You are a schedule builder for DevFest-style conferences.
 
 Your job is to create or revise a personalized day schedule for the attendee.
 
@@ -598,10 +728,11 @@ If there is reviewer feedback above, incorporate it to improve the schedule.
 If there is no feedback yet, build a fresh schedule from the user's preferences.
 
 Steps:
-1. Use get_user_preferences to capture what the user is interested in
-2. Use get_sessions to find sessions matching their interests
-3. Use get_speakers to provide context about the speakers
-4. Build a complete day schedule
+1. If the user hasn't chosen a conference, call list_conferences and ask them to pick one. Use the chosen conferenceId in every subsequent tool call.
+2. Use get_user_preferences to capture what the user is interested in
+3. Use get_sessions to find sessions matching their interests
+4. Use get_speakers to provide context about the speakers
+5. Build a complete day schedule
 
 Schedule format:
 - Pick one session per time slot across rooms
@@ -612,7 +743,7 @@ Rules:
 - No time conflicts (only one session per time slot)
 - Match the user's stated interests
 - Include talk title, speaker, room, start and end time for each slot`,
-  tools: [getSessions, getSpeakers, getUserPreferences],
+  tools: [listConferences, getSessions, getSpeakers, getUserPreferences],
   outputKey: "draftSchedule",
 });
 ```
@@ -640,7 +771,7 @@ export const scheduleReviewer = new LlmAgent({
   model: getModel(),
   description:
     "Reviews a schedule against quality criteria and either approves it or provides improvement feedback.",
-  instruction: `You are a schedule reviewer for DevFest Pisa 2026.
+  instruction: `You are a schedule reviewer for DevFest-style conferences.
 
 Review this schedule:
 {{draftSchedule}}
@@ -664,14 +795,43 @@ When providing feedback, be specific. For example:
 });
 ```
 
-**3. `src/04-loop/agent.ts`** — Wire them into a loop:
+**3. `src/04-loop/agents/schedulePresenter.ts`** — Outputs the approved schedule as the final message so the user actually sees it (the reviewer's last text is just an "approved" note):
+
+```typescript
+import { LlmAgent } from "@google/adk";
+import { getModel } from "../../common/models.js";
+
+export const schedulePresenter = new LlmAgent({
+  name: "schedulePresenter",
+  model: getModel(),
+  description:
+    "Presents the approved conference schedule to the user as the final answer.",
+  instruction: `You are the final voice of the schedule flow.
+
+The reviewer has just approved this schedule:
+
+{{draftSchedule}}
+
+Your job is to present it back to the attendee as the last message of the conversation.
+
+Rules:
+- Reproduce the full schedule exactly — do not drop or rename sessions
+- Keep the original time slots, talk titles, speakers and rooms
+- Do not call any tools
+- Do not add critique, reviewer notes or feedback
+- Be friendly and enthusiastic; a short closing line is fine`,
+});
+```
+
+**4. `src/04-loop/agent.ts`** — Wire the loop and the presenter into a sequential flow:
 
 ```typescript
 import { LoopAgent, SequentialAgent } from "@google/adk";
 import { scheduleBuilder } from "./agents/scheduleBuilder.js";
+import { schedulePresenter } from "./agents/schedulePresenter.js";
 import { scheduleReviewer } from "./agents/scheduleReviewer.js";
 
-export const rootAgent = new LoopAgent({
+const scheduleLoop = new LoopAgent({
   name: "scheduleLoop",
   description:
     "Iteratively builds and reviews a conference schedule until quality criteria are met.",
@@ -683,6 +843,13 @@ export const rootAgent = new LoopAgent({
   ],
   maxIterations: 3,
 });
+
+export const rootAgent = new SequentialAgent({
+  name: "scheduleFlow",
+  description:
+    "Iteratively builds and reviews a conference schedule, then presents the approved version to the user.",
+  subAgents: [scheduleLoop, schedulePresenter],
+});
 ```
 
 ### 🚀 Try it
@@ -691,7 +858,7 @@ export const rootAgent = new LoopAgent({
 npm run dev:04
 ```
 
-- _"Build me a schedule. I'm interested in everything but especially AI."_ 🤖
+- _"Build me a schedule for Pisa 2026. I'm interested in everything but especially AI."_ 🤖
 
 Watch the trace show multiple iterations — the schedule improves each round until the reviewer is satisfied. 📈
 
@@ -759,19 +926,25 @@ Create three strategy agents, a selector, and compose them:
 ```typescript
 import { LlmAgent } from "@google/adk";
 import { getModel } from "../../common/models.js";
-import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
+import {
+  getSessions,
+  getSpeakers,
+  getUserPreferences,
+  listConferences,
+} from "../tools.js";
 
 export const topicMatchStrategy = new LlmAgent({
   name: "topicMatchStrategy",
   model: getModel(),
   description:
     "Builds a schedule that maximizes topic relevance to user interests.",
-  instruction: `You are a schedule strategist for DevFest Pisa 2026.
+  instruction: `You are a schedule strategist for DevFest-style conferences.
 Your optimization goal: MAXIMIZE TOPIC RELEVANCE.
 
-1. Use get_user_preferences to understand the user's interests
-2. Use get_sessions to find ALL sessions matching the user's preferred topics
-3. Build a full day schedule that prioritizes sessions matching their interests
+1. If the user hasn't chosen a conference, call list_conferences and ask them to pick one. Use the chosen conferenceId in every subsequent tool call.
+2. Use get_user_preferences to understand the user's interests
+3. Use get_sessions to find ALL sessions matching the user's preferred topics
+4. Build a full day schedule that prioritizes sessions matching their interests
 
 Strategy:
 - Fill every slot with the most relevant session based on talk title and speaker expertise
@@ -781,7 +954,7 @@ Strategy:
 
 For each session include: title, speaker, room, start and end time.
 End with a brief explanation of why this schedule maximizes topic relevance.`,
-  tools: [getSessions, getSpeakers, getUserPreferences],
+  tools: [listConferences, getSessions, getSpeakers, getUserPreferences],
   outputKey: "topicSchedule",
 });
 ```
@@ -791,20 +964,26 @@ End with a brief explanation of why this schedule maximizes topic relevance.`,
 ```typescript
 import { LlmAgent } from "@google/adk";
 import { getModel } from "../../common/models.js";
-import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
+import {
+  getSessions,
+  getSpeakers,
+  getUserPreferences,
+  listConferences,
+} from "../tools.js";
 
 export const speakerQualityStrategy = new LlmAgent({
   name: "speakerQualityStrategy",
   model: getModel(),
   description:
     "Builds a schedule that prioritizes the most renowned speakers and expert-level content.",
-  instruction: `You are a schedule strategist for DevFest Pisa 2026.
+  instruction: `You are a schedule strategist for DevFest-style conferences.
 Your optimization goal: MAXIMIZE SPEAKER QUALITY.
 
-1. Use get_user_preferences to understand the user's interests (as secondary criteria)
-2. Use get_speakers to learn about ALL speakers
-3. Use get_sessions to find sessions by the top speakers
-4. Build a full day schedule that prioritizes the best speakers
+1. If the user hasn't chosen a conference, call list_conferences and ask them to pick one. Use the chosen conferenceId in every subsequent tool call.
+2. Use get_user_preferences to understand the user's interests (as secondary criteria)
+3. Use get_speakers to learn about ALL speakers
+4. Use get_sessions to find sessions by the top speakers
+5. Build a full day schedule that prioritizes the best speakers
 
 Strategy:
 - Prioritize keynote speakers and recognized experts based on their heading/bio
@@ -813,7 +992,7 @@ Strategy:
 
 For each session include: title, speaker, room, start and end time.
 End with a brief explanation of why this schedule maximizes speaker quality.`,
-  tools: [getSessions, getSpeakers, getUserPreferences],
+  tools: [listConferences, getSessions, getSpeakers, getUserPreferences],
   outputKey: "speakerSchedule",
 });
 ```
@@ -823,19 +1002,25 @@ End with a brief explanation of why this schedule maximizes speaker quality.`,
 ```typescript
 import { LlmAgent } from "@google/adk";
 import { getModel } from "../../common/models.js";
-import { getSessions, getSpeakers, getUserPreferences } from "../tools.js";
+import {
+  getSessions,
+  getSpeakers,
+  getUserPreferences,
+  listConferences,
+} from "../tools.js";
 
 export const diversityStrategy = new LlmAgent({
   name: "diversityStrategy",
   model: getModel(),
   description:
     "Builds a schedule that maximizes variety across rooms, topics, and speakers.",
-  instruction: `You are a schedule strategist for DevFest Pisa 2026.
+  instruction: `You are a schedule strategist for DevFest-style conferences.
 Your optimization goal: MAXIMIZE DIVERSITY AND BREADTH.
 
-1. Use get_user_preferences to understand the user's interests (as light guidance)
-2. Use get_sessions to explore ALL available sessions
-3. Build a full day schedule that maximizes variety
+1. If the user hasn't chosen a conference, call list_conferences and ask them to pick one. Use the chosen conferenceId in every subsequent tool call.
+2. Use get_user_preferences to understand the user's interests (as light guidance)
+3. Use get_sessions to explore ALL available sessions
+4. Build a full day schedule that maximizes variety
 
 Strategy:
 - Pick sessions from as many DIFFERENT rooms and topics as possible
@@ -846,7 +1031,7 @@ Strategy:
 
 For each session include: title, speaker, room, start and end time.
 End with a brief explanation of why this schedule maximizes diversity.`,
-  tools: [getSessions, getSpeakers, getUserPreferences],
+  tools: [listConferences, getSessions, getSpeakers, getUserPreferences],
   outputKey: "diversitySchedule",
 });
 ```
@@ -862,7 +1047,7 @@ export const bestScheduleSelector = new LlmAgent({
   model: getModel(),
   description:
     "Compares multiple schedule proposals and selects or synthesizes the best one.",
-  instruction: `You are a schedule advisor for DevFest Pisa 2026.
+  instruction: `You are a schedule advisor for DevFest-style conferences.
 
 Three different strategies have produced schedule proposals:
 
@@ -919,9 +1104,9 @@ export const rootAgent = new SequentialAgent({
 npm run dev:05
 ```
 
-- _"Build me a schedule. I'm a backend developer interested in Cloud and DevOps but also curious about AI."_ 💻
+- _"Build me a schedule for Pisa 2026. I'm a backend developer interested in Cloud and DevOps but also curious about AI."_ 💻
 
-Watch the trace: three strategy agents light up simultaneously, then the selector picks the best. 🎆
+Watch the trace: three strategy agents light up simultaneously (each calling `list_conferences` in parallel if needed), then the selector picks the best. 🎆
 
 ### 🔍 Check the solution
 
@@ -943,6 +1128,7 @@ You've gone from a simple chatbot to a sophisticated multi-agent system! 🚀 Ea
 
 ## 🔮 Next Steps
 
+- 🆕 Add your own conference by dropping JSON into `data/<your-id>/` (see [Data Layout](#-data-layout))
 - 📖 Explore the [ADK documentation](https://google.github.io/adk-docs/)
 - 🛠️ Try adding your own tools (e.g., fetch real conference data from an API)
 - 🧪 Experiment with different agent compositions
