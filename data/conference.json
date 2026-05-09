@@ -34,5 +34,45 @@
         "Wondersys srl"
       ]
     }
+  },
+  {
+    "id": "venice-2025",
+    "conference_name": "DevFest Venezia 2025",
+    "start_time": "2025-10-11T09:00:00.000+02:00",
+    "end_time": "2025-10-11T18:30:00.000+02:00",
+    "theme": "All-around development",
+    "venue": {
+      "name": "Edificio ALFA - Campus Scientifico Università Ca' Foscari",
+      "address": "Via Torino, 155, 30170 Mestre, Venezia VE, Italy",
+      "description": "The scientific campus of Ca' Foscari University located in Mestre. It serves as a large hub providing spaces for the tech community to meet, learn, and connect.",
+      "directions": {
+        "by_train": "Accessible from the Venezia Mestre train station. From there, you can reach the campus via a short bus ride or a 15-minute walk.",
+        "by_plane": "From Venice Marco Polo Airport (VCE), take the ATVO or ACTV bus to Mestre, then transfer to a local bus heading to Via Torino.",
+        "by_car": "Located in the Venice mainland (Mestre). Accessible by car without having to cross into the historic island, with paid parking options available nearby."
+      }
+    },
+    "organizers": [
+      "GDG Venezia"
+    ],
+    "sponsors": {
+      "main": [
+        "Google"
+      ],
+      "diamond": [
+        "Generali",
+        "NTT Data",
+        "Arsenalia",
+        "Var Group"
+      ],
+      "silver": [
+        "Unox",
+        "Randstad",
+        "Aton",
+        "Ergon Informatica",
+        "Banca IFIS",
+        "TEXA",
+        "Ecomi"
+      ]
+    }
   }
 ]

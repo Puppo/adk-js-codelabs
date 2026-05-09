@@ -1,0 +1,226 @@
+[
+  {
+    "speaker": "",
+    "talk title": "Check-in",
+    "start_time": "2025-10-11T08:30:00.000",
+    "end_time": "2025-10-11T09:15:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "",
+    "talk title": "Opening Keynote",
+    "start_time": "2025-10-11T09:15:00.000",
+    "end_time": "2025-10-11T09:45:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "Jad Joubran",
+    "talk title": "The (Abundant) State of the Web",
+    "start_time": "2025-10-11T09:45:00.000",
+    "end_time": "2025-10-11T10:30:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "Andrea Della Porta",
+    "talk title": "Kotlin Multiplatform in Production: Scaling for Real Apps",
+    "start_time": "2025-10-11T09:45:00.000",
+    "end_time": "2025-10-11T10:30:00.000",
+    "room": "Spritz Track"
+  },
+  {
+    "speaker": "Maurizio Ipsale",
+    "talk title": "Oltre le Parole - Gli LLM Comprendono Davvero?",
+    "start_time": "2025-10-11T09:45:00.000",
+    "end_time": "2025-10-11T10:30:00.000",
+    "room": "Campari Track"
+  },
+  {
+    "speaker": "Patty O'Callaghan",
+    "talk title": "Intro to Google's Agent Development Kit (ADK)",
+    "start_time": "2025-10-11T09:45:00.000",
+    "end_time": "2025-10-11T11:15:00.000",
+    "room": "Workshop"
+  },
+  {
+    "speaker": "Henry Lim",
+    "talk title": "Chrome Dev Tools LIVE LIVE LIVE",
+    "start_time": "2025-10-11T10:30:00.000",
+    "end_time": "2025-10-11T11:15:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "Matthias Geisler",
+    "talk title": "XP with Al?",
+    "start_time": "2025-10-11T10:30:00.000",
+    "end_time": "2025-10-11T11:15:00.000",
+    "room": "Spritz Track"
+  },
+  {
+    "speaker": "Davide Passafaro",
+    "talk title": "Il nuovo volto di Angular: più semplice, più veloce, più potente",
+    "start_time": "2025-10-11T10:30:00.000",
+    "end_time": "2025-10-11T11:15:00.000",
+    "room": "Campari Track"
+  },
+  {
+    "speaker": "",
+    "talk title": "Break",
+    "start_time": "2025-10-11T11:15:00.000",
+    "end_time": "2025-10-11T11:45:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "Riccardo Carretta",
+    "talk title": "Web Development Simplified: Next.js and the Modern Stack",
+    "start_time": "2025-10-11T11:45:00.000",
+    "end_time": "2025-10-11T12:30:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "Marc Moreno",
+    "talk title": "Designing Al-Ready Architectures: Beyond the Prompt",
+    "start_time": "2025-10-11T11:45:00.000",
+    "end_time": "2025-10-11T12:30:00.000",
+    "room": "Spritz Track"
+  },
+  {
+    "speaker": "Luca Del Puppo",
+    "talk title": "Vibe Coding - Let's follow the flow!",
+    "start_time": "2025-10-11T11:45:00.000",
+    "end_time": "2025-10-11T12:30:00.000",
+    "room": "Campari Track"
+  },
+  {
+    "speaker": "Alessandro Pezzato",
+    "talk title": "Coding Gym",
+    "start_time": "2025-10-11T11:45:00.000",
+    "end_time": "2025-10-11T13:15:00.000",
+    "room": "Workshop"
+  },
+  {
+    "speaker": "Giovanna Galleno Malaga",
+    "talk title": "Reframing How to Measure Your Success!",
+    "start_time": "2025-10-11T12:30:00.000",
+    "end_time": "2025-10-11T13:15:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "Vadym Pinchuk",
+    "talk title": "Accessibility is the new Law: A Guide to Accessible Multi-platform Development with Flutter",
+    "start_time": "2025-10-11T12:30:00.000",
+    "end_time": "2025-10-11T13:15:00.000",
+    "room": "Spritz Track"
+  },
+  {
+    "speaker": "Andrea Manzini",
+    "talk title": "Green Computing da RIGA DI COMANDO: Misurare il Consumo Energetico con Linux",
+    "start_time": "2025-10-11T12:30:00.000",
+    "end_time": "2025-10-11T13:15:00.000",
+    "room": "Campari Track"
+  },
+  {
+    "speaker": "",
+    "talk title": "Lunch Break",
+    "start_time": "2025-10-11T13:15:00.000",
+    "end_time": "2025-10-11T14:30:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "Natalie Godec",
+    "talk title": "But can you really run your app on 2 clouds at the same time?",
+    "start_time": "2025-10-11T14:30:00.000",
+    "end_time": "2025-10-11T15:15:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "István Juhos",
+    "talk title": "A Year of Compose Multiplatform Preview Tooling Improvements - We're Almost There*!",
+    "start_time": "2025-10-11T14:30:00.000",
+    "end_time": "2025-10-11T15:15:00.000",
+    "room": "Spritz Track"
+  },
+  {
+    "speaker": "Matteo Valerio",
+    "talk title": "Costruire DSL in Kotlin: guida pratica tra potenza e leggibilità",
+    "start_time": "2025-10-11T14:30:00.000",
+    "end_time": "2025-10-11T15:15:00.000",
+    "room": "Campari Track"
+  },
+  {
+    "speaker": "Piero Dotti, Nicolò Festa",
+    "talk title": "Smol but Mighty: Addestra il Tuo Mini Language Model",
+    "start_time": "2025-10-11T14:30:00.000",
+    "end_time": "2025-10-11T16:00:00.000",
+    "room": "Workshop"
+  },
+  {
+    "speaker": "Julien Salvi",
+    "talk title": "You, me and Firebase Studio",
+    "start_time": "2025-10-11T15:15:00.000",
+    "end_time": "2025-10-11T16:00:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "Emanuele Maso",
+    "talk title": "Goodbye Passwords, Welcome Passkeys! - Integrate Passkey Authentication in Your Apps",
+    "start_time": "2025-10-11T15:15:00.000",
+    "end_time": "2025-10-11T16:00:00.000",
+    "room": "Spritz Track"
+  },
+  {
+    "speaker": "Luca Raveri",
+    "talk title": "Mastering Observability with Open Source Tools",
+    "start_time": "2025-10-11T15:15:00.000",
+    "end_time": "2025-10-11T16:00:00.000",
+    "room": "Campari Track"
+  },
+  {
+    "speaker": "",
+    "talk title": "Break",
+    "start_time": "2025-10-11T16:00:00.000",
+    "end_time": "2025-10-11T16:30:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "Giorgio Galassi",
+    "talk title": "Zod: Type Safety Beyond TypeScript",
+    "start_time": "2025-10-11T16:30:00.000",
+    "end_time": "2025-10-11T17:15:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "Mattia Cintura",
+    "talk title": "LLM in your pocket: An introduction to Foundation Models on iOS",
+    "start_time": "2025-10-11T16:30:00.000",
+    "end_time": "2025-10-11T17:15:00.000",
+    "room": "Spritz Track"
+  },
+  {
+    "speaker": "Giorgio Basile",
+    "talk title": "Design pattern: costuisci la tua codebase di successo",
+    "start_time": "2025-10-11T16:30:00.000",
+    "end_time": "2025-10-11T17:15:00.000",
+    "room": "Campari Track"
+  },
+  {
+    "speaker": "Semih Kışlar",
+    "talk title": "Being Developer at Al Era",
+    "start_time": "2025-10-11T17:15:00.000",
+    "end_time": "2025-10-11T18:00:00.000",
+    "room": "Prosecco Track"
+  },
+  {
+    "speaker": "Fabrizio Mele",
+    "talk title": "Verso il Nirvana del Web Ul Testing con l'Al",
+    "start_time": "2025-10-11T17:15:00.000",
+    "end_time": "2025-10-11T18:00:00.000",
+    "room": "Campari Track"
+  },
+  {
+    "speaker": "",
+    "talk title": "Closing Keynote",
+    "start_time": "2025-10-11T18:00:00.000",
+    "end_time": "2025-10-11T18:30:00.000",
+    "room": "Prosecco Track"
+  }
+]

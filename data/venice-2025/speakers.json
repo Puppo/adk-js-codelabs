@@ -1,0 +1,137 @@
+[
+  {
+    "name": "Alessandro Pezzato",
+    "heading": "Freelance C++ developer and trainer",
+    "bio": "Coding for passion since I was a child, now working as C++ trainer and developer."
+  },
+  {
+    "name": "Andrea Della Porta",
+    "heading": "Cegeka, Mobile Technical Leader",
+    "bio": "Born in Rome in 1994, passionate about mobile development since forever. Andrea has been a technology enthusiast for as long as he can remember. He started developing his first Java programs in his early high school years, but with the advent of smartphones, he quickly fell in love with the mobile world. His experience started in Switzerland for an Android project in the medical field and continued for large companies such as NTT Data and Deloitte, until he got to his current Cegeka. Over the years he has developed applications with large user bases for various industries, specializing in native Android development, Flutter and now Kotlin Multiplatform. His life is not only programming, but also football and padel!"
+  },
+  {
+    "name": "Andrea Manzini",
+    "heading": "Senior SW Engineer @ SUSE",
+    "bio": "Linux sysadmin since the last millennium, I currently work as a Software Quality Engineer at SUSE. I'm passionate about Open Source and firmly believe in the value of knowledge sharing."
+  },
+  {
+    "name": "Davide Passafaro",
+    "heading": "Angular GDE | Senior Frontend Engineer @ awork",
+    "bio": "As a Senior Frontend Engineer, I lead two developer communities in Rome: GDG Roma Città and Angular Roma. I am passionate about contributing to the tech community as a writer and speaker. Specializing in Angular, I also have extensive experience in mobile and desktop app development using Capacitor and Electron. Over the years, I've built high-performing applications leveraging technologies like Nx, NgRx, and NGXS. Outside of work, I love playing board games or practicing archery. I'm also a fan of escape rooms and enjoy creating funny memes."
+  },
+  {
+    "name": "Emanuele Maso",
+    "heading": "Mobile developer @ Bitrock",
+    "bio": "Emanuele is a passionate mobile developer with experience in both native and cross-platform development. In his spare time, he enjoys building side projects with friends to learn new technologies and share knowledge about the latest advancements in software development. Beyond coding, he's a car and motorsport enthusiast, loving to watch races and take his car for mountain drives."
+  },
+  {
+    "name": "Fabrizio Mele",
+    "heading": "Web Developer @ Mõnade",
+    "bio": "Cloud-passionate web developer, at work I write Rails+Angular apps, at home I curate an (history) podcast and three cats."
+  },
+  {
+    "name": "Giorgio Basile",
+    "heading": "Angular Frontend Developer",
+    "bio": "I am a young man born in 2000 and I am currently finishing my studies in computer science at the Ca' Foscari University of Venice, located in Mestre, in addition to being a full-time web developer. In addition to studying, I love playing role-playing games, skateboarding and playing Magic the Gathering."
+  },
+  {
+    "name": "Giorgio Galassi",
+    "heading": "Senior Frontend Engineer @ Onpier | GDG Roma Città Organizer",
+    "bio": "Giorgio is a Senior Frontend Developer with nearly 8 years of experience building dynamic, user-focused web applications. Specialized in Angular, he also keeps an eye on other frontend frameworks and technologies, always seeking innovative approaches to problem-solving. Beyond coding, Giorgio is deeply involved in the developer community. As a proud Organizer of GDG Roma Città, he fosters knowledge-sharing and collaboration among peers. He enjoys making complex topics more accessible and helping others sharpen their technical skills."
+  },
+  {
+    "name": "Giovanna Galleno Malaga",
+    "heading": "Soft Skills Trainer & IT Project Manager",
+    "bio": "Versatile Soft Skills Trainer, Learning Designer, and IT Project Manager with 15+ years of experience designing and delivering tailored and impactful training solutions, leading dynamic workshops, and integrating e-learning strategies that drive measurable performance outcomes in diverse industries —including Mining, Technology, Finance, and Healthcare. Skilled in managing cross-functional and multicultural teams, aligning initiatives with strategic goals, and executing projects that boost productivity, efficiency, and professional growth ++ Talks & workshops in Italian, English, and Spanish."
+  },
+  {
+    "name": "Henry Lim",
+    "heading": "Google Developer Expert, Web Technologies",
+    "bio": "Henry is a Malaysian Google Developer Expert in Web Technologies. He is currently working as a frontend engineer in Hamburg, Germany. He loves to learn, experiment and share all the cool stuffs like Progressive Web Apps, Chrome DevTools, Project Fugu (Web Capabilities), Firebase, and more."
+  },
+  {
+    "name": "István Juhos",
+    "heading": "Staff Android Engineer @ Circuit",
+    "bio": "Staff Android Engineer @ Circuit; Co-organizer of Android Budapest"
+  },
+  {
+    "name": "Jad Joubran",
+    "heading": "Independent web consultant and educator",
+    "bio": "Jad is an independent Web performance consultant and educator based in Amsterdam. He develops the platform and writes the curriculum for his interactive online courses such as https://learnjavascript.online, https://learnhtmlcss.online, and others. For more information, visit https://jadjoubran.io"
+  },
+  {
+    "name": "Julien Salvi",
+    "heading": "Lead Android Engineer @ Aircall",
+    "bio": "With over a decade in the Android world, I've lived the fast-paced startup life in California before returning to France. Today, I'm leading and managing the Android team at Aircall, where we're building the best phone system for modern businesses. Beyond Android, I'm passionate about backend development with Kotlin and exploring the possibilities of AR/VR. In 2021, I was honored to become an Android GDE—continuing my mission to share knowledge and grow alongside the amazing Android community. Outside of work, you'll find me traveling the globe or on the hunt for the perfect IPA."
+  },
+  {
+    "name": "Luca Del Puppo",
+    "heading": "Senior Software Engineer @ Nearform",
+    "bio": "I'm a Senior Software Engineer, Former Microsoft MVP, Google Developer Expert Codemotion Ambassador and GitKraken Ambassador. I love JavaScript and TypeScript. In my free time, I love studying new technologies, improving myself, creating YouTube content or writing technical articles. I can't stay without trail running and love to do it in my love Dolomiti."
+  },
+  {
+    "name": "Luca Raveri",
+    "heading": "Software Architect at Plank Italy S.p.A.",
+    "bio": "Luca Raveri is a Software Engineer with a strong focus on backend development and cloud architectures. With a background in Computer Engineering and hands on experience in building scalable applications, Luca has worked across diverse industries, including banking, CRM systems, and SaaS tools. His main expertise lies in JavaScript (Node.js), PHP (Laravel), and AWS services, with a particular interest in monitoring and observability."
+  },
+  {
+    "name": "Marc Moreno",
+    "heading": "Principal Android Engineer at Airalo",
+    "bio": "Principal Android Engineer at Airalo. Focused on Kotlin ecosystem, Kotlin Multiplatform, and functional programming."
+  },
+  {
+    "name": "Matteo Valerio",
+    "heading": "Full-stack developer @ Kuama - Kotlin Topic Author @ Hyperskill",
+    "bio": "Full-stack developer con oltre 4 anni di esperienza in ambienti enterprise e startup. Attualmente lavoro presso Kuama Srl, dove mi occupo di progettazione e sviluppo di soluzioni web e mobile su stack .NET, Kotlin e Next.js. Collaboro inoltre con Hyperskill (JetBrains Academy) come autore di contenuti tecnici in Kotlin su temi avanzati."
+  },
+  {
+    "name": "Matthias Geisler",
+    "heading": "Senior Software Engineer @ Airalo",
+    "bio": "True believer in (Kotlin) Multiplatform and working with it since 2019. Builds solutions for Android. Organizer of KUG Berlin, GDG Android Berlin, XTC Berlin and more."
+  },
+  {
+    "name": "Mattia Cintura",
+    "heading": "Digital Engineer | IOS Engineer @ NTT Data Italia",
+    "bio": "I've been working as a Software Developer since 2020. During my career, I've worked on many iOS and web projects. Over the past three years, I focused exclusively in iOS development, contributing to three applications that rank among the top 100 in the Italian App Store."
+  },
+  {
+    "name": "Maurizio Ipsale",
+    "heading": "GDE Cloud AI/ML, Google Cloud Authorized Trainer",
+    "bio": "Maurizio Ipsale was born in Messina (Italy) in 1978 where he graduated in Electronic Engineering at the age of 23 and obtained a Ph.D. degree. Passionate about the ICT world, his professional curriculum has been enriched with many certifications, in particular as an instructor of official training courses, such as Cisco, Juniper, Huawei, Amazon AWS, and Google Cloud. He delivers training courses all around the world on many state-of-the-art technologies, including Cloud, Networking, Machine Learning, DevOps, Data Engineering, Internet of Things, Kubernetes. Maurizio currently lives in Modena (Italy) with his wife Liliana and two children, Simone and Alessia. He is a Google Cloud Authorized Trainer. Starting in 2022, he's been working as a cloud lead trainer for Datatonic Academy, a Google Cloud Authorised Training Partner based in London. In 2024 he was recognized as Google Champion Innovator for Cloud AI and ML. In 2025 he was recognized as Google Developer Expert (GDE) for Cloud and AI/ML"
+  },
+  {
+    "name": "Natalie Godec",
+    "heading": "Cloud Architect | Google Dev Expert in Cloud | GCP Champion Innovator",
+    "bio": "Systems/infra engineer turned cloud architect, with a soft spot for data platforms and security. GDE (Google Dev Expert) in Cloud, a Women TechMakers Ambassador and an experienced tech speaker. I speak English, Ukrainian and French (and a liiittle bit of Italian), and am based in London, UK. My previous talks and interviews (some of them): https://www.youtube.com/playlist?list=PLS3g1K3mnmajt5Eu3nNaAiMK3hXjVRRNL"
+  },
+  {
+    "name": "Nicolò Festa",
+    "heading": "Developer @ monade",
+    "bio": "Full Stack Developer con esperienza in contesti e settori diversi, dall'industria 4.0 al retail. Attualmente lavoro in Mònade, società che si occupa di sviluppo web e GenAI affacciata sul Lago d'Iseo."
+  },
+  {
+    "name": "Patty O'Callaghan",
+    "heading": "Technical Director - Head of AI Architecture and Engineering Group @ Charles River Laboratories",
+    "bio": "Patty is a Venezuelan living in Scotland. She has +20 years of experience in the tech industry and a background education in Computer Science and Artificial Intelligence. She is a Technical Director and Head of AI Architecture and Engineering Group at Charles River Laboratories. Patty is a member of the Google Developer Advisory Board, an organiser at Google Developers Group Glasgow, serves as an Ambassador for Google's Women Techmakers, and is recognised as a Google Developer Expert (GDE) in Artificial Intelligence."
+  },
+  {
+    "name": "Piero Dotti",
+    "heading": "Tech Lead @ monade",
+    "bio": "Sviluppatore web di giorno, di videogiochi di notte. Appassionato di tecnologia da sempre, inizia la sua avventura in entrambi i mondi durante gli studi. Si laurea in Informatica all'Università degli Studi di Brescia, dove si specializza in sistemi di intelligenza artificiale e computer vision. Dopo una breve esperienza nel mondo degli advergame e numerose applicazioni web rilasciate in produzione, pubblica due giochi indipendenti su PC e Console. Attualmente è Tech Lead e co-fondatore di Mònade, società di sviluppo web e GenAI sul Lago d'Iseo."
+  },
+  {
+    "name": "Riccardo Carretta",
+    "heading": "Freelancer Web Developer and UX/UI Designer",
+    "bio": "Starting from web projects for friends, I became a professional web full-stack developer. Recently started working with startups, directing all tech operations. Ranging from simple to complex websites, I studied and learnt how to integrate the human factor (through User Experience and graphic interfaces) into my projects. Experienced in React/NextJS and Flutter for development, and Firebase/Supabase for backend."
+  },
+  {
+    "name": "Semih Kişlar",
+    "heading": "DevRel Manager @ Teknasyon",
+    "bio": "DevRel Manager @Teknasyon"
+  },
+  {
+    "name": "Vadym Pinchuk",
+    "heading": "Software Development Engineer",
+    "bio": "Vadym is a seasoned mobile app developer with over 8 years of experience in Android and more than 4 years in cross-platform development using Flutter. He has worked with industry leaders such as Samsung, Volvo, Instagram, and Sky, as well as numerous startups, delivering high-quality mobile solutions across diverse sectors. In 2025, Vadym was recognized as a Google Developer Expert (GDE) in Flutter & Dart, acknowledging his deep expertise and active contributions to the community. As a speaker, Vadym has shared his insights at local meetups, DevFests, and major international conferences including Droidcon, Fluttercon, FlutterHeroes, and Appdevcon. He also actively supports community events as an MC and stage manager, bringing energy to the stage and ensuring smooth experiences at conferences. Passionate about developer education, Vadym is dedicated to mentoring others and supporting growth across the tech community."
+  }
+]
