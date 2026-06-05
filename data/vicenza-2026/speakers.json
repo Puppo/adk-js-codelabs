@@ -1,0 +1,172 @@
+[
+    {
+        "name": "Emanuele Maso",
+        "heading": "Mobile developer @Bitrock",
+        "bio": "Emanuele is a passionate mobile developer with experience in both native and cross-platform development. In his spare time, he enjoys building side projects with friends to learn new technologies and share knowledge about the latest advancements in software development.\n Beyond coding, he’s a car and motorsport enthusiast, loves watching races, and taking his car for mountain drives."
+    },
+    {
+        "name": "Gabriel Palmisano",
+        "heading": "Mobile Developer @ EBWorld",
+        "bio": "Mobile Developer presso EBWorld e Maintainer del package MapLibre Flutter, sono specializzato nello sviluppo di applicazioni mobile con cartografia avanzata. La mia missione è portare i dati geospaziali fuori dagli uffici: sviluppo app in Flutter che trasformano infrastrutture complesse (come reti elettriche o acquedotti) in strumenti operativi essenziali per chi lavora fisicamente sul campo.\n \nScrivo codice fin da giovanissimo, spinto dalla curiosità di esplorare i limiti delle tecnologie che utilizzo. Oltre al mio lavoro in EBWorld, contribuisco attivamente all'open source per migliorare gli strumenti su cui i developer fanno affidamento ogni giorno. \nCome speaker, amo portare sul palco casi d'uso concreti, traducendo sfide architetturali complesse in soluzioni pratiche per la community."
+    },
+    {
+        "name": "Andrea Manzini",
+        "heading": "Andrea Manzini - Senior SW Engineer @ SUSE",
+        "bio": "Linux sysadmin since the last millennium, I currently work as a Software Quality Engineer at SUSE. I'm passionate about Open Source and firmly believe in the value of knowledge sharing."
+    },
+    {
+        "name": "Michele Scarpa",
+        "heading": "Software Engineer - AI Engineer. Still learning. Curiosity-Driven",
+        "bio": "I'm a Senior Software Engineer with over 10 years of experience building fullstack, GIS, and mobile applications. In recent months he has been exploring the transition toward AI Engineering — applying agentic workflows, LLM integration, and tools like Antigravity, Claude Code, and Gemini to real-world projects across different domains.\n He is co-founder of BacaroTech, a developer community that produces technical content, covers tech events as media partner, and runs workshops across Italy. \n \n\n \n\n a frontend engineer with a strong background in full-stack developmen. My expertise spans modern JavaScript and TypeScript frameworks such as Angular and React, with a growing interest in Svelte.\n \n\n Beyond code, I enjoy sharing knowledge through technical talks, tutorials, and developer content, often focusing on frontend architecture, performance optimization, and developer experience. I'm always eager to explore new technologies and contribute to building better digital experiences.\n \n\n My work often bridges frontend and backend concerns, and I've contributed to projects ranging from digital signage platforms for Smart TVs to geospatial web applications and mobile apps for Android."
+    },
+    {
+        "name": "SGV SGV",
+        "heading": "",
+        "bio": ""
+    },
+    {
+        "name": "Alessandro Guzzon",
+        "heading": "Project Manager, Data Scientist and Algorithm developer @ D-Air Lab",
+        "bio": ""
+    },
+    {
+        "name": "Celeste Andreano",
+        "heading": "Junior Data Scientist",
+        "bio": "I'm a recent graduate in Data Analytics for Business and Finance. I'm interested in exploring how data and artificial intelligence influence decisions and society, with a particular focus on their role in justice systems."
+    },
+    {
+        "name": "Alfredo Bautista Santos",
+        "heading": "Google Developer Expert in Flutter & Dart / Flutter developer @ Salto CW",
+        "bio": "Google Developer Expert in Flutter & Dart since 2022, and Flutter developer at Salto CloudWorks. I was born in Málaga, a sunny city in Spain, and bring that energy to creating better UX in all the products that I worked. I'm passionate about coffee and tasting pizza around the world! You can find me at @alfredobs97"
+    },
+    {
+        "name": "Giorgio Galassi",
+        "heading": "Senior Frontend Engineer @ Freelancer | GDG Roma Città Organizer",
+        "bio": "Senior Frontend Engineer with 10+ years of experience building large-scale, production-grade web applications. Specialized in Angular, TypeScript, NgRx, RxJS, and Nx, with a strong focus on component architecture, state management, micro-frontend patterns, and modular monorepos.\n \n\n Most of my career has been spent in complex, multi-team environments where scalability and maintainability aren't optional. I think about frontend not just as UI delivery, but as a platform: shared libraries, design systems, DX tooling, and architecture that lets teams move fast without breaking each other's work.\n \n\n Beyond code, I care deeply about the developer community. I'm co-founder of GDG Roma Città and co-organizer of NgRome. I write regularly on Angular topics and speak at conferences across Italy and Europe, including DevFest events and NgRome."
+    },
+    {
+        "name": "Giacomo Sergio",
+        "heading": "CEO@Wondersys",
+        "bio": "Fondatore di Wondersys | Cofondatore di YouDoTools | AI & Cloud Advocate\n Giacomo Sergio vanta oltre 25 anni di esperienza nel settore IT. Laureato in Ingegneria, inizia il suo percorso presso il Consorzio Pisa Ricerche per poi trasferirsi a Vienna, dove lavora come software engineer in ambito finanziario. Nel 2008 fonda Wondersys, guidandone la crescita fino a oltre 20 dipendenti e posizionandola come partner d'eccellenza per soluzioni IT innovative in Italia e all'estero. Esperto di architetture software, promuove attivamente l'integrazione dell'Intelligenza Artificiale nei processi aziendali e nello sviluppo di prodotti moderni. Come cofondatore di YouDoTools, dedica le sue competenze alla ricerca di soluzioni tecnologiche avanzate (ML, RAG e Agentic AI) specificamente progettate per abbattere le barriere cognitive e supportare le persone con disabilità intellettiva e la loro rete di supporto."
+    },
+    {
+        "name": "Davide Passafaro",
+        "heading": "Google Developer Expert in Angular ❮ ❯ | Senior Software Engineer 💻📱 | GDG Roma Città Organizer 📣",
+        "bio": "Senior Frontend Engineer and Google Developer Expert in Angular, Davide leads the GDG Roma Città and Angular Roma communities.\n \n\n While rooted in Angular, he is currently expanding his horizons into Node.js, React, and AI experimentation to share fresh insights through talks and workshops.\n \n\n Outside of coding, he is an archery enthusiast, a board game strategist, and a fan of escape rooms."
+    },
+    {
+        "name": "Alexander Amin",
+        "heading": "Consultant & Engineer",
+        "bio": "I'm Alex, AI Engineer, Cloud Consultant, and founder based in Frankfurt. For over 12 years, I’ve built production-grade software, bridging the gap between AI models and scalable execution.\n\nNow, I advise enterprise clients like Deutsche Bahn on AI and architect a native legal AI platform. Previously, I managed tech partnerships at the ARD (with Google, Amazon, and Telekom) and founded a software agency at 23 that was acqui-hired by an NfX funded Startup.\n\nAs GDE in Cloud AI, I often give technical talks internationally. Alongside German and English, I speak Spanish, Portuguese, Dutch, and Dari."
+    },
+    {
+        "name": "SGV SGV",
+        "heading": "",
+        "bio": ""
+    },
+    {
+        "name": "Daniele Mario Areddu",
+        "heading": "Data Engineer @ Global Technologies Italia| CS Student @ University of Calabria | Community Lead of Velletri.dev | also interested about AI",
+        "bio": "Daniele Mario Areddu is a Computer Science student at the University of Calabria and a Data Engineer at Global Technologies Italia. He works on applied Artificial Intelligence projects, focusing on fine-tuning language models and building Retrieval-Augmented Generation (RAG) systems to enable more contextual and intelligent human–machine interactions.\n In the field of software and data engineering, he develops scalable applications using Python and Node.js (REST APIs, Flask), and works extensively with PySpark for data processing and analytics. He also leverages Microsoft Power Platform and Microsoft Fabric to design data-driven solutions and modern data architectures.\n \n\n He is also passionate about game development, creating Minecraft plugins and mods in Java, and prototyping games in C++ with Unreal Engine, where he experiments with AI-driven NPC behavior and advanced gameplay mechanics.\n \n\n Daniele is an active speaker and community builder. He regularly participates in workshops, conferences, and tech events focused on AI and digital innovation. He is the community lead of Velletri-Dev, where he organizes meetups and initiatives for students and developers, and collaborates with UNIDEA as a Change Model Specialist, promoting digital transformation and a culture of innovation."
+    },
+    {
+        "name": "Andrea Della Porta",
+        "heading": "Mobile Manager @ Capgemini",
+        "bio": "Born in Rome in 1994, passionate about mobile development since forever. Andrea has been a technology enthusiast for as long as he can remember. He started developing his first Java programs in his early high school years, but with the advent of smartphones, he quickly fell in love with the mobile world. His experience started in Switzerland for an Android project in the medical field and continued for large companies such as NTT Data and Deloitte, until he got to his current Capgemini. Over the years he has developed applications with large user bases for various industries, specializing in native Android development, Flutter and now Kotlin Multiplatform.\nHis life is not only programming, but also football, padel and an obsession with Lego!"
+    },
+    {
+        "name": "Fabio Delaiti",
+        "heading": "Co-founder @BookyWay & Accredited Kanban Consultant",
+        "bio": ""
+    },
+    {
+        "name": "Massimo Gobbo",
+        "heading": "Fractional CMO + Kumaux di Massimo Gobbo",
+        "bio": "Fractional CMO e strategist della crescita che aiuta aziende B2B e tecnologiche a costruire sistemi di sviluppo e di generazione di ricavi scalabili. Alimentato dal caffè e sempre curioso verso persone, idee e opportunità inaspettate."
+    },
+    {
+        "name": "Giovanni Bibbò",
+        "heading": "Digital Trasformation Consultant + Eduforma srl",
+        "bio": "Xennial, esperto di processi aziendali, formatore e consulente di trasformazione digitale in Eduforma. Cresciuto tra analogico e digitale, oggi aiuta le aziende a integrare l'IA nei processi con un approccio Open Source, etico e accessibile. Convinto che la tecnologia abbia bisogno di guide, non di venditori."
+    },
+    {
+        "name": "Enrico Fiore",
+        "heading": "Partner - Run Capital Partners",
+        "bio": "Visibilia ex Invisibilibus, Trust Your Instincts. \n\nI am a serial founder, investor, and board-level executive with over 30 years of international experience allocating capital at the intersection of innovation, sustainability, and long-term value creation. A YPO Alumnus, I have built, scaled, and governed businesses across Europe, the US, Asia, Israel, and the Gulf / MENA region.\n\nMy approach to investing and leadership is grounded in a clear conviction: economic returns and positive impact are not trade-offs, they are multipliers when capital is deployed with strategic foresight and disciplined governance.\n\nI measure sustainable corporate success through the Triple Bottom Line: People, Planet, Profitability. In every venture I lead, sustainability is embedded structurally, within strategy, capital allocation, governance models, and operational execution, never treated as a compliance exercise or branding tool.\n\nMy focus is consistently on the second horizon:\nanticipating systemic transitions, technological inflection points, and future constraints before they materialize in markets. I am particularly engaged in sectors where innovation, energy transition, deep tech, and regenerative models converge with scalable economic opportunity.\n\nAlongside my executive roles, I actively contribute to global entrepreneurship, impact investing, and governance ecosystems as a mentor, faculty member, and institutional representative, with a strong emphasis on ethics, long-term stewardship, and responsible growth.\n\nI partner selectively with founders, investors, and institutions who share a long-term perspective and a disciplined approach to building resilient, impact-driven businesses."
+    },
+    {
+        "name": "Davide Senatore",
+        "heading": "Software Architect - Ingenium Software Engineering",
+        "bio": "La mia passione per l’informatica è nata nel 1985, quando ho incontrato per la prima volta un Commodore 64. È stato amore a prima vista, e da allora ho capito quale sarebbe stato il mio percorso professionale.\nOggi, con la stessa passione di quel ragazzino, sviluppo software e progetto architetture in grado di migliorare la produttività delle persone. Credo profondamente nel valore del confronto e nella condivisione della conoscenza, valori che cerco di trasmettere a chi partecipa ai miei corsi o collabora con me.\nDal 2006 contribuisco come speaker a conferenze nazionali come WPC, Codemotion, XE One Day, Google Dev Fest e altre. Durante questi eventi, presento sessioni su tecniche avanzate di sviluppo e condivido esperienze basate su casi reali affrontati nel mio lavoro quotidiano."
+    },
+    {
+        "name": "Rachele Bari",
+        "heading": "Senior Consultant Digital & IT @JObros",
+        "bio": ""
+    },
+    {
+        "name": "Claudia De Jeu Boronat",
+        "heading": "AI Engineering Lead at WTW",
+        "bio": "My expertise spans Generative AI, AI Agents, Drift Detection, Computer Vision, Predictive Modelling, and Time Series Analysis. I thrive on building intelligent systems that drive innovation and create real impact. Beyond the technical side, I’m deeply committed to empowering, supporting, and inspiring other women to succeed in their careers in tech, data, and AI. I actively share my knowledge and experiences to help others grow, break barriers, and thrive in the industry.\n \n\n As a speaker, I focus on the latest AI advancements, the rise of Agentic AI, and how these technologies are shaping the future. I love engaging with audiences, breaking down complex concepts, and discussing both the opportunities and challenges of AI adoption.\n \n\n Whether on stage or in conversation, my goal is to not only drive AI innovation but also to create a more inclusive and supportive industry where more women can excel."
+    },
+    {
+        "name": "Camillo Bucciarelli",
+        "heading": "Technical manager @ Sopra Steria",
+        "bio": "Passionate about technology work in the IT industry since 2015. From Android through the web to Flutter helps companies to get their target."
+    },
+    {
+        "name": "Julia Undeutsch",
+        "heading": "Accessibility Specialist",
+        "bio": "Julia is a Web & UX Accessibility Specialist.\n\nAfter graduating University in Musicology and Japanese Studies in summer 2020, she started learning front-end development and specialized in the topic of web accessibility early on. Since then, she takes every opportunity to spread awareness on the topic by regularly creating content in form of writing blog articles and such.\n\nSince 2022, she has been certified by IAAP as a Professional in Accessibility Core Competencies (CPACC), and Web Accessibility Specialist (WAS) in 2025. Since 2023 Julia is a Google Developer Expert for Web Technologies."
+    },
+    {
+        "name": "Riccardo Carretta",
+        "heading": "Passionate about designing positive experiences",
+        "bio": "Sviluppatore Web & UX/UI Designer | Fullstack - Next.js Expert | Freelancer"
+    },
+    {
+        "name": "Henry Lim",
+        "heading": "Google Developer Expert, Web Technologies",
+        "bio": "Originally from Malaysia and now based in Hamburg, Henry Lim is a Senior Frontend Engineer and a Google Developer Expert (GDE) in Web Technologies. With nearly a decade of experience in building high-performance, accessible web applications, he specializes in modern frameworks like Nuxt, Vue.js, and TypeScript. Henry is deeply passionate about open-source development and web performance, having contributed to high-impact projects like Remote for Slides and the official COVIDNOW dashboard for the Ministry of Health Malaysia. As a longtime speaker and tech community organizer, he loves sharing practical insights on modern web capabilities, performance auditing, and DevTools."
+    },
+    {
+        "name": "Maurizio Ipsale",
+        "heading": "GDE Cloud AI/ML, Google Cloud Authorized Trainer",
+        "bio": "Maurizio Ipsale was born in Messina (Italy) in 1978 where he graduated in Electronic Engineering at the age of 23 and obtained a Ph.D. degree. Passionate about the ICT world, his professional curriculum has been enriched with many certifications, in particular as an instructor of official training courses, such as Cisco, Juniper, Huawei, Amazon AWS, and Google Cloud.\nHe delivers training courses all around the world on many state-of-the-art technologies, including Cloud, Networking, Machine Learning, DevOps, Data Engineering, Internet of Things, Kubernetes.\nMaurizio currently lives in Modena (Italy) with his wife Liliana and two children, Simone and Alessia. He is a Google Cloud Authorized Trainer.\nStarting in 2022, he's been working as a cloud lead trainer for Datatonic Academy, a Google Cloud Authorised Training Partner based in London.\nIn 2024 he was recognized as Google Champion Innovator for Cloud AI and ML. In 2025 he was recognized as Google Developer Expert (GDE) for Cloud and AI/ML."
+    },
+    {
+        "name": "Emmanuele Villa",
+        "heading": "Mobile Architect & Tech Leader",
+        "bio": "Emmanuele Villa is a Senior Technical Consultant at Fincons Group, leading mobile and web development with technologies like Kotlin Multiplatform, Compose, and SwiftUI.\n \n\n He also teaches at the Università della Terza Età in Carate Brianza and is pursuing a degree in Middle Age History, bridging his passion for technology and the humanities.\n \n\n Outside of work, he enjoys exploring Quantum Computing, running Dungeons&Dragons, and reading One Piece."
+    },
+    {
+        "name": "Luca Del Puppo",
+        "heading": "Nearform_, Senior Software Engineer",
+        "bio": "I'm a Senior Software Engineer, Google Developer Expert, Former Microsoft MVP Codemotion Ambassador and GitKraken Ambassador. I love JavaScript and TypeScript.\n In my free time, I love studying new technologies, improving myself, creating YouTube content or writing technical articles. I can’t stay without trail running and love to do it in my love Dolomiti."
+    },
+    {
+        "name": "Andrea Napoli",
+        "heading": "Ceo & Founder Locare Srl",
+        "bio": "Sono nato a Dolo, nel cuore del Veneto, nel 1973.\nÈ proprio nella mia terra che ho posto le basi di un percorso personale e professionale guidato dalla volontà di affrontare le sfide e trasformarle in opportunità di crescita.\nHo iniziato a lavorare come assicuratore nel 1995, costruendo negli anni una carriera solida che mi ha portato a ricoprire il ruolo di Direttore Commerciale in diversi network locali.\nNel 2008 la mia vita cambia radicalmente: perdo mia figlia Celeste a causa di un errore medico. Un evento che mi segna profondamente e che mi porta a confrontarmi con le criticità burocratiche e normative legate a una delle esperienze più difficili che una famiglia possa affrontare.\nDa questa esperienza nasce “Pensiero Celeste”, un’associazione a supporto dei genitori che affrontano la perdita di un figlio durante e dopo la gravidanza. Nel 2013 arriviamo a un risultato storico: una sentenza che consente, per la prima volta in Italia, l’iscrizione all’anagrafe di un bambino nato morto prima delle 28 settimane di gestazione.\nNel tempo ho sviluppato una crescente attenzione verso il mondo delle locazioni immobiliari. Nel 2013 fondo la prima società di mutuo soccorso in Italia specializzata nella tutela della locazione, maturando una conoscenza approfondita delle dinamiche e delle criticità del settore.\nNel 2018 nasce Locare, una delle prime realtà PropTech italiane dedicate alla gestione e tutela degli affitti. Attraverso servizi digitali e soluzioni integrate, lavoriamo per rendere il mercato delle locazioni più semplice, sicuro e trasparente per proprietari e inquilini. Il progetto cresce rapidamente, portandoci a chiudere tre campagne di equity crowdfunding e a coinvolgere oltre 200 soci.\nRicopro il ruolo di presidente di Federproprietà Genova e, nel corso degli anni, ho partecipato e moderato numerosi convegni e momenti di confronto dedicati al settore immobiliare, contribuendo al dialogo tra operatori, professionisti e istituzioni.\nPartecipo inoltre allo sviluppo degli Stati Generali dell’Abitare, un momento di confronto nato con l’obiettivo di mettere attorno allo stesso tavolo i principali attori del mondo immobiliare italiano — istituzioni, operatori e professionisti — per favorire un dialogo concreto sui temi della casa e sulle evoluzioni del settore.\nAttraverso Locare partecipiamo come partner del Censis all’indagine annuale dedicata al rapporto degli italiani con la casa, contribuendo all’analisi delle principali dinamiche e trasformazioni del mercato.\nDal 2019 promuovo Refuture – Forum dell’Economia Immobiliare, un evento annuale ospitato presso la Camera dei Deputati che riunisce istituzioni e operatori del settore sugli scenari futuri del mercato immobiliare.\nParallelamente, sono impegnato sui temi della casa anche a livello istituzionale: nell’ambito dell’Unione di Centro (UdC) sono responsabile per le politiche abitative e faccio parte del tavolo tecnico dedicato al Piano Casa, contribuendo allo sviluppo di proposte e soluzioni per il settore.\nNel 2024 ho pubblicato con Mondadori Electa La grammatica dell’affitto, vincitore della prima edizione dei TELL Inhabit Awards, rafforzando ulteriormente il mio impegno e la mia esperienza sul tema delle locazioni."
+    },
+    {
+        "name": "Fabio Catinella",
+        "heading": "Senior Android Developer @ Sky",
+        "bio": "Fabio is an Android lover even before being an Android Developer, he studied in Pisa and now lives in Padua working as Senior Android Developer for Sky Italia. \n In his spare time helps the Google Developer Group Venezia organising events."
+    },
+    {
+        "name": "Alessandro Petracca",
+        "heading": "Mecapptronics",
+        "bio": "Consulente Strategico AI & more"
+    },
+    {
+        "name": "Jacopo Antonio Causin",
+        "heading": "Founder @Mecapptronics | AI & Software per PMI e Startup | Google Developer Group Vicenza Lead",
+        "bio": ""
+    },
+    {
+        "name": "Giorgio Basile",
+        "heading": "Frontend developer per MXNS Italia e founder di BacaroTech",
+        "bio": "Ciao, sono Giorgio Basile 👋\n\nMi sono laureato nel 2025 in Informatica e Scienze delle Telecomunicazioni presso l’Università Ca’ Foscari 🎓.\n\nDal 2022 lavoro come sviluppatore web frontend e tutt'ora ricopro questa posizione.💻\n\nSono appassionato di divulgazione informatica, motivo per cui ho fondato BacaroTech, un progetto social per rendere l’informatica più accessibile e creare una community di appassionati. Partecipo anche come speaker a conferenze italiane. 🚀\n\nNel tempo libero mi piace insegnare informatica, giocare di ruolo, andare in skate e giocare a Magic the Gathering."
+    }
+]

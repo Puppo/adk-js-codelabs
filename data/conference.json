@@ -74,5 +74,79 @@
         "Ecomi"
       ]
     }
+  },
+  {
+    "id": "vicenza-2026",
+    "conference_name": "DevFest Vicenza 2026",
+    "start_time": "2026-06-06T08:20:00.000+02:00",
+    "end_time": "2026-06-06T18:30:00.000+02:00",
+    "theme": "Technology, Innovation, and Networking",
+    "venue": {
+      "name": "Hotel Viest",
+      "address": "Strada della Pelosa, 241, 36100 Vicenza VI, Italy",
+      "description": "A modern hotel and conference center located near the Vicenza Est exit, providing an excellent venue with multiple tracks and networking areas.",
+      "directions": {
+        "by_train": "Accessible from the Vicenza train station via taxi or local public transport.",
+        "by_plane": "The nearest airports are Venice Marco Polo (VCE) and Verona Villafranca (VRN).",
+        "by_car": "Located extremely close to the Vicenza Est highway exit (A4). Large parking area available."
+      }
+    },
+    "organizers": [
+      "GDG Vicenza"
+    ],
+    "sponsors": {
+      "main": [
+        "Google"
+      ],
+      "titanium": [
+        "Mecapptronics",
+        "Receiptia",
+        "Studio San Michele"
+      ],
+      "platinum": [
+        "D-Air Lab",
+        "JObros"
+      ],
+      "diamond": [
+        "Vinary"
+      ],
+      "gold": [
+        "Eduforma",
+        "Erty"
+      ],
+      "silver": [
+        "ADI Labs"
+      ],
+      "supporters": [
+        "Elevator Innovation Hub",
+        "Ensys",
+        "La Copia"
+      ],
+      "media_partners": [
+        "Android Developers Italia",
+        "Azure Meetup Veneto",
+        "BacaroTech",
+        "Startup Grind Vicenza"
+      ],
+      "partners": [
+        "GDG Bari",
+        "GDG Basilicata",
+        "GDG Campobasso",
+        "GDG Catania",
+        "GDG Cloud Milano",
+        "GDG Cloud Modena",
+        "GDG Firenze",
+        "GDG Genova",
+        "GDG Milano",
+        "GDG Napoli",
+        "GDG Pescara",
+        "GDG Pisa",
+        "Woman Techmakers Pisa",
+        "GDG Roma",
+        "GDG Roma Città",
+        "GDG Torino",
+        "GDG Venezia"
+      ]
+    }
   }
 ]
