@@ -1,0 +1,261 @@
+[
+    {
+        "speaker": "Andrea Manzini",
+        "talk title": "Oltre il \"restart\": 5+1 superpoteri di systemd per lo sviluppatore moderno",
+        "start_time": "2026-06-06T15:30:00.000Z",
+        "end_time": "2026-06-06T16:15:00.000Z",
+        "room": "palladio"
+    },
+    {
+        "speaker": "Alexander Amin",
+        "talk title": "When RAG Can't Be Wrong: Building a Legal AI Agent for Latin America",
+        "start_time": "2026-06-06T14:00:00.000Z",
+        "end_time": "2026-06-06T14:45:00.000Z",
+        "room": "palladio"
+    },
+    {
+        "speaker": "Celeste Andreano",
+        "talk title": "def Judge(human, AI_model, bias=True): print(\"Welcome to the Age of Perfect Injustice\")",
+        "start_time": "2026-06-06T10:15:00.000Z",
+        "end_time": "2026-06-06T11:00:00.000Z",
+        "room": "trissino"
+    },
+    {
+        "speaker": "Camillo Bucciarelli",
+        "talk title": "Mettiti l’LLM in tasca: AI generativa offline su smartphone con Flutter",
+        "start_time": "2026-06-06T14:45:00.000Z",
+        "end_time": "2026-06-06T15:30:00.000Z",
+        "room": "palladio"
+    },
+    {
+        "speaker": "Emmanuele Villa",
+        "talk title": "Post-Quantum Cryptography in Kotlin Multiplatform",
+        "start_time": "2026-06-06T15:30:00.000Z",
+        "end_time": "2026-06-06T16:15:00.000Z",
+        "room": "trissino"
+    },
+    {
+        "speaker": "Fabio Catinella",
+        "talk title": "Hey Google, I want to use AI in my Android App but I'm poor. What are my options?",
+        "start_time": "2026-06-06T14:00:00.000Z",
+        "end_time": "2026-06-06T14:45:00.000Z",
+        "room": "mozart"
+    },
+    {
+        "speaker": "Gabriel Palmisano",
+        "talk title": "Flutter Marionette: l'IA che Testa la tua App a Runtime",
+        "start_time": "2026-06-06T08:15:00.000Z",
+        "end_time": "2026-06-06T09:00:00.000Z",
+        "room": "trissino"
+    },
+    {
+        "speaker": "",
+        "talk title": "Lunch",
+        "start_time": "2026-06-06T11:00:00.000Z",
+        "end_time": "2026-06-06T12:00:00.000Z",
+        "room": "lobby"
+    },
+    {
+        "speaker": "Massimo Gobbo",
+        "talk title": "Lost in translation: come vendere il Tech al mondo aziendale",
+        "start_time": "2026-06-06T14:45:00.000Z",
+        "end_time": "2026-06-06T15:30:00.000Z",
+        "room": "verdi"
+    },
+    {
+        "speaker": "Alessandro Guzzon",
+        "talk title": "D-Alert Tag: Never Alone – Help Is Just One Button Away",
+        "start_time": "2026-06-06T12:45:00.000Z",
+        "end_time": "2026-06-06T13:30:00.000Z",
+        "room": "trissino"
+    },
+    {
+        "speaker": "Alessandro Petracca",
+        "talk title": "Il commerciale digitale, quello che non avete ancora assunto.",
+        "start_time": "2026-06-06T09:30:00.000Z",
+        "end_time": "2026-06-06T10:15:00.000Z",
+        "room": "verdi"
+    },
+    {
+        "speaker": "Andrea Della Porta",
+        "talk title": "Coding with an AI Pair: Real Workflows with Claude Code and Codex on Mobile Projects",
+        "start_time": "2026-06-06T12:00:00.000Z",
+        "end_time": "2026-06-06T12:45:00.000Z",
+        "room": "trissino"
+    },
+    {
+        "speaker": "",
+        "talk title": "Coffee Break",
+        "start_time": "2026-06-06T09:00:00.000Z",
+        "end_time": "2026-06-06T09:30:00.000Z",
+        "room": "lobby"
+    },
+    {
+        "speaker": "Henry Lim",
+        "talk title": "Chrome DevTools LIVE LIVE LIVE",
+        "start_time": "2026-06-06T10:15:00.000Z",
+        "end_time": "2026-06-06T11:00:00.000Z",
+        "room": "palladio"
+    },
+    {
+        "speaker": "Emanuele Maso",
+        "talk title": "Level up Android security with Play Integrity API",
+        "start_time": "2026-06-06T14:00:00.000Z",
+        "end_time": "2026-06-06T14:45:00.000Z",
+        "room": "trissino"
+    },
+    {
+        "speaker": "Fabio Delaiti",
+        "talk title": "Non tutte le feature meritano codice",
+        "start_time": "2026-06-06T12:00:00.000Z",
+        "end_time": "2026-06-06T12:45:00.000Z",
+        "room": "verdi"
+    },
+    {
+        "speaker": "Giorgio Galassi",
+        "talk title": "Context Engineering: Stateless by Default, Stateful by Design",
+        "start_time": "2026-06-06T09:30:00.000Z",
+        "end_time": "2026-06-06T10:15:00.000Z",
+        "room": "palladio"
+    },
+    {
+        "speaker": "Davide Senatore",
+        "talk title": "Web Fragments: una nuova alba per i Micro-Frontend?",
+        "start_time": "2026-06-06T14:45:00.000Z",
+        "end_time": "2026-06-06T15:30:00.000Z",
+        "room": "trissino"
+    },
+    {
+        "speaker": "Daniele Mario Areddu",
+        "talk title": "Parla, Pensa, Risponde: Costruire App Flutter IA con Gemini, anche Offline\"",
+        "start_time": "2026-06-06T12:00:00.000Z",
+        "end_time": "2026-06-06T12:45:00.000Z",
+        "room": "palladio"
+    },
+    {
+        "speaker": "Davide Passafaro",
+        "talk title": "Web Apps with Superpowers: Breaking the Sandbox with Project Fugu",
+        "start_time": "2026-06-06T07:30:00.000Z",
+        "end_time": "2026-06-06T08:15:00.000Z",
+        "room": "palladio"
+    },
+    {
+        "speaker": "",
+        "talk title": "Welcome",
+        "start_time": "2026-06-06T07:00:00.000Z",
+        "end_time": "2026-06-06T07:30:00.000Z",
+        "room": "lobby"
+    },
+    {
+        "speaker": "Giovanni Bibbò",
+        "talk title": "Guide, non venditori: un approccio Open Source all'IA aziendale",
+        "start_time": "2026-06-06T07:30:00.000Z",
+        "end_time": "2026-06-06T08:15:00.000Z",
+        "room": "trissino"
+    },
+    {
+        "speaker": "Giacomo Sergio",
+        "talk title": "AI e disabilità intellettiva: abbattere le barriere per promuovere l'autonomia e la partecipazione",
+        "start_time": "2026-06-06T07:30:00.000Z",
+        "end_time": "2026-06-06T08:15:00.000Z",
+        "room": "verdi"
+    },
+    {
+        "speaker": "",
+        "talk title": "Closing",
+        "start_time": "2026-06-06T16:15:00.000Z",
+        "end_time": "2026-06-06T16:30:00.000Z",
+        "room": "lobby"
+    },
+    {
+        "speaker": "",
+        "talk title": "Check-In",
+        "start_time": "2026-06-06T06:20:00.000Z",
+        "end_time": "2026-06-06T07:00:00.000Z",
+        "room": "lobby"
+    },
+    {
+        "speaker": "Michele Scarpa",
+        "talk title": "Da Fullstack a AI Engineer: diario di bordo tra agenti, codice e progetti reali",
+        "start_time": "2026-06-06T08:15:00.000Z",
+        "end_time": "2026-06-06T09:00:00.000Z",
+        "room": "verdi"
+    },
+    {
+        "speaker": "Enrico Fiore",
+        "talk title": "Startup is not for everyone",
+        "start_time": "2026-06-06T14:00:00.000Z",
+        "end_time": "2026-06-06T14:45:00.000Z",
+        "room": "verdi"
+    },
+    {
+        "speaker": "Riccardo Carretta",
+        "talk title": "AI e fiducia: la psicologia asimmetrica",
+        "start_time": "2026-06-06T10:15:00.000Z",
+        "end_time": "2026-06-06T11:00:00.000Z",
+        "room": "verdi"
+    },
+    {
+        "speaker": "Julia Undeutsch",
+        "talk title": "How blind people navigate the world, on and offline",
+        "start_time": "2026-06-06T09:30:00.000Z",
+        "end_time": "2026-06-06T11:00:00.000Z",
+        "room": "mozart"
+    },
+    {
+        "speaker": "Luca Del Puppo",
+        "talk title": "Costruiamo agenti con ADK-js",
+        "start_time": "2026-06-06T07:30:00.000Z",
+        "end_time": "2026-06-06T09:00:00.000Z",
+        "room": "mozart"
+    },
+    {
+        "speaker": "Andrea Napoli",
+        "talk title": "Dal mattone al codice: come abbiamo digitalizzato il mercato della locazione in Italia",
+        "start_time": "2026-06-06T12:45:00.000Z",
+        "end_time": "2026-06-06T13:30:00.000Z",
+        "room": "verdi"
+    },
+    {
+        "speaker": "Rachele Bari",
+        "talk title": "Debuggare la carriera: errori e decisioni nel mercato del lavoro tech",
+        "start_time": "2026-06-06T09:30:00.000Z",
+        "end_time": "2026-06-06T10:15:00.000Z",
+        "room": "trissino"
+    },
+    {
+        "speaker": "",
+        "talk title": "Coffee Break",
+        "start_time": "2026-06-06T13:30:00.000Z",
+        "end_time": "2026-06-06T14:00:00.000Z",
+        "room": "lobby"
+    },
+    {
+        "speaker": "Claudia De Jeu Boronat",
+        "talk title": "Beyond Context: Teaching Expertise to AI Agents",
+        "start_time": "2026-06-06T12:45:00.000Z",
+        "end_time": "2026-06-06T13:30:00.000Z",
+        "room": "palladio"
+    },
+    {
+        "speaker": "Maurizio Ipsale",
+        "talk title": "L'Eclissi della Verità: Perché l'Intelligenza Artificiale Mente",
+        "start_time": "2026-06-06T08:15:00.000Z",
+        "end_time": "2026-06-06T09:00:00.000Z",
+        "room": "palladio"
+    },
+    {
+        "speaker": "Alfredo Bautista Santos",
+        "talk title": "Gen UI: The Future of User Interfaces with Flutter & Gemini",
+        "start_time": "2026-06-06T12:00:00.000Z",
+        "end_time": "2026-06-06T13:30:00.000Z",
+        "room": "mozart"
+    },
+    {
+        "speaker": "Giorgio Basile",
+        "talk title": "BacaroTech - Storia di una community complicata, ma divertente",
+        "start_time": "2026-06-06T14:45:00.000Z",
+        "end_time": "2026-06-06T15:30:00.000Z",
+        "room": "mozart"
+    }
+]
